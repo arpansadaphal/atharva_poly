@@ -1,0 +1,8 @@
+export { Navbar }          from './Navbar'
+export { Footer }          from './Footer'
+export { WhatsAppButton }  from './WhatsAppButton'
+export { Hero }            from './Hero'
+export { CompanyIntroduction } from './CompanyIntroduction'
+export { WhyAtharva }      from './WhyAtharva'
+export { ImpactMetrics }   from './ImpactMetrics'
+// export { ManufacturingQuality } from './ManufacturingQuality'

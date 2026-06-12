@@ -1,26 +1,62 @@
 @import "tailwindcss";
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  body {
+    @apply bg-white text-slate-900;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Global focus ring — applied to all interactive elements via focus-visible */
+  :focus-visible {
+    @apply outline-none ring-2 ring-blue-600 ring-offset-2;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Body copy line-length constraint — apply to all prose containers */
+  .prose-constrained {
+    @apply max-w-[540px];
+  }
+
+  /* Section padding — consistent rhythm across all breakpoints */
+  .section-padding {
+    @apply py-[72px] md:py-24 lg:py-[120px];
+  }
+
+  /* Dark atmospheric section — always pair with <NoiseOverlay /> as first child */
+  .dark-surface {
+    @apply bg-slate-900 relative overflow-hidden;
+  }
+
+  /* The Specification Mark — 2px vertical blue line, applied via absolute/flex */
+  .spec-mark {
+    @apply w-0.5 bg-blue-600 flex-shrink-0;
+    height: 1em;
+    transform-origin: top;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Reduced Motion Support
+   Disables all transforms + animations when user prefers reduced motion.
+   Framer Motion components also check useReducedMotion() individually.
+───────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -179,12 +179,12 @@
 // components/sections/CertificationsTrust.tsx
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react'
-import {NoiseOverlay} from '@/components/ui/NoiseOverlay'
-import {SectionHeader} from '@/components/ui/SectionHeader'
+import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 import LightboxModal from '@/components/ui/LightboxModal'
 import type { Certification } from '@/types'
 
@@ -244,6 +244,9 @@ export default function CertificationsTrust() {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null)
 
+  const touchStartX = useRef<number>(0)
+  const touchEndX = useRef<number>(0)
+
   const goToNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % certificates.length)
   }, [])
@@ -252,7 +255,6 @@ export default function CertificationsTrust() {
     setCurrentIndex((prev) => (prev - 1 + certificates.length) % certificates.length)
   }, [])
 
-  // Auto‑rotate every 5 seconds, pausing on hover
   useEffect(() => {
     if (isHovering) return
     const interval = setInterval(goToNext, 5000)
@@ -269,6 +271,28 @@ export default function CertificationsTrust() {
     setTimeout(() => setSelectedCert(null), 200)
   }
 
+  // Touch handlers for swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].clientX
+    const deltaX = touchEndX.current - touchStartX.current
+    const swipeThreshold = 50 // minimum px to count as swipe
+
+    if (Math.abs(deltaX) > swipeThreshold) {
+      if (deltaX > 0) {
+        goToPrev()
+      } else {
+        goToNext()
+      }
+    } else {
+      // treat as tap → open modal
+      openModal(certificates[currentIndex])
+    }
+  }
+
   const currentCert = certificates[currentIndex]
 
   return (
@@ -281,7 +305,6 @@ export default function CertificationsTrust() {
 
         <div className="max-w-7xl mx-auto bg-slate-900 px-6 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-20 items-center">
-            {/* Left Column – copy & trust points */}
             <div>
               <SectionHeader
                 eyebrow="Certifications & Quality Standards"
@@ -300,13 +323,13 @@ export default function CertificationsTrust() {
               </ul>
             </div>
 
-            {/* Right Column – Certificate Viewer (15% smaller) */}
             <div
               className="relative bg-white overflow-hidden rounded-none w-full max-w-[440px] mx-auto cursor-pointer"
               style={{ aspectRatio: '0.707' }}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
-              onClick={() => openModal(currentCert)}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -316,7 +339,6 @@ export default function CertificationsTrust() {
                 }
               }}
             >
-              {/* Crossfade certificate image */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentIndex}
@@ -337,7 +359,6 @@ export default function CertificationsTrust() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Navigation – bottom right */}
               <div className="absolute bottom-3 right-3 flex gap-2 z-10">
                 <button
                   onClick={(e) => {

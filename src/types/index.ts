@@ -79,12 +79,14 @@ export interface Industry {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface Certification {
-  id: string
-  name: string
-  abbreviation: string
-  description?: string
-  logoPath?: string
+  short: string
+  full: string
+  id?: string
   certNumber?: string
+  validUntil?: string
+  issuerUrl?: string
+  localPdfPath: string            // now required
+  optimizedWebPPath: string       // now required
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

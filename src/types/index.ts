@@ -217,3 +217,44 @@ export interface FooterColumn {
   title: string
   links: NavItem[]
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ABOUT PAGE
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface JourneyBeat {
+  year: string
+  yearLabel: string
+  headline: string
+  body: string
+  imageSrc: string
+  imageAlt: string
+  principle?: string
+}
+
+export interface Principle {
+  number: string
+  title: string
+  body: string
+}
+
+export interface Leader {
+  role: string
+  name: string
+  bio: string
+  imageSrc: string
+  imageAlt: string
+  span?: 'founder' | 'standard'
+}
+
+export interface AboutStat {
+  value: number
+  suffix: string
+  label: string
+}
+
+export interface FactoryCaption {
+  src: string
+  alt: string
+  caption: string
+}

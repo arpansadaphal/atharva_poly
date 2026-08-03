@@ -60,3 +60,147 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Product card styles */
+.product-card {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Industry cell hover */
+.industry-cell {
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+.industry-cell:hover {
+  background-color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Filter tabs scrollable on mobile */
+.filter-tabs-scroll::-webkit-scrollbar {
+  display: none;
+}
+.filter-tabs-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Right fade gradient for scrollable filter tabs */
+.filter-tabs-container::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, white);
+  pointer-events: none;
+  z-index: 2;
+}
+@media (min-width: 768px) {
+  .filter-tabs-container::after {
+    display: none;
+  }
+}
+
+/* Section padding utility */
+.section-padding {
+  padding: 120px 0;
+}
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 80px 0;
+  }
+}
+
+/* Breadcrumb light text for dark sections */
+.bg-blue-600 .breadcrumb a {
+  color: rgba(255,255,255,0.7);
+}
+.bg-blue-600 .breadcrumb a:hover {
+  color: white;
+}
+.bg-blue-600 .breadcrumb [aria-current] {
+  color: white;
+}
+
+#manufacturing, #technical, #quality, #supply {
+  scroll-margin-top: 88px;
+}
+
+.section-padding {
+  padding: 60px 0;
+}
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 120px 0;
+  }
+}
+
+#manufacturing, #technical, #quality, #supply, #capacity, #certifications {
+  scroll-margin-top: 88px;
+}
+.process-line {
+  transform-origin: top;
+}
+
+.industry-card {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.industry-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.service-card-hover {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,..."); /* your existing noise SVG */
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input-field {
+  border-bottom: 1px solid #cbd5e1;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  color: #0f172a;
+  padding-bottom: 0.75rem;
+  width: 100%;
+  transition: border-color 0.15s ease;
+}
+.input-field:focus {
+  border-bottom-color: #2563eb;
+}
+.input-field::placeholder {
+  color: #94a3b8;
+}
+
+.service-card-hover {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.faq-answer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+}
+.faq-answer.open {
+  max-height: 500px; /* enough to show content */
+  opacity: 1;
+}

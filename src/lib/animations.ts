@@ -260,3 +260,41 @@ export const pageEnter: Variants = {
     transition: { duration: 0.3, ease },
   },
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EDITORIAL / ABOUT PAGE
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Pinned journey beat — opacity envelope for a beat inside the journey panel */
+export const journeyBeat: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease },
+  },
+  exit: {
+    opacity: 0,
+    y: -16,
+    transition: { duration: 0.4, ease },
+  },
+}
+
+/** Editorial rule line — horizontal hairline that draws left → right under headlines */
+export const ruleDraw: Variants = {
+  hidden: { scaleX: 0 },
+  visible: {
+    scaleX: 1,
+    transition: { duration: 0.6, delay: 0.25, ease },
+  },
+}
+
+/** Editorial portrait image — slow scale resolve for editorial spreads */
+export const editorialPhoto: Variants = {
+  hidden: { opacity: 0, scale: 1.04 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1.0, ease },
+  },
+}

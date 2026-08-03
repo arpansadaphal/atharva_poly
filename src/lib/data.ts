@@ -18,6 +18,11 @@ import type {
   CaseStudy,
   GalleryImage,
   JobListing,
+  JourneyBeat,
+  Principle,
+  Leader,
+  AboutStat,
+  FactoryCaption,
 } from '@/types'
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -66,6 +71,7 @@ export const navigation = {
     { label: 'Products',      href: '/products' },
     { label: 'Industries',    href: '/industries' },
     { label: 'Manufacturing', href: '/manufacturing' },
+    { label: 'Services',      href: '/services' },
     { label: 'About',         href: '/about' },
     { label: 'Contact',       href: '/contact' },
   ] satisfies NavItem[],
@@ -76,6 +82,7 @@ export const navigation = {
       { label: 'Products',              href: '/products' },
       { label: 'Industries',            href: '/industries' },
       { label: 'Manufacturing & Quality', href: '/manufacturing' },
+      { label: 'Services & Capabilities', href: '/services' },
       { label: 'About Us',              href: '/about' },
       { label: 'Contact',               href: '/contact' },
     ] satisfies NavItem[],
@@ -371,4 +378,212 @@ export const contactCta = {
     'Our team responds within one business day. For urgent requirements, reach us directly on WhatsApp.',
   primaryCta:   { label: 'Request Quote',      href: '/contact' },
   secondaryCta: { label: 'Chat on WhatsApp',   href: '' }, // built by buildWhatsAppURL()
+} as const
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ABOUT PAGE
+// Single source of truth for the /about route.
+// All facts traceable to atharva_poly_baseinfo.md.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const aboutPage = {
+  meta: {
+    eyebrow: 'About — Atharva Polymers',
+    chapter: 'Chapter One',
+    yearRange: '2007—2026',
+    headline: 'Two decades of polymer. One discipline.',
+    subhead:
+      'How a single facility in MIDC Ranjangaon became a 95,000 sq. m. precision manufacturing operation — without ever leaving the discipline that started it.',
+  },
+
+  directorsNote: {
+    eyebrow: "Director's Note",
+    signature: 'Mr. Mansingh Pachundkar',
+    signatureRole: 'Founder & Managing Director',
+    headline: 'A 19-year discipline, not a 19-year story.',
+    paragraphs: [
+      'When we started Atharva Polymers in 2007, we made a deliberate choice: stay focused. Build one facility. Learn one discipline deeply. Resist the temptation to do everything.',
+      'Nineteen years later, that decision still defines us. Every machine in our 35-unit injection moulding line, every quality protocol, every export shipment carries the same conviction: precision is not a department. It is the culture of the floor.',
+      'This page is not a brochure. It is a record of how we think, how we build, and what we will not compromise.',
+    ],
+    imageSrc: '/assets/team/leadership.jpg',
+    imageAlt:
+      'Mr. Mansingh Pachundkar, Founder and Managing Director of Atharva Polymers',
+  },
+
+  journeyBeats: [
+    {
+      year: '2007',
+      yearLabel: 'Founded',
+      principle: 'Origin',
+      headline: 'A single facility in MIDC Ranjangaon, Pune.',
+      body:
+        'Atharva Polymers begins with a focused mission: deliver consistently reliable polymer products for industrial applications. One facility. One discipline. No shortcuts.',
+      imageSrc: '/assets/factory/images.jpeg',
+      imageAlt: 'Atharva Polymers first manufacturing facility, MIDC Ranjangaon, 2007',
+    },
+    {
+      year: '2010–2015',
+      yearLabel: 'Capacity',
+      principle: 'Discipline',
+      headline: 'Building the line — 35 machines, 100T to 1000T.',
+      body:
+        'Capacity expansion with discipline. Machines acquired in matched sets. Process control established before volume. Operating 24/7 by the end of the period.',
+      imageSrc: '/assets/machinery/Horizontal-INJ-presses--2_s.webp',
+      imageAlt:
+        'Horizontal injection moulding presses, Atharva Polymers production line',
+    },
+    {
+      year: '2016',
+      yearLabel: 'Expansion',
+      principle: 'Adjacency',
+      headline: 'Atharva Poly Plast opens at Shirwal MIDC.',
+      body:
+        'Productivity at Ranjangaon meets demand ahead of capacity. A second polymer facility is commissioned — same standards, second geography. The group’s diversification model begins.',
+      imageSrc: '/assets/factory/images (1).jpeg',
+      imageAlt: 'Atharva Poly Plast manufacturing facility, Shirwal MIDC',
+    },
+    {
+      year: '2019',
+      yearLabel: 'Certification',
+      principle: 'Audit',
+      headline: 'IATF 16949. ISO 9001, 14001, 45001.',
+      body:
+        'Independent audit of every system: quality, environment, occupational health, safety. Manufacturing becomes auditable, not just inspectable.',
+      imageSrc: '/assets/factory/1772433684539.jpeg',
+      imageAlt: 'Quality inspection at Atharva Polymers production line',
+    },
+    {
+      year: '2020s',
+      yearLabel: 'Diversification',
+      principle: 'Ecosystem',
+      headline: 'Corrugation. Metal. Biopharma. Logistics.',
+      body:
+        'Adjacent industries added under the Atharva Group — corrugation, sheet metal fabrication, EPS thermoforming, biopharma. Polymer remains the spine.',
+      imageSrc: '/assets/machinery/polymer_production_plant.jpg',
+      imageAlt:
+        'Polymer production plant — Atharva Polymers diversified manufacturing operations',
+    },
+    {
+      year: '2026',
+      yearLabel: 'Today',
+      principle: 'Outlook',
+      headline: '20+ customers. 4+ countries. Chennai and Ahmedabad next.',
+      body:
+        '20+ active industrial customers. Exports to four international markets. Plans to expand the manufacturing footprint into Chennai and Ahmedabad. The discipline continues.',
+      imageSrc: '/assets/machinery/polymer-g-factory-1024x568.jpg',
+      imageAlt: 'Atharva Polymers factory floor — current production capacity',
+    },
+  ] satisfies JourneyBeat[],
+
+  principles: [
+    {
+      number: '01',
+      title: 'One facility. One discipline.',
+      body:
+        'We do not manufacture everything. We manufacture polymer components with one set of standards, in one place, audited continuously.',
+    },
+    {
+      number: '02',
+      title: 'Process before output.',
+      body:
+        'Capacity is not a number on a spreadsheet. It is the consequence of a process that has been stabilised, documented, and re-audited.',
+    },
+    {
+      number: '03',
+      title: 'No batch without a record.',
+      body:
+        'Every production run leaves a traceable record — material, machine, operator, parameters. Inspectability is the minimum, not the ceiling.',
+    },
+    {
+      number: '04',
+      title: 'Long-term over opportunistic.',
+      body:
+        'We build with customers who stay. The 19-year relationships in our customer base are the metric that matters.',
+    },
+  ] satisfies Principle[],
+
+  factoryCaptions: [
+    {
+      src: '/assets/machinery/Horizontal-INJ-presses--2_s.webp',
+      alt: 'Horizontal injection moulding presses',
+      caption: 'Line 04 — Horizontal presses, 100T to 1000T',
+    },
+    {
+      src: '/assets/factory/images.jpeg',
+      alt: 'Production floor overview',
+      caption: 'Production floor, MIDC Ranjangaon',
+    },
+    {
+      src: '/assets/polymer/werkstoffpruefung-chemische-analyse-j2cvxj8cpv8rpj4.jpg',
+      alt: 'Polymer chemical analysis',
+      caption: 'Material analysis — incoming and in-process',
+    },
+    {
+      src: '/assets/machinery/adbe991cb8.webp',
+      alt: 'Machinery detail',
+      caption: 'Press detail — moulded component inspection',
+    },
+    {
+      src: '/assets/factory/images (1).jpeg',
+      alt: 'Factory interior',
+      caption: 'Material handling, between cells',
+    },
+    {
+      src: '/assets/machinery/e062018579.webp',
+      alt: 'Moulded components',
+      caption: 'Finished components — pre-dispatch staging',
+    },
+  ] satisfies FactoryCaption[],
+
+  leadership: [
+    {
+      role: 'Founder & Managing Director',
+      name: 'Mr. Mansingh Pachundkar',
+      bio:
+        'Founded Atharva Polymers in 2007 with a single-discipline focus. Extended the Atharva Group into corrugation, sheet metal, EPS thermoforming, and biopharma while preserving the standards established at the polymer facility.',
+      imageSrc: '/assets/team/leadership.jpg',
+      imageAlt: 'Mr. Mansingh Pachundkar, Founder and Managing Director',
+      span: 'founder',
+    },
+    {
+      role: 'Head of Production',
+      name: 'Production Lead',
+      bio:
+        'Leads the 24/7 injection moulding operation across 35 machines, 100T to 1000T.',
+      imageSrc: '/assets/team/1658747856497.jpeg',
+      imageAlt: 'Production Lead at Atharva Polymers',
+    },
+    {
+      role: 'Head of Quality',
+      name: 'Quality Lead',
+      bio:
+        'Owns the IATF 16949, ISO 9001, 14001, and 45001 quality systems and audit cycle.',
+      imageSrc: '/assets/team/images.jpeg',
+      imageAlt: 'Quality Lead at Atharva Polymers',
+    },
+    {
+      role: 'Head of Design Engineering',
+      name: 'Design Lead',
+      bio:
+        'Runs the in-house design and development function — concept to production, alongside the customer.',
+      imageSrc: '/assets/team/1778938994361.jpeg',
+      imageAlt: 'Design Engineering Lead at Atharva Polymers',
+    },
+    {
+      role: 'Head of Operations',
+      name: 'Operations Lead',
+      bio:
+        'Coordinates production scheduling, logistics, and supply chain across the 95,000 sq. m. Ranjangaon facility.',
+      imageSrc: '/assets/team/00India-Women-Jobs-gmfz-articleLarge.webp',
+      imageAlt: 'Operations Lead at Atharva Polymers',
+    },
+  ] satisfies Leader[],
+
+  aboutStats: [
+    { value: 19, suffix: '+', label: 'Years of polymer manufacturing' },
+    { value: 35, suffix: '',  label: 'Injection moulding machines' },
+    { value: 95, suffix: 'k', label: 'Sq. m. manufacturing footprint' },
+    { value: 4,  suffix: '+', label: 'International markets served' },
+  ] satisfies AboutStat[],
 } as const

@@ -186,6 +186,7 @@ import { ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react'
 import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import LightboxModal from '@/components/ui/LightboxModal'
+import { cn } from '@/lib/utils'
 import type { Certification } from '@/types'
 
 const certificates: Certification[] = [
@@ -238,7 +239,11 @@ const trustPoints = [
   'Export Ready Manufacturing',
 ]
 
-export default function CertificationsTrust() {
+export default function CertificationsTrust({
+  compact = false,
+}: {
+  compact?: boolean
+}) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
@@ -299,32 +304,50 @@ export default function CertificationsTrust() {
     <>
       <section
         aria-label="Certifications and Quality Standards"
-        className="relative bg-slate-900 section-padding overflow-hidden"
+        className={cn(
+          'relative bg-slate-900 overflow-hidden',
+          compact ? 'py-[72px] lg:py-[120px]' : 'section-padding'
+        )}
       >
         <NoiseOverlay />
 
         <div className="max-w-7xl mx-auto bg-slate-900 px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-20 items-center">
-            <div>
+          <div
+            className={cn(
+              compact
+                ? 'flex flex-col items-center gap-10'
+                : 'grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-20 items-center'
+            )}
+          >
+            <div className={cn(compact && 'text-center max-w-[640px] mx-auto')}>
               <SectionHeader
                 eyebrow="Certifications & Quality Standards"
                 headline="Verified Quality Standards"
-                description="Our manufacturing processes are documented, audited, and independently certified."
-                align="left"
+                description={
+                  compact
+                    ? undefined
+                    : 'Our manufacturing processes are documented, audited, and independently certified.'
+                }
+                align={compact ? 'center' : 'left'}
                 theme="dark"
               />
-              <ul className="mt-8 space-y-4">
-                {trustPoints.map((point) => (
-                  <li key={point} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-base text-slate-300">{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              {!compact && (
+                <ul className="mt-8 space-y-4">
+                  {trustPoints.map((point) => (
+                    <li key={point} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-base text-slate-300">{point}</span>
+                   </li>
+                  ))}
+               </ul>
+              )}
+           </div>
 
             <div
-              className="relative bg-white overflow-hidden rounded-none w-full max-w-[440px] mx-auto cursor-pointer"
+              className={cn(
+                'relative bg-white overflow-hidden rounded-none w-full mx-auto cursor-pointer',
+                compact ? 'max-w-[280px]' : 'max-w-[440px]'
+              )}
               style={{ aspectRatio: '0.707' }}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
@@ -353,11 +376,11 @@ export default function CertificationsTrust() {
                     alt={`${currentCert.short} ${currentCert.full} Certificate`}
                     fill
                     className="object-contain"
-                    sizes="(max-width: 768px) 100vw, 440px"
+                    sizes={compact ? '280px' : '(max-width: 768px) 100vw, 440px'}
                     priority
                   />
-                </motion.div>
-              </AnimatePresence>
+               </motion.div>
+             </AnimatePresence>
 
               <div className="absolute bottom-3 right-3 flex gap-2 z-10">
                 <button
@@ -369,7 +392,7 @@ export default function CertificationsTrust() {
                   aria-label="Previous Certificate"
                 >
                   <ChevronLeft className="w-5 h-5 text-slate-700" />
-                </button>
+               </button>
                 <button
                   onClick={(e) => {
                     e.stopPropagation()
@@ -379,12 +402,12 @@ export default function CertificationsTrust() {
                   aria-label="Next Certificate"
                 >
                   <ChevronRight className="w-5 h-5 text-slate-700" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+               </button>
+             </div>
+           </div>
+         </div>
+       </div>
+     </section>
 
       <LightboxModal
         isOpen={modalOpen}

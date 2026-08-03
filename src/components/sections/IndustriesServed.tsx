@@ -16,25 +16,25 @@ const industries = [
     slug: 'automotive',
   },
   {
-    name: 'Packaging',
+    name: 'Appliances',
     icon: Package,
     description:
-      'Flexible and rigid packaging materials with consistent barrier properties, seal strength, and processing characteristics.',
-    slug: 'packaging',
+      'Smart, durable parts for the worlds leading home appliance brands, from housings to functional components.',
+    slug: 'appliances',
   },
   {
-    name: 'Consumer Goods',
+    name: 'Furniture',
     icon: ShoppingBag,
     description:
-      'Durable, aesthetically consistent polymer compounds for household and consumer product applications.',
-    slug: 'consumer-goods',
+      'precision-moulded components for premium office furniture and seating.',
+    slug: 'furniture',
   },
   {
-    name: 'Industrial Manufacturing',
+    name: 'Industrial And Medical',
     icon: Factory,
     description:
-      'Custom polymer solutions for industrial components, machine parts, and manufacturing processes requiring precise specifications.',
-    slug: 'industrial',
+      'High-spec parts for industrial equipment, electronics, and pharma. 10% of our busniess',
+    slug: 'others',
   },
 ]
 

@@ -4,10 +4,10 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {NoiseOverlay} from '@/components/ui/NoiseOverlay'
 import { buildWhatsAppURL } from '@/lib/whatsapp'
-import type { Product } from '@/types/products'
+import type { ProductDetail } from '@/types/solutions'
 
 interface ProductInquiryCTAProps {
-  product: Product
+  product: ProductDetail
 }
 
 export default function ProductInquiryCTA({ product }: ProductInquiryCTAProps) {

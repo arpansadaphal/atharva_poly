@@ -3,10 +3,10 @@
 import { motion } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
 import Link from 'next/link'
-import type { Product } from '@/types/products'
+import type { ProductDetail } from '@/types/solutions'
 
 interface ProductApplicationsProps {
-  product: Product
+  product: ProductDetail
 }
 
 export default function ProductApplications({ product }: ProductApplicationsProps) {

@@ -4,26 +4,24 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { FileDown } from 'lucide-react'
 import BreadcrumbNav from '@/components/ui/BreadcrumbNav'
-import type { Product } from '@/types/products'
+import type { ProductDetail } from '@/types/solutions'
 
 interface ProductDetailHeaderProps {
-  product: Product
+  product: ProductDetail
 }
 
 export default function ProductDetailHeader({ product }: ProductDetailHeaderProps) {
-const catLabel = (product.industries || []).join(', ').replace(/-/g, ' ') || 'Product'
-const catCap = catLabel.charAt(0).toUpperCase() + catLabel.slice(1)
+  const catLabel = product.category.replace(/-/g, ' ')
+  const catCap = catLabel.charAt(0).toUpperCase() + catLabel.slice(1)
   const hasDatasheet = product.downloads?.some((d) => d.type === 'datasheet')
   const datasheetDownload = hasDatasheet ? product.downloads.find((d) => d.type === 'datasheet') : null
 
-const categoryLabel = product.industries?.[0]?.replace(/-/g, ' ') || 'Products'
-
-const breadcrumbItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Products', href: '/products' },
-  { label: categoryLabel, href: `/products?category=${product.industries?.[0] || ''}` },
-  { label: product.name },
-]
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Solutions', href: '/solutions' },
+    { label: catCap, href: `/solutions?category=${product.category}` },
+    { label: product.name },
+  ]
 
   return (
     <section className="bg-slate-900 pt-32 pb-16 relative">

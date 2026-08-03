@@ -3,13 +3,13 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import FilterTabs from '@/components/ui/FilterTabs'
-import ProductCard from '@/components/sections/products/ProductCard'
+import ProductCard from '@/components/sections/solutions/ProductCard'
 import { Package } from 'lucide-react'
 import Link from 'next/link'
-import type { Product } from '@/types/products'
+import type { ProductDetail } from '@/types/solutions'
 
 interface ProductGridProps {
-  products: Product[]
+  products: ProductDetail[]
 }
 
 const CATEGORY_TABS = [
@@ -26,7 +26,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
   const filtered =
     activeCategory === 'all'
       ? products
-      : products.filter((p) => p.industries.includes(activeCategory))
+      : products.filter((p) => p.category === activeCategory)
 
   const handleCategoryChange = (value: string) => {
     if (value === activeCategory) return

@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { PhotoPlaceholder } from '@/components/ui/PhotoPlaceholder'
 import { staggerContainer, staggerItem, ease } from '@/lib/animations'
 import { products as allProducts } from '@/lib/products-data' // ← the real product data
-import type { ProductDetail } from '@/types/products'
+import type { Product } from '@/types/products'
 
 // Card image entrance scale — Specification Mark entrance at photography scale
 const cardImageReveal = {
@@ -22,7 +22,7 @@ const displayProducts = featuredProducts.length >= 3
   ? featuredProducts.slice(0, 3)
   : allProducts.slice(0, 3)
 
-function ProductCard({ product }: { product: ProductDetail }) {
+function ProductCard({ product }: { product: Product }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -67,8 +67,8 @@ function ProductCard({ product }: { product: ProductDetail }) {
       {/* Card body */}
       <div className="p-5 md:p-6">
         <p className="text-[13px] font-semibold text-blue-600 uppercase tracking-[0.08em] mb-2">
-          {product.category.replace(/-/g, ' ')}
-        </p>
+  {product.industries[0]?.replace(/-/g, ' ') || 'Product'}
+</p>
         <h3 className="text-xl font-semibold text-slate-900 mb-2">{product.name}</h3>
         <p className="text-[15px] leading-6 text-slate-500 mb-4 line-clamp-2">
           {product.shortDescription}

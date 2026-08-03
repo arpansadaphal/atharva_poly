@@ -1,10 +1,10 @@
 'use client'
 
 import FAQAccordion from '@/components/ui/FAQAccordion'
-import type { Product } from '@/types/products'
+import type { ProductDetail } from '@/types/solutions'
 
 interface ProductFAQProps {
-  product: Product
+  product: ProductDetail
 }
 
 export default function ProductFAQ({ product }: ProductFAQProps) {

@@ -2,18 +2,17 @@
 
 import { motion } from 'framer-motion'
 import ProductCard from '@/components/sections/products/ProductCard'
-import { products } from '@/lib/products-data' // ✅ import the full array
-import type { Product } from '@/types/products'
+import { getRelatedProducts } from '@/lib/solutions-data'
+import type { ProductDetail } from '@/types/solutions'
 
 interface RelatedProductsProps {
-  product: Product
+  product: ProductDetail
 }
 
 export default function RelatedProducts({ product }: RelatedProductsProps) {
   if (!product.relatedProductSlugs || product.relatedProductSlugs.length === 0) return null
 
-  // ✅ Filter products by the slugs in relatedProductSlugs
-  const related = products.filter(p => product.relatedProductSlugs?.includes(p.slug))
+  const related = getRelatedProducts(product.relatedProductSlugs)
 
   if (related.length === 0) return null
 

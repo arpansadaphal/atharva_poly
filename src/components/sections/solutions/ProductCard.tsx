@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Hexagon } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import type { ProductDetail } from '@/types/products'
+import type { ProductDetail } from '@/types/solutions'
 
 interface ProductCardProps {
   product: ProductDetail
@@ -109,7 +109,7 @@ export default function ProductCard({
         {/* CTA row */}
         <div className="flex items-center justify-between mt-3">
           <Link
-            href={`/products/${product.slug}`}
+            href={`/solutions/${product.slug}`}
             className="text-[14px] font-medium text-blue-600 hover:text-blue-700 transition-colors"
             aria-label={`View specifications for ${product.name}`}
           >

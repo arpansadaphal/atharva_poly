@@ -68,6 +68,7 @@ export const metrics: Metric[] = [
 
 export const navigation = {
   primary: [
+    { label: 'Solutions',      href: '/solutions' },
     { label: 'Products',      href: '/products' },
     { label: 'Industries',    href: '/industries' },
     { label: 'Manufacturing', href: '/manufacturing' },
@@ -79,6 +80,7 @@ export const navigation = {
   footer: {
     quickLinks: [
       { label: 'Home',                  href: '/' },
+      { label: 'Solutions',             href: '/solutions' },
       { label: 'Products',              href: '/products' },
       { label: 'Industries',            href: '/industries' },
       { label: 'Manufacturing & Quality', href: '/manufacturing' },

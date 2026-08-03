@@ -19,6 +19,7 @@ const typeConfig = {
   technical: { submitLabel: 'Submit Technical Request' },
   general: { submitLabel: 'Send Message' },
   career: { submitLabel: 'Submit Application' },
+  services: { submitLabel: 'Get Service Info'},
 }
 
 export default function ContactForm() {

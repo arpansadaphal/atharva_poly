@@ -50,4 +50,5 @@ export interface Industry {
   metaTitle: string
   metaDescription: string
   iconName: string // Lucide icon for the industry
+  faq?: Array<{ question: string; answer: string }> 
 }

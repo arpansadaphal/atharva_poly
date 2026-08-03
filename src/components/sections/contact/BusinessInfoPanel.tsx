@@ -11,7 +11,7 @@ export default function BusinessInfoPanel() {
 
       {/* WhatsApp */}
       <a
-        href={buildWhatsAppURL({ context: 'contact' })}
+        href={buildWhatsAppURL()}
         target="_blank"
         rel="noopener"
         className="flex items-start gap-4 py-3"

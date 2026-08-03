@@ -41,7 +41,7 @@ export default function ServicesInquiryCTA() {
             Start a Project
           </Link>
           <a
-            href={buildWhatsAppURL(undefined, undefined)}
+            href={buildWhatsAppURL()}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center h-14 px-8 text-white font-medium rounded-lg hover:opacity-90 transition-opacity text-[15px]"

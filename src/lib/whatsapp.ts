@@ -15,6 +15,8 @@ interface WhatsAppParams {
   product?: string
   industry?: string
   customMessage?: string
+  source?: string;
+  
 }
 
 export function buildWhatsAppURL(params?: WhatsAppParams): string {

@@ -242,7 +242,8 @@ const trustPoints = [
 export default function CertificationsTrust({
   compact = false,
 }: {
-  compact?: boolean
+  compact?: boolean;
+  certifications?: string[];
 }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isHovering, setIsHovering] = useState(false)

@@ -63,7 +63,7 @@ export default function ProductInquiryCTA({ product }: ProductInquiryCTAProps) {
             Request a Quotation
           </Link>
           <a
-            href={buildWhatsAppURL(product.name)}
+            href={buildWhatsAppURL({ product: product.name })}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center h-14 px-8 text-white font-medium rounded-lg hover:opacity-90 transition-opacity text-[15px]"

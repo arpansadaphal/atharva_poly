@@ -17,6 +17,7 @@ export interface QuoteFields {
   quantity?: string
   application?: string
   requirements?: string
+  
 }
 
 export interface TechnicalFields {

@@ -3,7 +3,8 @@ import { SectionHeader } from '@/components/ui/SectionHeader'
 import type { Industry } from '@/types/industries'
 
 export default function IndustryFAQSection({ industry }: { industry: Industry }) {
-  if (industry.faq.length === 0) return null
+  
+  if (!industry.faq || industry.faq.length === 0) return null
 
   return (
     <section className="bg-white section-padding">

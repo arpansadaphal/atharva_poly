@@ -138,14 +138,14 @@ export default async function IndustryDetailPage({ params }: { params: Promise<{
             Discuss Your {industry.name} Project
           </h2>
           <p className="text-slate-400 text-[17px] mt-4 max-w-[520px] mx-auto">
-            Share your requirements — we'll respond with a material recommendation and feasibility assessment.
+            Share your requirements — {"we'll"} respond with a material recommendation and feasibility assessment.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <Button variant="primary" size="lg" href={`/contact?industry=${industry.slug}`}>
               Request a Quotation
             </Button>
             <a
-              href={buildWhatsAppURL(`${industry.name} project`)}
+              href={buildWhatsAppURL({ customMessage: `${industry.name} project` })}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center h-14 px-8 text-white font-medium rounded-lg bg-[#25D366] hover:bg-[#20bd5a] transition-colors text-[15px]"

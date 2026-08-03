@@ -3,7 +3,8 @@ import { Resend } from 'resend'
 import { contactSchema } from '@/lib/validation/contact-schema'
 import type { ContactSubmission } from '@/types/contact'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// ❌ Remove this top-level instantiation:
+// const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,13 +18,35 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: true })
     }
 
+    // ✅ Get API key and create Resend client inside the handler
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      console.error('RESEND_API_KEY is not set')
+      return NextResponse.json(
+        { error: 'Email service is not configured' },
+        { status: 500 }
+      )
+    }
+
+    const resend = new Resend(apiKey)
+
+    // Also check CONTACT_EMAIL
+    const toEmail = process.env.CONTACT_EMAIL
+    if (!toEmail) {
+      console.error('CONTACT_EMAIL is not set')
+      return NextResponse.json(
+        { error: 'Email recipient is not configured' },
+        { status: 500 }
+      )
+    }
+
     // Send email
     await resend.emails.send({
       from: 'Atharva Polymers Website <noreply@atharvapolymers.com>',
-      to: process.env.CONTACT_EMAIL!,
+      to: toEmail,
       subject: subjectLine(data),
       html: buildEmailHTML(data),
-      replyTo: data.email,
+      reply_to: data.email,
     })
 
     return NextResponse.json({ success: true })
@@ -39,6 +62,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
+// Helper functions (unchanged)
 function subjectLine(data: ContactSubmission) {
   const map = {
     quote: `New Quote Request — ${data.company}`,
@@ -50,7 +74,6 @@ function subjectLine(data: ContactSubmission) {
 }
 
 function buildEmailHTML(data: ContactSubmission): string {
-  // Build a clean HTML table showing all submitted fields
   const fields = Object.entries(data)
     .filter(([key]) => key !== 'honeypot')
     .map(([key, value]) => `<tr><td style="padding:6px 12px;border-bottom:1px solid #e2e8f0;font-weight:600">${key}</td><td style="padding:6px 12px;border-bottom:1px solid #e2e8f0">${value || '—'}</td></tr>`)

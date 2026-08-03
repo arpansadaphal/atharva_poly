@@ -84,7 +84,7 @@ export default function ContactForm() {
           For urgent requirements, WhatsApp us directly.
         </p>
         <a
-          href={buildWhatsAppURL({ context: 'urgent' })}
+          href={buildWhatsAppURL()}
           className="text-[14px] font-medium text-blue-600"
         >
           Open WhatsApp →
@@ -124,42 +124,37 @@ export default function ContactForm() {
 
         {/* Dynamic fields based on inquiry type */}
         <div className="mt-8" key={inquiryType}>
-          {inquiryType === 'quote' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
-              <div>
-                <label htmlFor="industry" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Industry *</label>
-                <select {...register('industry')} id="industry" className="input-field appearance-none bg-transparent">
-                  <option value="">Select industry</option>
-                  {industryOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
-                </select>
-                {errors.industry && <p className="text-[12px] text-red-600 mt-1" role="alert">{errors.industry.message}</p>}
-              </div>
-              <div>
-                <label htmlFor="productInterest" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Product Interest *</label>
-                <input {...register('productInterest')} id="productInterest" className="input-field" placeholder="Which material or product?" />
-                {errors.productInterest && <p className="text-[12px] text-red-600 mt-1" role="alert">{errors.productInterest.message}</p>}
-              </div>
-              <div>
-                <label htmlFor="quantity" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Quantity (optional)</label>
-                <input {...register('quantity')} id="quantity" className="input-field" placeholder="e.g. 500 kg/month" />
-              </div>
-              <div>
-                <label htmlFor="application" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Application (optional)</label>
-                <input {...register('application')} id="application" className="input-field" placeholder="What will it be used for?" />
-              </div>
-              <div className="md:col-span-2">
-                <label htmlFor="requirements" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Technical Requirements (optional)</label>
-                <textarea {...register('requirements')} id="requirements" rows={4} className="input-field" placeholder="Any specific requirements..." />
-              </div>
-            </div>
-          )}
+         {inquiryType === 'quote' && (
+  <div>
+    <label htmlFor="industry" className="text-[12px] font-medium text-gray-700">
+      Industry <span className="text-red-500">*</span>
+    </label>
+    <select
+      id="industry"
+      {...register('industry')}
+      className="w-full h-12 px-4 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+    >
+      <option value="">Select your industry</option>
+      {industryOptions.map((o) => (
+        <option key={o.value} value={o.value}>
+          {o.label}
+        </option>
+      ))}
+    </select>
+    {(errors as any).industry && (
+      <p className="text-[12px] text-red-600 mt-1" role="alert">
+        {(errors as any).industry.message}
+      </p>
+    )}
+  </div>
+)}
 
           {inquiryType === 'technical' && (
             <div className="space-y-8">
               <div>
                 <label htmlFor="product" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Product / Material *</label>
                 <input {...register('product')} id="product" className="input-field" placeholder="Which product or material?" />
-                {errors.product && <p className="text-[12px] text-red-600 mt-1" role="alert">{errors.product.message}</p>}
+                {(errors as any).product && <p className="text-[12px] text-red-600 mt-1" role="alert">{(errors as any).product.message}</p>}
               </div>
               <div>
                 <label htmlFor="currentMaterial" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Current Material (optional)</label>
@@ -168,7 +163,7 @@ export default function ContactForm() {
               <div>
                 <label htmlFor="problemStatement" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Problem / Requirement *</label>
                 <textarea {...register('problemStatement')} id="problemStatement" rows={5} className="input-field" placeholder="Describe your technical requirement or challenge..." />
-                {errors.problemStatement && <p className="text-[12px] text-red-600 mt-1" role="alert">{errors.problemStatement.message}</p>}
+                {(errors as any).problemStatement && <p className="text-[12px] text-red-600 mt-1" role="alert">{(errors as any).problemStatement.message}</p>}
               </div>
             </div>
           )}
@@ -178,12 +173,12 @@ export default function ContactForm() {
               <div>
                 <label htmlFor="subject" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Subject *</label>
                 <input {...register('subject')} id="subject" className="input-field" placeholder="What is this about?" />
-                {errors.subject && <p className="text-[12px] text-red-600 mt-1" role="alert">{errors.subject.message}</p>}
+                {(errors as any).subject && <p className="text-[12px] text-red-600 mt-1" role="alert">{(errors as any).subject.message}</p>}
               </div>
               <div>
                 <label htmlFor="message" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Message *</label>
                 <textarea {...register('message')} id="message" rows={5} className="input-field" placeholder="Your message..." />
-                {errors.message && <p className="text-[12px] text-red-600 mt-1" role="alert">{errors.message.message}</p>}
+                {(errors as any).message && <p className="text-[12px] text-red-600 mt-1" role="alert">{(errors as any).message.message}</p>}
               </div>
             </div>
           )}
@@ -193,7 +188,7 @@ export default function ContactForm() {
               <div>
                 <label htmlFor="positionInterest" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Position of Interest *</label>
                 <input {...register('positionInterest')} id="positionInterest" className="input-field" placeholder="Role or area you are interested in" />
-                {errors.positionInterest && <p className="text-[12px] text-red-600 mt-1" role="alert">{errors.positionInterest.message}</p>}
+                {(errors as any).positionInterest && <p className="text-[12px] text-red-600 mt-1" role="alert">{(errors as any).positionInterest.message}</p>}
               </div>
               <div>
                 <label htmlFor="experience" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Years of Experience *</label>
@@ -201,12 +196,12 @@ export default function ContactForm() {
                   <option value="">Select experience</option>
                   {experienceOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
                 </select>
-                {errors.experience && <p className="text-[12px] text-red-600 mt-1" role="alert">{errors.experience.message}</p>}
+                {(errors as any).experience && <p className="text-[12px] text-red-600 mt-1" role="alert">{(errors as any).experience.message}</p>}
               </div>
               <div>
                 <label htmlFor="coverMessage" className="text-[12px] font-medium text-slate-500 uppercase tracking-[0.08em] mb-2 block">Cover Message *</label>
                 <textarea {...register('coverMessage')} id="coverMessage" rows={5} className="input-field" placeholder="Tell us about your background and interests..." />
-                {errors.coverMessage && <p className="text-[12px] text-red-600 mt-1" role="alert">{errors.coverMessage.message}</p>}
+                {(errors as any).coverMessage && <p className="text-[12px] text-red-600 mt-1" role="alert">{(errors as any).coverMessage.message}</p>}
               </div>
               <div className="border border-dashed border-slate-300 bg-slate-50 rounded-lg p-6 text-center">
                 <span className="text-slate-400 text-sm">📎</span>

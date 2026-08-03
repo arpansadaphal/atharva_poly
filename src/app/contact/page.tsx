@@ -1,10 +1,11 @@
+import { Suspense } from 'react'  // ✅ Add this import
 import { Metadata } from 'next'
 import PageHero from '@/components/sections/products/PageHero'
 import BreadcrumbNav from '@/components/ui/BreadcrumbNav'
 import ContactForm from '@/components/sections/contact/ContactForm'
 import BusinessInfoPanel from '@/components/sections/contact/BusinessInfoPanel'
 import LocationSection from '@/components/sections/contact/LocationSection'
-import {NoiseOverlay} from '@/components/ui/NoiseOverlay'
+import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
 import { Button } from '@/components/ui/Button'
 import { buildWhatsAppURL } from '@/lib/whatsapp'
 import { contactFAQ } from '@/lib/contact-data'
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading…</div>}>
       {/* C1 Hero */}
       <PageHero
         eyebrow="GET IN TOUCH"
@@ -48,12 +49,9 @@ export default function ContactPage() {
       <section className="bg-white section-padding" id="contact-form-section">
         <div className="max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[60fr_40fr] gap-12 lg:gap-16">
-            {/* BusinessInfoPanel placed above form on mobile (order-1) */}
             <div className="order-1 lg:order-2 lg:sticky lg:top-24">
               <BusinessInfoPanel />
             </div>
-
-            {/* Form */}
             <div className="order-2 lg:order-1">
               <ContactForm />
             </div>
@@ -98,7 +96,7 @@ export default function ContactPage() {
               Request Quote
             </Button>
             <a
-              href={buildWhatsAppURL({ context: 'contact' })}
+              href={buildWhatsAppURL({ customMessage: 'Hello, I would like to get in touch with the Atharva Polymers team.' })}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center h-14 px-8 text-white font-semibold rounded-lg bg-[#25D366] hover:bg-[#20bd5a] transition-colors"
@@ -108,6 +106,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-    </>
+    </Suspense>
   )
 }

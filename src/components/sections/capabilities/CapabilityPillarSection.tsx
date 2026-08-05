@@ -28,7 +28,7 @@ function CapabilityAccordion({ items }: { items: AccordionItem[] }) {
               onClick={() => toggle(i)}
               aria-expanded={isOpen}
               aria-controls={`cap-answer-${i}`}
-              className="w-full text-left py-5 flex justify-between items-center cursor-pointer text-[16px] font-semibold text-slate-900 hover:text-blue-600 transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded-sm"
+              className="w-full text-left py-5 flex justify-between items-center cursor-pointer text-[15px] sm:text-[16px] font-semibold text-slate-900 hover:text-blue-600 transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded-sm"
             >
               {item.title}
               {isOpen ? (
@@ -45,7 +45,7 @@ function CapabilityAccordion({ items }: { items: AccordionItem[] }) {
                 isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
               }`}
             >
-              <p className="text-[15px] text-slate-600 leading-7 pb-5">
+              <p className="text-[14px] sm:text-[15px] text-slate-600 leading-7 pb-5">
                 {item.content}
               </p>
             </div>
@@ -157,8 +157,9 @@ export default function CapabilityPillarSection({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Text Column */}
           <div className={isTextLeft ? '' : 'lg:order-2'}>
-            {/* 👇 REPLACED SectionHeader with plain heading */}
-            <h2 className="font-normal text-4xl text-slate-900 mb-4">{title}</h2>
+            <h2 className="font-normal text-3xl sm:text-4xl text-slate-900 mb-4">
+              {title}
+            </h2>
             <p className="text-[16px] text-slate-600 leading-7 mb-4">
               {description}
             </p>

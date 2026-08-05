@@ -137,24 +137,24 @@ export function Hero() {
           {/* ── Specification Mark + Eyebrow ────────────────────────────── */}
           <div className="flex items-center gap-3 mb-6">
 
-            {/* Specification Mark — 2px blue line, draws top→bottom first */}
+            {/* Specification Mark — 2px blue line, draws top→bottom first
             <motion.div
               className="w-0.5 bg-blue-600 flex-shrink-0"
               style={{ height: 16, transformOrigin: 'top' }}
               initial={fromSY(0)}
               animate={{ scaleY: 1, opacity: 1 }}
               transition={t(D.specMark, 0.25)}
-            />
+            /> */}
 
             {/* Eyebrow — follows mark, slides in from left */}
-            <motion.span
+            {/* <motion.span
               className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em]"
               initial={fromX(-4)}
               animate={toVisible}
               transition={t(D.eyebrow, 0.2)}
             >
               {hero.eyebrow}
-            </motion.span>
+            </motion.span> */}
           </div>
 
           {/* ── Headline — Inter Light (font-[300]), 64px desktop ───────── */}

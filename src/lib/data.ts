@@ -31,6 +31,7 @@ import type {
 
 export const company = {
   name: 'Atharva Polymers',
+  navname: 'Atharva',
   legalName: 'Atharva Polymers Pvt Ltd',
   tagline: 'Precision Polymer Manufacturing Built on Experience',
   founded: '2007',
@@ -117,7 +118,7 @@ export const hero = {
     line3: 'Industry Experience',
   },
   description:
-    'Serving industrial buyers across India and international markets. Quality products. Reliable supply. 19 years of delivery.',
+    'Serving industries across India and international markets. Quality products. Reliable supply. 19 years of delivery.',
   primaryCta:   { label: 'Request Quote',  href: '/contact' },
   secondaryCta: { label: 'View Products',  href: '/products' },
   image: {
@@ -135,7 +136,7 @@ export const companyIntro = {
   headline: 'A Focused Manufacturing Partner Since 2007',
   paragraphs: [
     'Atharva Polymers was established in MIDC Ranjangaon, Pune with a focused mission: to deliver consistently reliable polymer products for industrial applications. Over nearly two decades, that focus has not wavered.',
-    'Operating from a single, precision-controlled manufacturing facility, we have built long-term partnerships with industrial buyers across India and international markets by prioritising quality and dependability over corporate scale.',
+    'Operating from a single, precision-controlled manufacturing facility, we have built long-term partnerships with industries across India and international markets by prioritising quality and dependability over corporate scale.',
     // ⚠ AWAITING CLIENT — replace paragraph 3 with client-approved company story before launch.
     '⚠ AWAITING CLIENT COMPANY STORY',
   ],

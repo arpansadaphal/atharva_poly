@@ -204,3 +204,20 @@
   max-height: 500px; /* enough to show content */
   opacity: 1;
 }
+
+
+.pillar-nav-card {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pillar-nav-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+}
+.section-padding {
+  padding: 120px 0;
+}
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 80px 0;
+  }
+}

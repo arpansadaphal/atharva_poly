@@ -1,5 +1,5 @@
 import { products } from '@/lib/solutions-data'
-import PageHero from '@/components/sections/solutions/PageHero'
+import PageHero from '@/components/sections/products/PageHero'
 import ProductGrid from '@/components/sections/solutions/ProductGrid'
 import IndustryApplicationMap from '@/components/sections/solutions/IndustryApplicationMap'
 import InquiryBanner from '@/components/ui/InquiryBanner'

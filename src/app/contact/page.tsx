@@ -26,13 +26,13 @@ export default function ContactPage() {
   return (
     <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading…</div>}>
       {/* C1 Hero */}
-      <PageHero
+      {/* <PageHero
         eyebrow="GET IN TOUCH"
         headline="Start a Conversation"
         description="Tell us about your requirement. Our technical team responds within one business day."
         theme="dark"
         minHeight="min-h-[280px] lg:min-h-[360px]"
-      />
+      /> */}
 
       {/* Breadcrumb */}
      

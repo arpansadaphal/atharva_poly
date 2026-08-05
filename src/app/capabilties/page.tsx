@@ -313,11 +313,6 @@ export default function CapabilitiesPage() {
               'Full seat unit assembly integrating moulded shells, foam cushions, upholstery, and mounting hardware — tested for durability and comfort compliance.',
           },
           {
-            title: 'LED Products Assembly',
-            content:
-              'Assembly of LED lighting products including housing, lens, PCB integration, and wiring — with functional testing at each stage to ensure reliability and performance.',
-          },
-          {
             title: 'High-Volume Small Parts Assembly',
             content:
               'Automated and semi-automated assembly lines for high-volume small parts — delivering consistent quality at competitive cycle times for cost-sensitive applications.',

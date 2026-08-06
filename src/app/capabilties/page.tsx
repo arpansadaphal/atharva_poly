@@ -25,8 +25,8 @@ export default function CapabilitiesPage() {
   const engineeringImages = [
     { src: '/assets/capabilities/engineering/2.jpg', alt: 'Engineering team collaborating' },
     { src: '/assets/capabilities/engineering/design.jpg', alt: 'CAD modelling' },
-    { src: '/assets/capabilities/engineering/DFM-2.jpg', alt: 'Prototyping' },
-    { src: '/assets/capabilities/engineering/engg-DFM.jpg', alt: 'Prototyping' },
+    { src: '/assets/capabilities/engineering/dfm-2.jpg', alt: 'Prototyping' },
+    { src: '/assets/capabilities/engineering/engg-dfm.jpg', alt: 'Prototyping' },
     { src: '/assets/capabilities/engineering/material.jpg', alt: 'Prototyping' },
     { src: '/assets/capabilities/engineering/mold.jpg', alt: 'Prototyping' },
   ]
@@ -64,18 +64,18 @@ export default function CapabilitiesPage() {
     { src: '/assets/capabilities/assembly/as2.jpg', alt: 'Furniture assembly' },
     { src: '/assets/capabilities/assembly/as5.jpg', alt: 'Furniture assembly' },
     { src: '/assets/capabilities/assembly/as6.jpg', alt: 'Furniture assembly' },
-    { src: '/assets/capabilities/assembly/Ass1.jpg', alt: 'Furniture assembly' },
-    { src: '/assets/capabilities/assembly/ASs3.jpg', alt: 'Furniture assembly' },
+    { src: '/assets/capabilities/assembly/ass1.jpg', alt: 'Furniture assembly' },
+    { src: '/assets/capabilities/assembly/ass3.jpg', alt: 'Furniture assembly' },
   ]
 
   const qualityImages = [
-    { src: '/assets/capabilities/quality-systems/Q1.jpg', alt: 'Quality inspection' },
-    { src: '/assets/capabilities/quality-systems/QS1.jpg', alt: 'Certified lab' },
-    { src: '/assets/capabilities/quality-systems/QS3.jpg', alt: 'Certified lab' },
-    { src: '/assets/capabilities/quality-systems/QS4.jpg', alt: 'Certified lab' },
-    { src: '/assets/capabilities/quality-systems/QS5.jpg', alt: 'Certified lab' },
-    { src: '/assets/capabilities/quality-systems/QS6.jpg', alt: 'Certified lab' },
-    { src: '/assets/capabilities/quality-systems/QS8.jpg', alt: 'Certified lab' },
+    { src: '/assets/capabilities/quality-systems/q1.jpg', alt: 'Quality inspection' },
+    { src: '/assets/capabilities/quality-systems/qs1.jpg', alt: 'Certified lab' },
+    { src: '/assets/capabilities/quality-systems/qs3.jpg', alt: 'Certified lab' },
+    { src: '/assets/capabilities/quality-systems/qs4.jpg', alt: 'Certified lab' },
+    { src: '/assets/capabilities/quality-systems/qs5.jpg', alt: 'Certified lab' },
+    { src: '/assets/capabilities/quality-systems/qs6.jpg', alt: 'Certified lab' },
+    { src: '/assets/capabilities/quality-systems/qs8.jpg', alt: 'Certified lab' },
   ]
 
   return (

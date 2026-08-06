@@ -7,6 +7,7 @@ export const industries: Industry[] = [
     tagline: 'Smart, durable parts for the world’s leading home appliance brands. 40% of our business.',
     share: '40%',
     iconName: 'Refrigerator',
+    image: '/assets/industries/appliances.jpg', 
     overview:
       'We supply injection‑moulded components to major appliance manufacturers including Haier, Godrej, Kenstar, and Atomberg. Our parts meet demanding aesthetic, dimensional, and durability standards for household appliances.',
     challenges: [
@@ -59,6 +60,7 @@ export const industries: Industry[] = [
     iconName: 'Car',
     overview:
       'Atharva Polymers supplies injection‑moulded plastic parts to global vehicle manufacturers, including Toro, Ditch Witch, Spark Minda, Uno Minda, Varroc, Pricol, and IAC. Our components are found in autonomous commercial lawnmowers, off‑road utility vehicles, and automotive systems. Every part is produced under IATF 16949 certified quality systems, with full traceability and zero‑defect supply expectations.',
+      image: '/assets/industries/automotive.jpg', 
     challenges: [
       { title: 'Dimensional Precision', description: 'Vehicle components must maintain exact tolerances across production batches.', iconName: 'Ruler' },
       { title: 'Vibration & Impact Resistance', description: 'Parts endure constant vibration and mechanical shock in service.', iconName: 'Zap' },
@@ -107,6 +109,7 @@ export const industries: Industry[] = [
     iconName: 'Armchair',
     overview:
       'We manufacture high‑quality plastic components for global furniture leaders including Steelcase, Herman Miller, HNI, and Spacewood Office Solutions. Our parts meet rigorous ergonomic, durability, and surface finish standards.',
+      image: '/assets/industries/furniture.jpg', 
     challenges: [
       { title: 'Surface Finish', description: 'Visible furniture parts demand flawless surface quality and texture consistency.', iconName: 'Palette' },
       { title: 'Structural Integrity', description: 'Seating and structural components must support weight and repetitive stress.', iconName: 'Weight' },
@@ -142,8 +145,10 @@ export const industries: Industry[] = [
     tagline: 'High‑spec parts for industrial equipment, electronics, and pharma. 10% of business.',
     share: '10%',
     iconName: 'Factory',
+    image: '/assets/industries/industrial.png',
     overview:
       'We produce precision polymer components for industrial conglomerates L&T, JABIL, DRTS, and medical device leaders Fresenius Kabi and Nipro. Our parts meet stringent regulatory and performance requirements.',
+
     challenges: [
       { title: 'Regulatory Compliance', description: 'Medical and pharma components require validated processes and clean manufacturing.', iconName: 'FileCheck' },
       { title: 'Material Certification', description: 'Full material traceability and biocompatibility documentation.', iconName: 'Microscope' },

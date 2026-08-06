@@ -94,9 +94,9 @@ export const navigation = {
 
     industries: [
       { label: 'Automotive',              href: '/industries/automotive' },
-      { label: 'Packaging',               href: '/industries/packaging' },
-      { label: 'Consumer Goods',          href: '/industries/consumer-goods' },
-      { label: 'Industrial Manufacturing', href: '/industries/industrial' },
+      { label: 'Furniture',               href: '/industries/furniture' },
+      { label: 'Appliances',          href: '/industries/appliances' },
+      { label: 'Industrial & Medical', href: '/industries/others' },
     ] satisfies NavItem[],
 
     company: [
@@ -161,7 +161,8 @@ export const companyIntro = {
 export const differentiators: Differentiator[] = [
   {
     icon: 'Award',
-    title: 'Consistent Manufacturing Quality',
+    // title: 'Consistent Manufacturing Quality',
+    title: 'State of the art Manufacturing Facility',
     description:
       'Our single-facility model enables tight process control. Every batch produced to the same standard.',
   },

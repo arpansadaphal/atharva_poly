@@ -45,6 +45,7 @@ export interface Industry {
   clients: IndustryClient[] // real clients with logo
   products: IndustryProduct[] // featured parts
   certifications: string[] // e.g. "IATF 16949"
+  image?: string // 
   complianceNote?: string
   services: IndustryService[]
   metaTitle: string

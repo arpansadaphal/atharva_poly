@@ -79,7 +79,7 @@ export const productionProcess: ProcessStage[] = [
 export const machineCategories: MachineCategory[] = [
   {
     id: 'light',
-    label: 'New‑Gen Millkron',
+    label: 'New‑Gen Milacron',
     range: '100T – 250T',
     count: 5,
     applications: [
@@ -92,7 +92,7 @@ export const machineCategories: MachineCategory[] = [
   },
   {
     id: 'medium',
-    label: 'Millkron 450T Q‑Series',
+    label: 'Milacron 450T Q‑Series',
     range: '450T',
     count: 5,
     applications: [
@@ -105,7 +105,7 @@ export const machineCategories: MachineCategory[] = [
   },
   {
     id: 'heavy',
-    label: 'Servo Injection Moulding',
+    label: 'Servo Injection Molding',
     range: '50T – 1,000T',
     count: 19,
     applications: [

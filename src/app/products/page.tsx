@@ -17,14 +17,14 @@ const filterTabs = [
   { label: 'Appliances', value: 'appliances' },
   { label: 'Automotive & Off‑Road', value: 'automotive' },
   { label: 'Furniture', value: 'furniture' },
-  { label: 'Industrial & Medical', value: 'others' },
+  { label: 'Industrial & FMCG', value: 'others' },
 ]
 
 const industryQuickLinks = [
   { key: 'appliances', label: 'Appliances', icon: Refrigerator },
   { key: 'automotive', label: 'Automotive & Off‑Road', icon: Car },
   { key: 'furniture', label: 'Furniture', icon: Armchair },
-  { key: 'others', label: 'Industrial & Medical', icon: Factory },
+  { key: 'others', label: 'Industrial & FMCG', icon: Factory },
 ]
 
 const ITEMS_PER_PAGE = 6

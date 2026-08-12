@@ -13,8 +13,9 @@ export default function LocationSection() {
             type="manufacturing"
             name={businessInfo.manufacturingAddress.line1}
             addressLines={[
-              `${businessInfo.manufacturingAddress.line1}, ${businessInfo.manufacturingAddress.city}`,
+              `${businessInfo.manufacturingAddress.line2}, ${businessInfo.manufacturingAddress.city}`,
               `${businessInfo.manufacturingAddress.state}, ${businessInfo.manufacturingAddress.country}`,
+              `${businessInfo.manufacturingAddress.zipCode}`,
             ]}
             mapsUrl={businessInfo.manufacturingAddress.googleMapsUrl}
           />

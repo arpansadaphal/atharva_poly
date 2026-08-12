@@ -155,7 +155,7 @@ export function Footer() {
                 </div>
 
                 {/* Phone */}
-                {company.contact.phone !== '⚠ AWAITING CLIENT DATA' && (
+                {(company.contact.phone as string) !== '⚠ AWAITING CLIENT DATA' && (
                   <a
                     href={`tel:${company.contact.phone}`}
                     className={cn(
@@ -170,7 +170,7 @@ export function Footer() {
                 )}
 
                 {/* Email */}
-                {company.contact.email !== '⚠ AWAITING CLIENT DATA' && (
+                {(company.contact.email as string) !== '⚠ AWAITING CLIENT DATA' && (
                   <a
                     href={`mailto:${company.contact.email}`}
                     className={cn(

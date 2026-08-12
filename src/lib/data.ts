@@ -35,21 +35,27 @@ export const company = {
   legalName: 'Atharva Polymers Pvt Ltd',
   tagline: 'Precision Polymer Manufacturing Built on Experience',
   founded: '2007',
-  employees: 40,
+  employees: 200,
   address: {
     street: 'MIDC Ranjangaon',
     city: 'Pune',
     state: 'Maharashtra',
-    pin: '⚠ AWAITING CLIENT DATA',
+    // pin: '⚠ AWAITING CLIENT DATA',
     country: 'India',
     full: 'MIDC Ranjangaon, Pune, Maharashtra, India',
-    googleMapsUrl: '⚠ AWAITING CLIENT DATA',
+    googleMapsUrl: 'https://maps.app.goo.gl/a8WygP8xiao1NF7w5',
   },
+  // contact: {
+  //   phone: '⚠ AWAITING CLIENT DATA',
+  //   email: '⚠ AWAITING CLIENT DATA',
+  //   whatsappDisplay: '⚠ AWAITING CLIENT DATA',
+  // },
   contact: {
-    phone: '⚠ AWAITING CLIENT DATA',
-    email: '⚠ AWAITING CLIENT DATA',
+    phone: '+91 9011534516',
+    email: 'shantanu.dhanu@atharvapolymers.com',
     whatsappDisplay: '⚠ AWAITING CLIENT DATA',
   },
+
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -96,7 +102,7 @@ export const navigation = {
       { label: 'Automotive',              href: '/industries/automotive' },
       { label: 'Furniture',               href: '/industries/furniture' },
       { label: 'Appliances',          href: '/industries/appliances' },
-      { label: 'Industrial & Medical', href: '/industries/others' },
+      { label: 'Industrial & FMCG', href: '/industries/others' },
     ] satisfies NavItem[],
 
     company: [
@@ -399,7 +405,7 @@ export const aboutPage = {
     yearRange: '2007—2026',
     headline: 'Two decades of polymer. One discipline.',
     subhead:
-      'How a single facility in MIDC Ranjangaon became a 95,000 sq. m. precision manufacturing operation — without ever leaving the discipline that started it.',
+      'How a single facility in MIDC Ranjangaon became a 85,000 sq. m. precision manufacturing operation — without ever leaving the discipline that started it.',
   },
 
   directorsNote: {
@@ -409,7 +415,7 @@ export const aboutPage = {
     headline: 'A 19-year discipline, not a 19-year story.',
     paragraphs: [
       'When we started Atharva Polymers in 2007, we made a deliberate choice: stay focused. Build one facility. Learn one discipline deeply. Resist the temptation to do everything.',
-      'Nineteen years later, that decision still defines us. Every machine in our 35-unit injection moulding line, every quality protocol, every export shipment carries the same conviction: precision is not a department. It is the culture of the floor.',
+      'Nineteen years later, that decision still defines us. Every machine in our 35+ unit injection moulding line, every quality protocol, every export shipment carries the same conviction: precision is not a department. It is the culture of the floor.',
       'This page is not a brochure. It is a record of how we think, how we build, and what we will not compromise.',
     ],
     imageSrc: '/assets/team/leadership.jpg',
@@ -432,7 +438,7 @@ export const aboutPage = {
       year: '2010–2015',
       yearLabel: 'Capacity',
       principle: 'Discipline',
-      headline: 'Building the line — 35 machines, 100T to 1000T.',
+      headline: 'Building the line — 60+ machines, 100T to 1000T.',
       body:
         'Capacity expansion with discipline. Machines acquired in matched sets. Process control established before volume. Operating 24/7 by the end of the period.',
       imageSrc: '/assets/machinery/Horizontal-INJ-presses--2_s.webp',
@@ -546,8 +552,12 @@ export const aboutPage = {
     {
       role: 'Founder & Managing Director',
       name: 'Mr. Mansingh Pachundkar',
-      bio:
-        'Founded Atharva Polymers in 2007 with a single-discipline focus. Extended the Atharva Group into corrugation, sheet metal, EPS thermoforming, and biopharma while preserving the standards established at the polymer facility.',
+      // bio:
+      //   'Founded Atharva Polymers in 2007 with a single-discipline focus. Extended the Atharva Group into corrugation, sheet metal, EPS thermoforming, and biopharma while preserving the standards established at the polymer facility.',
+     bio: `Since our inception, we have believed that sustainable growth is built on quality, integrity, innovation, and customer trust. These principles continue to guide our decisions as we strengthen our capabilities and respond to the evolving needs of our customers.
+
+We remain committed to precision, consistency, technological advancement, and continuous improvement — supported by skilled people, modern manufacturing capabilities, and robust quality systems. As we look to the future, our focus remains on responsible growth, operational excellence, and building enduring relationships founded on trust and transparency.`,
+
       imageSrc: '/assets/team/leadership.jpg',
       imageAlt: 'Mr. Mansingh Pachundkar, Founder and Managing Director',
       span: 'founder',
@@ -556,7 +566,7 @@ export const aboutPage = {
       role: 'Head of Production',
       name: 'Production Lead',
       bio:
-        'Leads the 24/7 injection moulding operation across 35 machines, 100T to 1000T.',
+        'Leads the 24/7 injection moulding operation across 35+ machines, 100T to 1000T.',
       imageSrc: '/assets/team/1658747856497.jpeg',
       imageAlt: 'Production Lead at Atharva Polymers',
     },
@@ -588,8 +598,8 @@ export const aboutPage = {
 
   aboutStats: [
     { value: 19, suffix: '+', label: 'Years of polymer manufacturing' },
-    { value: 35, suffix: '',  label: 'Injection moulding machines' },
-    { value: 95, suffix: 'k', label: 'Sq. m. manufacturing footprint' },
+    { value: 60, suffix: '',  label: 'Injection moulding machines' },
+    { value: 85, suffix: 'k', label: 'Sq. m. manufacturing footprint' },
     { value: 4,  suffix: '+', label: 'International markets served' },
   ] satisfies AboutStat[],
 } as const

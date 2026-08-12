@@ -219,11 +219,16 @@ export default function ManufacturingPage() {
             <h2 className="font-normal text-4xl text-slate-900 mb-4">
               From Raw Material to Finished Product
             </h2>
-            <p className="text-[16px] text-slate-600 mb-16">
+            {/* <p className="text-[16px] text-slate-600 mb-16">
               Eight defined stages govern every production run. Quality is embedded
               throughout — not inspected in at the end — under our IATF 16949 quality
               management system.
-            </p>
+            </p> */}
+            <p className="text-[16px] text-slate-600 mb-16">
+  Fifteen defined stages govern every production run — from initial RFQ to final dispatch.
+  Quality is embedded throughout — not inspected in at the end — under our IATF 16949
+  quality management system.
+</p>
           </div>
           <ProductionProcessFlow stages={productionProcess} />
         </div>

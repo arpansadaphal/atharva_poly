@@ -1,9 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import * as LucideIcons from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { staggerContainer, staggerItem } from '@/lib/animations'
+import { staggerContainer } from '@/lib/animations'
 import type { ProcessStage } from '@/types/manufacturing'
 
 interface ProductionProcessFlowProps {
@@ -11,14 +12,37 @@ interface ProductionProcessFlowProps {
   showCheckpoints?: boolean
 }
 
+// Local variant with slight zoom (scale from 0.95 to 1)
+const zoomStaggerItem = {
+  hidden: { opacity: 0, y: 16, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+}
+
 export default function ProductionProcessFlow({
   stages,
   showCheckpoints = true,
 }: ProductionProcessFlowProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Scroll progress for the vertical line
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start 0.8', 'end 0.6'], // adjust as needed
+  })
+
+  const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1])
+
   return (
-    <div className="relative max-w-3xl mx-auto">
-      <div
-        className="process-line absolute left-[18px] top-[18px] bottom-[18px] w-px bg-slate-200 origin-top transition-transform duration-300"
+    <div ref={containerRef} className="relative max-w-3xl mx-auto">
+      {/* Animated vertical line that draws with scroll */}
+      <motion.div
+        style={{ scaleY: lineScale }}
+        className="process-line absolute left-[18px] top-[18px] bottom-[18px] w-px bg-slate-200 origin-top"
         aria-hidden="true"
       />
       <motion.ol
@@ -34,7 +58,7 @@ export default function ProductionProcessFlow({
           return (
             <motion.li
               key={stage.step}
-              variants={staggerItem}
+              variants={zoomStaggerItem}
               className="flex gap-6"
             >
               <div

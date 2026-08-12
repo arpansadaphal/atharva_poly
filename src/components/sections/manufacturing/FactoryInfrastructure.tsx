@@ -233,7 +233,7 @@ export default function FactoryInfrastructure() {
             Ranjangaon, Pune — Atharva Polymers Pvt. Ltd.
           </p>
           <p className="text-[17px] font-[300] text-slate-300 max-w-[600px] mt-6 leading-7">
-            A modern, 80,000 sq ft manufacturing facility (70,000 sq ft constructed)
+            A modern, 106,000 sq ft manufacturing facility (85,000 sq ft constructed)
             designed for precision injection moulding. The plant houses 60+ machines
             ranging from 50T to 1,300T, a dedicated tool room, quality laboratory, and
             automated inspection cells. Part of the Atharva Group's 300,000 sq ft
@@ -246,7 +246,7 @@ export default function FactoryInfrastructure() {
               <Factory className="w-5 h-5 text-blue-600" aria-hidden="true" />
               <div>
                 <p className="text-[13px] text-slate-400">Year Established</p>
-                <p className="text-[15px] font-medium text-white">2010</p>
+                <p className="text-[15px] font-medium text-white">2008</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -271,7 +271,7 @@ export default function FactoryInfrastructure() {
               <Maximize className="w-5 h-5 text-blue-600" aria-hidden="true" />
               <div>
                 <p className="text-[13px] text-slate-400">Plant Area</p>
-                <p className="text-[15px] font-medium text-white">80,000 sq ft</p>
+                <p className="text-[15px] font-medium text-white">85,000 sq ft</p>
               </div>
             </div>
           </div>

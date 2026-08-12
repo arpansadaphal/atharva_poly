@@ -5,7 +5,7 @@ import { industries } from '@/lib/industries-data'
 import { Metadata } from 'next'
 
 const crossCapabilities = [
-  { title: 'IATF 16949 Traceability', description: 'Full batch traceability mandatory for automotive and increasingly requested by appliance and medical clients.', iconName: 'GitBranch' },
+  { title: 'IATF 16949 Traceability', description: 'Full batch traceability mandatory for automotive and increasingly requested by appliance and FMCG clients.', iconName: 'GitBranch' },
   { title: 'Design & Engineering', description: 'In‑house CAD, reverse engineering, and 3D scanning to accelerate development.', iconName: 'FileText' },
   { title: 'Automated Inspection', description: 'FARO arm, SPM camera, MFI testing for consistent quality across millions of parts.', iconName: 'ClipboardCheck' },
   { title: 'Direct Technical Access', description: 'Every client receives a named technical contact who understands their product.', iconName: 'MessageSquare' },
@@ -13,7 +13,7 @@ const crossCapabilities = [
 
 export const metadata: Metadata = {
   title: 'Industries Served | Atharva Polymers, Pune',
-  description: 'Polymer solutions for appliances, automotive & off‑road, furniture, and medical/industrial sectors. IATF 16949 certified. 60+ machines. MIDC Ranjangaon, Pune.',
+  description: 'Polymer solutions for appliances, automotive & off‑road, furniture, and FMCG/industrial sectors. IATF 16949 certified. 60+ machines. MIDC Ranjangaon, Pune.',
 }
 
 export default function IndustriesPage() {

@@ -15,13 +15,23 @@ export const experienceOptions = [
 
 // ⚠ All values below require client confirmation before launch
 export const businessInfo = {
+  // manufacturingAddress: {
+  //   line1: 'MIDC Ranjangaon',
+  //   city: 'Pune',
+  //   state: 'Maharashtra',
+  //   country: 'India',
+  //   googleMapsUrl: 'https://maps.app.goo.gl/a8WygP8xiao1NF7w5',
+  // },
   manufacturingAddress: {
-    line1: 'MIDC Ranjangaon',
-    city: 'Pune',
-    state: 'Maharashtra',
-    country: 'India',
-    googleMapsUrl: 'https://maps.google.com/?q=MIDC+Ranjangaon+Pune',
-  },
+  line2: 'Gat No. 596, Dhokh Sanghvi, Tal. Shirur',
+  line1: 'MIDC Ranjangaon',
+  city: 'Pune',
+  state: 'Maharashtra',
+  zipCode: '412026',
+  country: 'India',
+  googleMapsUrl: 'https://maps.app.goo.gl/a8WygP8xiao1NF7w5',
+},
+
   commercialAddress: {
     line1: 'World Trade Center, Kharadi',
     city: 'Pune',
@@ -29,10 +39,10 @@ export const businessInfo = {
     country: 'India',
     googleMapsUrl: 'https://maps.google.com/?q=World+Trade+Center+Kharadi+Pune',
   },
-  phone: '⚠ Client validation required',
-  email: '⚠ Client validation required',
+  phone: '+91 9011534516',
+  email: 'shantanu.dhanu@atharvapolymers.com',
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '',
-  workingHours: '⚠ Client validation required',
+  workingHours: '9:00 AM – 6:00 PM IST, Monday to Saturday',
   founded: '2007',
   exportMarkets: 4,
 }
@@ -40,7 +50,7 @@ export const businessInfo = {
 export const contactFAQ = [
   {
     question: 'How quickly does your team respond to enquiries?',
-    answer: '⚠ Client validation required. Remove placeholder before launch.',
+    answer: '1 working day',
   },
   {
     question: 'What information do you need to provide a quotation?',
@@ -48,17 +58,9 @@ export const contactFAQ = [
       'To prepare an accurate quotation, it helps to know the material grade or application requirements, approximate quantity, delivery location, and any technical specifications. Our team will follow up if we need further details.',
   },
   {
-    question: 'Can you provide material samples?',
-    answer: '⚠ Validate sample supply policy with client before publishing.',
-  },
-  {
     question: 'Do you supply to international buyers?',
     answer:
       'Yes. We currently supply to clients in India and four international export markets. Contact us to discuss your export requirement.',
-  },
-  {
-    question: 'What is the minimum order quantity?',
-    answer: '⚠ Client validation required.',
   },
   {
     question: 'Can you assist with material selection for my application?',

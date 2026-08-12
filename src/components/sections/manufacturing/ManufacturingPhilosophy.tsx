@@ -61,7 +61,7 @@ export default function ManufacturingPhilosophy() {
               Atharva Polymers Pvt. Ltd.
             </p>
             <p className="text-[13px] text-slate-500">
-              Ranjangaon, Pune — established 2010
+              Ranjangaon, Pune — established 2008
             </p>
             <hr className="border-t border-slate-100 my-4" />
             <div className="space-y-3">
@@ -82,9 +82,9 @@ export default function ManufacturingPhilosophy() {
                 <p className="text-[13px] text-slate-500">Polymer Processing / Annum</p>
               </div>
               <div>
-                <p className="text-[22px] font-semibold text-slate-900">80,000</p>
+                <p className="text-[22px] font-semibold text-slate-900">106,000</p>
                 <p className="text-[13px] text-slate-500">
-                  sq ft (70,000 sq ft constructed)
+                  sq ft (85,000 sq ft constructed)
                 </p>
               </div>
             </div>

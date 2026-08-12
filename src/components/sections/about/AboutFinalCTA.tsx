@@ -14,8 +14,8 @@ import { company } from '@/lib/data'
  * address strip — a magazine-spread closer.
  */
 export function AboutFinalCTA() {
-  const phone = company.contact.phone
-  const email = company.contact.email
+  const phone = company.contact.phone as string
+  const email = company.contact.email as string
   const hasPhone = phone !== '⚠ AWAITING CLIENT DATA'
   const hasEmail = email !== '⚠ AWAITING CLIENT DATA'
 

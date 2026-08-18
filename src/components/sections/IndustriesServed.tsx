@@ -3,7 +3,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Car, Package, ShoppingBag, Factory, ArrowRight } from 'lucide-react'
+import { Car, CookingPot, RockingChair, Factory, ArrowRight } from 'lucide-react'
 import {SectionHeader }from '@/components/ui/SectionHeader'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 
@@ -17,23 +17,23 @@ const industries = [
   },
   {
     name: 'Appliances',
-    icon: Package,
+    icon: CookingPot,
     description:
       'Smart, durable parts for the worlds leading home appliance brands, from housings to functional components.',
     slug: 'appliances',
   },
   {
     name: 'Furniture',
-    icon: ShoppingBag,
+    icon: RockingChair,
     description:
       'precision-moulded components for premium office furniture and seating.',
     slug: 'furniture',
   },
   {
-    name: 'Industrial And Medical',
+    name: 'Industrial And FMCG',
     icon: Factory,
     description:
-      'High-spec parts for industrial equipment, electronics, and pharma. 10% of our busniess',
+      'High-spec parts for industrial equipment and FMCG applications.',
     slug: 'others',
   },
 ]

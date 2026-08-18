@@ -3,22 +3,24 @@
 import { motion } from 'framer-motion'
 import { Car, Package, ShoppingBag, Factory } from 'lucide-react'
 import Link from 'next/link'
-import type { ProductDetail } from '@/types/solutions'
+import type { ProductDetail } from '@/types/solutions' // or '@/types/products' if not re-exported
 
 interface IndustryApplicationMapProps {
   products: ProductDetail[]
 }
 
+// Use 'others' instead of 'industrial' to match the ProductDetail.industries union.
 const INDUSTRY_CONFIG = [
   { key: 'automotive', label: 'Automotive', icon: Car, href: '/industries/automotive' },
-  { key: 'packaging', label: 'Packaging', icon: Package, href: '/industries/packaging' },
-  { key: 'consumer-goods', label: 'Consumer Goods', icon: ShoppingBag, href: '/industries/consumer-goods' },
-  { key: 'industrial', label: 'Industrial Manufacturing', icon: Factory, href: '/industries/industrial' },
+  { key: 'appliances', label: 'Appliances', icon: Package, href: '/industries/appliances' },
+  { key: 'furniture', label: 'Furniture', icon: ShoppingBag, href: '/industries/furniture' },
+  { key: 'others', label: 'Industrial & FMCG', icon: Factory, href: '/industries/others' },
 ] as const
 
 export default function IndustryApplicationMap({ products }: IndustryApplicationMapProps) {
-  const getProductsForIndustry = (industry: string) =>
-    products.filter((p) => p.industries.includes(industry as any))
+  // Type-safe filter: `industry.key` is now one of the allowed values.
+  const getProductsForIndustry = (industry: (typeof INDUSTRY_CONFIG)[number]['key']) =>
+    products.filter((p) => p.industries.includes(industry))
 
   return (
     <section className="bg-slate-50 section-padding" aria-label="Products by Industry">

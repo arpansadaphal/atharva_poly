@@ -54,23 +54,16 @@ const coreSchema = z.object({
   name: z.string().trim().min(2, 'Please enter your name').max(120),
   company: z.string().trim().min(2, 'Please enter your company name').max(160),
   email: z.string().trim().email('Please enter a valid email address').max(180),
-  // phone: z
-  //   .string()
-  //   .trim()
-  //   .regex(
-  //     /^(\+?[1-9]\d{0,3}[\s\-]?)?((\(\d{1,4}\))|\d{1,4})[\s\-]?\d{1,4}[\s\-]?\d{1,9}$/,
-  //     'Please enter a valid phone number',
-  //   )
-  //   .max(20),
-  // honeypot: z.string().max(200).optional().default(''),
   phone: z
-  .string()
-  .trim()
-  .transform((val) => val.replace(/[\s\-()]/g, '')) // remove separators
-  .refine((val) => /^\+[1-9]\d{7,14}$/.test(val), {
-    message: 'Please include country code (e.g. +91 98765 43210)',
-  }),
-})
+    .string()
+    .trim()
+    .transform((val) => val.replace(/[\s\-()]/g, ''))
+    .refine((val) => /^\+[1-9]\d{7,14}$/.test(val), {
+      message: 'Please include country code (e.g. +91 98765 43210)',
+    }),
+  hearAboutUs: z.string().min(1, 'Please select how you heard about us'),
+  honeypot: z.string().max(200).optional().default(''),
+});
 
 const quoteSchema = coreSchema.extend({
   inquiryType: z.literal('quote'),

@@ -419,7 +419,7 @@ export const qualitySystems: QualitySystem[] = [
 
 export const capacityMetrics: ManufacturingMetric[] = [
   {
-    value: '60+',
+    value: '32+',
     label: 'Injection Moulding Machines',
     context: '50T to 1,300T clamping force',
   },

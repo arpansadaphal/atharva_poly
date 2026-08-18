@@ -61,19 +61,19 @@ export default function ManufacturingPhilosophy() {
               Atharva Polymers Pvt. Ltd.
             </p>
             <p className="text-[13px] text-slate-500">
-              Ranjangaon, Pune — established 2008
+              Ranjangaon, Pune — established 2007
             </p>
             <hr className="border-t border-slate-100 my-4" />
             <div className="space-y-3">
               <div>
-                <p className="text-[22px] font-semibold text-slate-900">60+</p>
+                <p className="text-[22px] font-semibold text-slate-900">32+</p>
                 <p className="text-[13px] text-slate-500">
                   Injection Moulding Machines
                 </p>
               </div>
               <div>
                 <p className="text-[22px] font-semibold text-slate-900">
-                  50T – 1,300T
+                  50T – 1,000T
                 </p>
                 <p className="text-[13px] text-slate-500">Clamping Force Range</p>
               </div>

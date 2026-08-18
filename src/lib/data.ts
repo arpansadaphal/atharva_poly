@@ -550,7 +550,7 @@ export const aboutPage = {
 
   leadership: [
     {
-      role: 'Founder & Managing Director',
+      role: 'Founder & Group Chairman',
       name: 'Mr. Mansingh Pachundkar',
       // bio:
       //   'Founded Atharva Polymers in 2007 with a single-discipline focus. Extended the Atharva Group into corrugation, sheet metal, EPS thermoforming, and biopharma while preserving the standards established at the polymer facility.',
@@ -559,7 +559,7 @@ export const aboutPage = {
 We remain committed to precision, consistency, technological advancement, and continuous improvement — supported by skilled people, modern manufacturing capabilities, and robust quality systems. As we look to the future, our focus remains on responsible growth, operational excellence, and building enduring relationships founded on trust and transparency.`,
 
       imageSrc: '/assets/team/leadership.jpg',
-      imageAlt: 'Mr. Mansingh Pachundkar, Founder and Managing Director',
+      imageAlt: 'Mr. Mansingh Pachundkar, Founder and Group Chairman',
       span: 'founder',
     },
     {

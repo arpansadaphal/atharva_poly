@@ -264,7 +264,9 @@ export const industries: Industry[] = [
     ],
     clients: [
       { name: 'Toro', logoPath: '/assets/logos/toro.png' },
-      { name: 'Ditch Witch', logoPath: '/assets/logos/ditch-witch.png' },
+      { name: 'Bajaj', logoPath: '/assets/logos/bajaj.png' },
+      { name: 'JABIL', logoPath: '/assets/logos/jabil.png' },
+      { name: 'Ditch Witch', logoPath: '/assets/logos/ditch-witch.jpg' },
       { name: 'Spark Minda', logoPath: '/assets/logos/spark-minda.png' },
       { name: 'Uno Minda', logoPath: '/assets/logos/uno-minda.png' },
       { name: 'Varroc', logoPath: '/assets/logos/varroc.png' },
@@ -346,10 +348,9 @@ export const industries: Industry[] = [
       { title: 'Consumer Packaging', description: 'Custom moulded components for FMCG product packaging and dispensing.', iconName: 'Package' },
     ],
     clients: [
-      { name: 'JABIL', logoPath: '/assets/logos/jabil.png' },
+      
       // { name: 'Larsen & Toubro', logoPath: '/assets/logos/lnt.png' },
-      { name: 'Bajaj', logoPath: '/assets/logos/bajaj.png' },
-      { name: 'Awesome', logoPath: '/assets/logos/awesome.png' },
+      { name: 'Awesome', logoPath: '/assets/logos/awesome.jpeg' },
       // { name: 'Britannia', logoPath: '/assets/logos/britannia.png' },
     ],
     products: [

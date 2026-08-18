@@ -39,7 +39,7 @@ export interface ProductDetail {
   tagline: string
   description: string
   shortDescription: string
-  industries: ('automotive' | 'packaging' | 'consumer-goods' | 'industrial')[]
+  industries: ('automotive' | 'appliances' | 'furniture' | 'others')[]
   applications: string[]
   keyProperties: KeyProperty[]
   technicalSpecs: SpecSection[]

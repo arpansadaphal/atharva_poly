@@ -63,7 +63,7 @@ export default function ManufacturingGalleryPreview({
           </motion.div>
         ))}
       </motion.div>
-      {showLink && (
+      {/* {showLink && (
         <div className="text-right mt-6">
           <Link
             href={galleryHref}
@@ -72,7 +72,7 @@ export default function ManufacturingGalleryPreview({
             View full gallery →
           </Link>
         </div>
-      )}
+      )} */}
     </>
   )
 }

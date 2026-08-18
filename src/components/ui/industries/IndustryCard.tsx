@@ -101,24 +101,24 @@ export default function IndustryCard({ industry }: IndustryCardProps) {
           // Fallback to icon if no image
           <div className="w-full h-full flex flex-col items-center justify-center gap-2">
             <Icon className="w-10 h-10 text-slate-400" aria-hidden="true" />
-            <span className="text-[14px] font-semibold text-slate-500">{industry.share} of business</span>
+            {/* <span className="text-[14px] font-semibold text-slate-500">{industry.share} of business</span> */}
           </div>
         )}
         
         {/* Optional: Overlay text on image */}
         {industry.image && (
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-            <span className="text-white text-[14px] font-semibold">{industry.share} of business</span>
+            {/* <span className="text-white text-[14px] font-semibold">{industry.share} of business</span> */}
           </div>
         )}
       </div>
       
       <div className="p-6">
         <div className="flex items-center gap-2 mb-2">
-          <Icon className="w-5 h-5 text-blue-600" aria-hidden="true" />
-          <span className="bg-blue-50 text-blue-600 text-[11px] font-semibold rounded-full px-2.5 py-0.5">
-            {industry.share} SHARE
-          </span>
+          {/* <Icon className="w-5 h-5 text-blue-600" aria-hidden="true" /> */}
+          {/* <span className="bg-blue-50 text-blue-600 text-[11px] font-semibold rounded-full px-2.5 py-0.5"> */}
+            {/* {industry.share} SHARE */}
+          {/* </span> */}
         </div>
         <h3 className="text-[20px] font-semibold text-slate-900 mt-1">{industry.name}</h3>
         <p className="text-[14px] text-slate-500 mt-1 leading-5 line-clamp-2">{industry.tagline}</p>

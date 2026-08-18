@@ -50,7 +50,7 @@ export const businessInfo = {
 export const contactFAQ = [
   {
     question: 'How quickly does your team respond to enquiries?',
-    answer: '1 working day',
+    answer: 'One working day',
   },
   {
     question: 'What information do you need to provide a quotation?',

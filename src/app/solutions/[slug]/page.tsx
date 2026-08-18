@@ -52,9 +52,9 @@ export default async function ProductDetailPage({
       <ProductDetailHeader product={product} />
       <ProductOverview product={product} />
       <ProductSpecifications product={product} />
-      <ProductApplications product={product} />
+      {/* <ProductApplications product={product} />
       <ProductDownloads product={product} />
-      <ProductFAQ product={product} />
+      <ProductFAQ product={product} /> */}
       <RelatedProducts product={product} />
       <ProductInquiryCTA product={product} />
     </>

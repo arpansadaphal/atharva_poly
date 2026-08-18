@@ -47,7 +47,7 @@ function AccordionColumn({ title, alwaysOpen = false, children }: AccordionColum
             <ChevronDown
               size={16}
               className={cn(
-                'text-slate-500 transition-transform duration-200 flex-shrink-0',
+                'text-slate-400 transition-transform duration-200 flex-shrink-0',
                 open && 'rotate-180'
               )}
               aria-hidden="true"
@@ -93,7 +93,7 @@ function FooterLinks({ links }: { links: readonly NavItem[] }) {
           <Link
             href={item.href}
             className={cn(
-              'text-[14px] text-slate-500 hover:text-white transition-colors duration-150',
+              'text-[14px] text-slate-400 hover:text-white transition-colors duration-150',
               FOCUS
             )}
           >
@@ -134,7 +134,7 @@ export function Footer() {
           <AccordionColumn title={company.name} alwaysOpen>
             <div className="flex flex-col gap-4">
               {/* Tagline */}
-              <p className="text-[14px] text-slate-500 leading-6">
+              <p className="text-[14px] text-slate-400 leading-6">
                 {company.tagline}
               </p>
 
@@ -146,7 +146,7 @@ export function Footer() {
                     className="text-slate-600 mt-0.5 flex-shrink-0"
                     aria-hidden="true"
                   />
-                  <span className="text-[13px] text-slate-500 leading-5">
+                  <span className="text-[13px] text-slate-400 leading-5">
                     {company.address.street},{' '}
                     {company.address.city},{' '}
                     {company.address.state},{' '}
@@ -159,7 +159,7 @@ export function Footer() {
                   <a
                     href={`tel:${company.contact.phone}`}
                     className={cn(
-                      'flex items-center gap-2 text-[13px] text-slate-500',
+                      'flex items-center gap-2 text-[13px] text-slate-400',
                       'hover:text-white transition-colors duration-150',
                       FOCUS
                     )}
@@ -174,7 +174,7 @@ export function Footer() {
                   <a
                     href={`mailto:${company.contact.email}`}
                     className={cn(
-                      'flex items-center gap-2 text-[13px] text-slate-500',
+                      'flex items-center gap-2 text-[13px] text-slate-400',
                       'hover:text-white transition-colors duration-150',
                       FOCUS
                     )}

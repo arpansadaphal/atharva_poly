@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import PageHero from '@/components/sections/products/PageHero'
 import FilterTabs from '@/components/ui/FilterTabs'
 import ProductCard from '@/components/sections/products/ProductCard'
 import InquiryBanner from '@/components/ui/InquiryBanner'
 import { Button } from '@/components/ui/Button'
-import {NoiseOverlay} from '@/components/ui/NoiseOverlay'
+import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
 import { products, getProductsByIndustry } from '@/lib/products-data'
 import { Refrigerator, Car, Armchair, Factory, ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
@@ -34,17 +34,31 @@ export default function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [mobileFullCatalog, setMobileFullCatalog] = useState(false)
 
+  // Read ?industry= from the URL on initial mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const industry = params.get('industry')
+    if (industry && industry !== activeIndustry) {
+      setActiveIndustry(industry)
+      setCurrentPage(1)
+      setMobileFullCatalog(true) // show full catalog on mobile when arriving with a filter
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const filtered = getProductsByIndustry(activeIndustry)
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE)
   const page = Math.min(currentPage, totalPages || 1)
   const paginatedProducts = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
 
-  const handleIndustryChange = (industry: string) => {
+  // Handler for filter changes: updates industry, resets page, and on mobile switches to full catalog view
+  const handleFilterChange = (industry: string) => {
     setActiveIndustry(industry)
     setCurrentPage(1)
+    setMobileFullCatalog(true) // ensures full catalog is shown when a filter is selected
   }
 
-  // One unique product per category for the mobile preview (avoid duplicates by using a set)
+  // One unique product per category for the mobile preview
   const pickedSlugs = new Set<string>()
   const mobileCategoryProducts = industryQuickLinks
     .map(({ key }) => {
@@ -134,10 +148,17 @@ export default function ProductsPage() {
       {/* ========== MOBILE VIEW ========== */}
       <section className="bg-white section-padding block md:hidden">
         <div className="max-w-[1280px] mx-auto px-6">
+          {/* Filter tabs always visible on mobile */}
+          <FilterTabs
+            tabs={filterTabs}
+            activeTab={activeIndustry}
+            onChange={handleFilterChange}
+          />
+
           {!mobileFullCatalog ? (
             <>
               {/* Category preview */}
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mt-8 mb-6">
                 <span className="w-[2px] h-6 bg-blue-600 inline-block" aria-hidden="true" />
                 <span className="font-semibold text-[11px] uppercase tracking-[0.1em] text-slate-500">
                   PRODUCTS BY CATEGORY
@@ -163,7 +184,7 @@ export default function ProductsPage() {
           ) : (
             <>
               {/* Full catalog on mobile */}
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between mt-8 mb-4">
                 <button
                   onClick={() => setMobileFullCatalog(false)}
                   className="flex items-center gap-2 text-[14px] font-medium text-blue-600 hover:text-blue-700"
@@ -172,12 +193,6 @@ export default function ProductsPage() {
                   Back to categories
                 </button>
               </div>
-
-              <FilterTabs
-                tabs={filterTabs}
-                activeTab={activeIndustry}
-                onChange={handleIndustryChange}
-              />
 
               <p className="text-[13px] text-slate-400 mb-6">
                 Showing{' '}
@@ -201,7 +216,7 @@ export default function ProductsPage() {
           <FilterTabs
             tabs={filterTabs}
             activeTab={activeIndustry}
-            onChange={handleIndustryChange}
+            onChange={handleFilterChange}
           />
 
           <p className="text-[13px] text-slate-400 mb-8">
@@ -219,7 +234,7 @@ export default function ProductsPage() {
       </section>
 
       {/* Industry Quick Links */}
-      <section className="bg-slate-50 section-padding">
+      {/* <section className="bg-slate-50 section-padding">
         <div className="max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12">
           <div className="flex items-center gap-3 mb-4">
             <span className="w-[2px] h-6 bg-blue-600 inline-block" aria-hidden="true" />
@@ -234,11 +249,7 @@ export default function ProductsPage() {
               return (
                 <button
                   key={key}
-                  onClick={() => {
-                    handleIndustryChange(key)
-                    // If on mobile and in full catalog, keep the view; otherwise auto-switch to full catalog
-                    if (!mobileFullCatalog) setMobileFullCatalog(true)
-                  }}
+                  onClick={() => handleFilterChange(key)}
                   className="bg-white border border-slate-200 rounded-xl p-6 text-left hover:shadow-md transition-shadow"
                 >
                   <Icon className="w-8 h-8 text-blue-600" />
@@ -249,7 +260,7 @@ export default function ProductsPage() {
             })}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <InquiryBanner />
 

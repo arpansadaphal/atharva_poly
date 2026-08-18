@@ -54,7 +54,7 @@ export function AboutFinalCTA() {
 
                 <p className="text-base text-slate-600 leading-[1.85] max-w-[480px] mt-6">
                   Our team responds within one business day. Tell us the application,
-                  the volume, the tolerance — we will tell you whether we are the
+                  the volume, the tolerance — we will tell you we are the
                   right facility for it.
  </p>
 </div>

@@ -376,7 +376,7 @@ export default function CapabilitiesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <a
-              href="/contact?inquiry=capabilities"
+              href="/contact?inquiry"
               className="inline-flex items-center justify-center h-14 px-8 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors text-[15px]"
             >
               Start a Project

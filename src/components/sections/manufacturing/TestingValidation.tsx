@@ -79,7 +79,7 @@ export default function TestingValidation() {
               scope.
             </p>
             <Link
-              href="/contact?inquiry=docs"
+              href="/contact?inquiry"
               className="inline-flex items-center justify-center h-10 px-5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors text-[14px]"
             >
               Request Documentation

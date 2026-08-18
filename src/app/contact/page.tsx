@@ -42,6 +42,7 @@ export default function ContactPage() {
         <div className="max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[60fr_40fr] gap-12 lg:gap-16">
             <div className="order-1 lg:order-2 lg:sticky lg:top-24">
+              
               <BusinessInfoPanel />
             </div>
             <div className="order-2 lg:order-1">

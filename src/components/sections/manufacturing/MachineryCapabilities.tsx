@@ -22,8 +22,8 @@ export default function MachineryCapabilities() {
       <div className="max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12">
         <SectionHeader
           eyebrow="MACHINERY & EQUIPMENT"
-          headline="60+ Injection Moulding Machines. One Quality Standard."
-          description="Our machine park spans 50T to 1,300T clamping force, enabling everything from micro‑precision electronic parts to large structural automotive components. Advanced capabilities include 2K moulding, vertical moulding, and all‑electric servo machines."
+          headline="32+ Injection Moulding Machines. One Quality Standard."
+          description="Our machine park spans 50T to 1,000T clamping force, enabling everything from micro‑precision electronic parts to large structural automotive components. Advanced capabilities include 2K moulding and vertical moulding."
           theme="light"
         />
 

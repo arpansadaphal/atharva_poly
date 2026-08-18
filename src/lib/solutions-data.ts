@@ -10,7 +10,7 @@ export const products: ProductDetail[] = [
     tagline: 'High-crystallinity homopolymer for rigid industrial packaging and automotive interior components.',
     shortDescription: 'High-flow homopolymer polypropylene for injection moulding applications requiring stiffness and processability.',
     description: 'A high-crystallinity polypropylene homopolymer compound engineered for rigid packaging and automotive interior applications. This grade offers excellent stiffness, good processability on standard injection moulding equipment, and consistent lot-to-lot quality under IATF 16949 quality systems.',
-    industries: ['automotive', 'packaging', 'industrial'],
+    industries: ['automotive', 'appliances', 'furniture', 'others'],
     applications: [
       'Automotive interior trims and door panels',
       'Rigid packaging containers and caps',
@@ -74,7 +74,7 @@ export const products: ProductDetail[] = [
     tagline: 'High-impact engineering blend for automotive exterior and electronic housing applications.',
     shortDescription: 'ABS-PC blend offering excellent impact resistance and heat stability for demanding engineering applications.',
     description: 'An engineered ABS-PC (Acrylonitrile Butadiene Styrene – Polycarbonate) blend designed for applications requiring high impact resistance combined with good heat deflection performance. This grade is suitable for automotive exterior components, electronic equipment housings, and consumer durable goods.',
-    industries: ['automotive', 'consumer-goods', 'industrial'],
+    industries: ['automotive', 'appliances', 'others'],
     applications: [
       'Automotive exterior trim and mirror housings',
       'Electronic equipment enclosures',
@@ -132,7 +132,7 @@ export const products: ProductDetail[] = [
     tagline: 'Tailored colour concentrates for brand-matched consumer packaging and durable goods.',
     shortDescription: 'Bespoke colour masterbatch formulations for polyolefins and engineering resins with precise colour matching.',
     description: 'Custom-formulated colour masterbatches designed for exact brand colour matching in consumer packaging, caps and closures, and durable goods. Our in-house colour laboratory provides spectrophotometric matching and small-batch sampling for approval before production quantities.',
-    industries: ['packaging', 'consumer-goods'],
+    industries: ['appliances', 'furniture', 'others'],
     applications: [
       'Brand-colour packaging containers',
       'Caps and closures with precise colour requirements',
@@ -174,7 +174,7 @@ export const products: ProductDetail[] = [
     tagline: 'High-molecular-weight HDPE for extrusion blow moulding of containers and automotive ducts.',
     shortDescription: 'HDPE grade optimised for blow moulding with excellent melt strength and environmental stress crack resistance.',
     description: 'A high-molecular-weight high-density polyethylene specifically formulated for extrusion blow moulding applications. Offers superior melt strength for parison control, excellent environmental stress crack resistance (ESCR), and consistent processing on single and dual-head blow moulding machines.',
-    industries: ['packaging', 'automotive', 'industrial'],
+    industries: ['automotive', 'others'],
     applications: [
       'Industrial chemical containers and jerry cans',
       'Automotive fluid reservoirs and ducts',
@@ -225,7 +225,7 @@ export const products: ProductDetail[] = [
     tagline: '30% glass-fibre-reinforced polyamide 6 for high-strength structural automotive components.',
     shortDescription: 'Glass-fibre-reinforced PA6 offering excellent mechanical strength and thermal performance for under-hood applications.',
     description: 'A 30% glass-fibre-reinforced polyamide 6 (Nylon 6) compound engineered for high-strength structural applications in automotive under-hood and exterior environments. This grade provides exceptional tensile strength, heat resistance, and dimensional stability.',
-    industries: ['automotive', 'industrial'],
+    industries: ['automotive', 'others'],
     applications: [
       'Engine cover components and air intake manifolds',
       'Structural brackets and mounting systems',
@@ -281,7 +281,7 @@ export const products: ProductDetail[] = [
     tagline: 'Anti-static polyethylene for electronics packaging and ESD-sensitive industrial environments.',
     shortDescription: 'Specialty PE compound with permanent antistatic properties for electronics and hazardous-area packaging.',
     description: 'A specialty polyethylene compound with permanent antistatic additives designed for packaging applications in electronics manufacturing and ESD-sensitive environments. Surface resistivity is controlled to meet IEC 61340-5-1 requirements for ESD protective packaging.',
-    industries: ['packaging', 'industrial', 'consumer-goods'],
+    industries: ['others'],
     applications: [
       'Electronics component trays and packaging',
       'ESD-safe industrial containers',

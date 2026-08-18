@@ -137,7 +137,7 @@ const galleryImages = [
   },
   { 
     src: '/assets/manufacturing/production-floor.jpg', 
-    alt: 'Production floor with 60+ injection moulding machines in operation', 
+    alt: 'Production floor with 32+ injection moulding machines in operation', 
     category: 'production' as const 
   },
   { 
@@ -181,11 +181,11 @@ const galleryImages = [
 export const metadata: Metadata = {
   title: 'Manufacturing & Quality | Atharva Polymers, Ranjangaon',
   description:
-    '60+ injection moulding machines. IATF 16949 certified. Precision manufacturing at 80,000 sq ft Ranjangaon facility since 2010.',
+    '32+ injection moulding machines. IATF 16949 certified. Precision manufacturing at 80,000 sq ft Ranjangaon facility since 2010.',
   openGraph: {
     title: 'Manufacturing & Quality | Atharva Polymers',
     description:
-      '60+ injection moulding machines. IATF 16949 certified. Precision manufacturing at Ranjangaon, Pune.',
+      '32+ injection moulding machines. IATF 16949 certified. Precision manufacturing at Ranjangaon, Pune.',
     url: 'https://www.atharvapolymers.com/manufacturing',
     images: [{ url: '/assets/og/manufacturing.jpg', width: 1200, height: 630 }],
   },
@@ -197,7 +197,7 @@ export default function ManufacturingPage() {
     <>
       <PageHero
         eyebrow="MANUFACTURING & QUALITY"
-        headline="60+ Machines. One Facility. Zero Compromise on Quality."
+        headline="32+ Machines. One Facility. Zero Compromise on Quality."
         description="Our 80,000 sq ft Ranjangaon plant operates under IATF 16949 and ISO 9001. We process 3,600 MT of polymers annually, supplying precision components to global OEMs."
       />
       <div className="max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 -mt-6 relative z-20">

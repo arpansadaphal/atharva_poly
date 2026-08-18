@@ -80,7 +80,7 @@ export function WhyAtharva() {
         {/* Section header — uses SectionHeader component (left-aligned, light theme) */}
         <SectionHeader
           eyebrow="Why Choose Us"
-          headline="Why Industrial Buyers Choose Atharva Polymers"
+          headline="Why Industries Choose Atharva Polymers"
         />
 
         {/* Card grid — stagger triggered by single gridRef */}

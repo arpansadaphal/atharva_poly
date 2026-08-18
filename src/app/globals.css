@@ -221,3 +221,49 @@
     padding: 80px 0;
   }
 }
+
+/* PhoneInput overrides */
+.PhoneInput {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.PhoneInputInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.PhoneInputCountry {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  border-right: 1px solid #e2e8f0;
+}
+
+.PhoneInputCountrySelect {
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.PhoneInputCountryIcon {
+  width: 24px;
+  height: 16px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+/* Ensure the wrapper matches your input-field */
+.input-field.PhoneInput {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+}

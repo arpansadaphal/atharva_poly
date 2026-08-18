@@ -33,6 +33,97 @@
 // }
 
 
+// import type { Metadata } from 'next'
+// import { Inter } from 'next/font/google'
+// import './globals.css'
+// import { Navbar } from '@/components/sections/Navbar'
+// import { Footer } from '@/components/sections/Footer'
+// import { WhatsAppButton } from '@/components/sections/WhatsAppButton'
+
+// // ─────────────────────────────────────────────────────────────────────────────
+// // Font — loaded once at root, injected as CSS variable
+// // Weights: 200 (data numerals), 300 (hero), 400 (body/H2), 500 (nav/labels),
+// //          600 (eyebrows/buttons)
+// // ─────────────────────────────────────────────────────────────────────────────
+// const inter = Inter({
+//   subsets: ['latin'],
+//   weight: ['200', '300', '400', '500', '600'],
+//   variable: '--font-inter',
+//   display: 'swap',
+// })
+
+// // ─────────────────────────────────────────────────────────────────────────────
+// // Site-wide default metadata — pages override as needed via generateMetadata
+// // ─────────────────────────────────────────────────────────────────────────────
+// export const metadata: Metadata = {
+//   metadataBase: new URL(
+//     process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.atharvapolymers.com'
+//   ),
+//   title: {
+//     default: 'Polymer Manufacturer in Pune | Atharva Polymers',
+//     template: '%s | Atharva Polymers',
+//   },
+//   description:
+//     'Atharva Polymers manufactures polymer products for industrial applications from our MIDC Ranjangaon, Pune facility. 19+ years experience, export-ready. Request a quote today.',
+//   keywords: [
+//     'polymer manufacturer pune',
+//     'polymer manufacturing india',
+//     'industrial polymer supplier',
+//     'polymer manufacturer ranjangaon midc',
+//     'polymer export india',
+//   ],
+//   authors: [{ name: 'Atharva Polymers Pvt Ltd' }],
+//   creator: 'Atharva Polymers Pvt Ltd',
+//   openGraph: {
+//     type: 'website',
+//     siteName: 'Atharva Polymers',
+//     locale: 'en_IN',
+//     images: [
+//       {
+//         url: '/og-image.jpg',
+//         width: 1200,
+//         height: 630,
+//         alt: 'Atharva Polymers — Precision Polymer Manufacturing, Pune',
+//       },
+//     ],
+//   },
+//   twitter: {
+//     card: 'summary_large_image',
+//     images: ['/og-image.jpg'],
+//   },
+//   robots: {
+//     index: true,
+//     follow: true,
+//   },
+// }
+
+// export default function RootLayout({
+//   children,
+// }: {
+//   children: React.ReactNode
+// }) {
+//   return (
+//     <html lang="en"  data-scroll-behavior="smooth" className={inter.variable}>
+//       <body className="font-sans antialiased">
+//         <main>
+//         {/* Global navigation — fixed, transparent over hero, solid on scroll */}
+//         <Navbar />
+
+//         {/* Page content */}
+//         {children}
+
+//         {/* Global footer */}
+//         <Footer />
+
+//         {/* Floating WhatsApp button — mandatory client requirement, visible on all pages */}
+//         <WhatsAppButton />
+//         </main>
+//       </body>
+//     </html>
+//   )
+// }
+
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -40,11 +131,6 @@ import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { WhatsAppButton } from '@/components/sections/WhatsAppButton'
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Font — loaded once at root, injected as CSS variable
-// Weights: 200 (data numerals), 300 (hero), 400 (body/H2), 500 (nav/labels),
-//          600 (eyebrows/buttons)
-// ─────────────────────────────────────────────────────────────────────────────
 const inter = Inter({
   subsets: ['latin'],
   weight: ['200', '300', '400', '500', '600'],
@@ -52,9 +138,6 @@ const inter = Inter({
   display: 'swap',
 })
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Site-wide default metadata — pages override as needed via generateMetadata
-// ─────────────────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.atharvapolymers.com'
@@ -103,13 +186,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en"  data-scroll-behavior="smooth" className={inter.variable}>
+    <html lang="en" data-scroll-behavior="smooth" className={inter.variable}>
       <body className="font-sans antialiased">
         {/* Global navigation — fixed, transparent over hero, solid on scroll */}
         <Navbar />
 
-        {/* Page content */}
-        {children}
+        {/* Page content wrapped in main landmark */}
+        <main>{children}</main>
 
         {/* Global footer */}
         <Footer />
@@ -120,53 +203,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-// app/layout.tsx
-// import type { Metadata } from 'next'
-// import { Inter } from 'next/font/google'
-// import './globals.css'
-// import {Navbar} from '@/components/sections/Navbar'
-// import {Footer }from '@/components/sections/Footer'
-// import {WhatsAppButton} from '@/components/sections/WhatsAppButton'
-
-// const inter = Inter({
-//   subsets: ['latin'],
-//   weight: ['200', '300', '400', '500', '600'],
-//   variable: '--font-inter',
-//   display: 'swap',
-// })
-
-// export const metadata: Metadata = {
-//   title: {
-//     default: 'Polymer Manufacturer in Pune | Atharva Polymers',
-//     template: '%s | Atharva Polymers',
-//   },
-//   description:
-//     'Atharva Polymers manufactures polymer products for industrial applications from our MIDC Ranjangaon, Pune facility. 19+ years experience, export-ready. Request a quote today.',
-//   openGraph: {
-//     type: 'website',
-//     siteName: 'Atharva Polymers',
-//     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
-//   },
-//   robots: {
-//     index: true,
-//     follow: true,
-//   },
-// }
-
-// export default function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode
-// }) {
-//   return (
-//     <html lang="en" className={inter.variable}>
-//       <body className="min-h-screen flex flex-col">
-//         <Navbar />
-//         <main className="flex-1">{children}</main>
-//         <Footer />
-//         <WhatsAppButton />
-//       </body>
-//     </html>
-//   )
-// }

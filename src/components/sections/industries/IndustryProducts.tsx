@@ -2,30 +2,57 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 import type { Industry } from '@/types/industries'
+import type { Product } from '@/types/products'
 
-function CompactProductCard({ name, shortDesc }: { name: string; shortDesc: string }) {
+function CompactProductCard({ product }: { product: Product }) {
   return (
-    <div className="service-card-hover bg-white border border-slate-200 rounded-xl overflow-hidden relative group cursor-pointer">
-      {/* Photo placeholder */}
-      <div className="aspect-[16/10] bg-slate-100 flex items-center justify-center">
-        <span className="text-slate-400 text-sm">Product Image</span>
+    <Link
+      href={`/products/${product.slug}`}
+      className="service-card-hover bg-white border border-slate-200 rounded-xl overflow-hidden relative group cursor-pointer block"
+    >
+      {/* Product image or placeholder */}
+      <div className="aspect-[16/10] bg-slate-100 flex items-center justify-center overflow-hidden">
+        {product.images?.card ? (
+          <Image
+            src={product.images.card}
+            alt={product.name}
+            fill
+            className="object-cover"
+          />
+        ) : (
+          <span className="text-slate-400 text-sm">Product Image</span>
+        )}
       </div>
       <div className="p-5">
-        <h3 className="font-semibold text-slate-900">{name}</h3>
-        <p className="text-sm text-slate-500 mt-1 line-clamp-2">{shortDesc}</p>
+        <h3 className="font-semibold text-slate-900">{product.name}</h3>
+        <p className="text-sm text-slate-500 mt-1 line-clamp-2">
+          {product.shortDescription}
+        </p>
         <span className="text-[13px] font-medium text-blue-600 mt-3 inline-block">
           View specifications →
         </span>
       </div>
-    </div>
+    </Link>
   )
 }
 
-export default function IndustryProducts({ industry }: { industry: Industry }) {
-  if (!industry.products || industry.products.length === 0) return null
+export default function IndustryProducts({
+  industry,
+  products,
+}: {
+  industry: Industry
+  products: Product[]
+}) {
+  // Hide the section if there are no real products for this industry
+  if (!products || products.length === 0) return null
+
+  // Show only the first 3 products
+  const visibleProducts = products.slice(0, 3)
+  const remainingCount = products.length - visibleProducts.length
 
   return (
     <section className="bg-slate-50 section-padding" aria-label="Featured components">
@@ -43,19 +70,26 @@ export default function IndustryProducts({ industry }: { industry: Industry }) {
           whileInView="visible"
           viewport={{ once: true, margin: '-80px 0px' }}
         >
-          {industry.products.map((prod, i) => (
-            <motion.div key={i} variants={staggerItem}>
-              <CompactProductCard name={prod.name} shortDesc={prod.shortDesc} />
+          {visibleProducts.map((product) => (
+            <motion.div key={product.slug} variants={staggerItem}>
+              <CompactProductCard product={product} />
             </motion.div>
           ))}
         </motion.div>
 
-        <Link
-          href="/products"
-          className="inline-flex items-center gap-2 text-[14px] font-medium text-blue-600 hover:text-blue-700 mt-10"
-        >
-          View all products →
-        </Link>
+        <div className="mt-10 flex items-center justify-between flex-wrap gap-4">
+          <Link
+            href={`/products?industry=${industry.slug}`}
+            className="inline-flex items-center gap-2 text-[14px] font-medium text-blue-600 hover:text-blue-700"
+          >
+            View all {industry.name.toLowerCase()} products →
+          </Link>
+          {remainingCount > 0 && (
+            <span className="text-[13px] text-slate-500">
+              +{remainingCount} more {remainingCount === 1 ? 'product' : 'products'} available
+            </span>
+          )}
+        </div>
       </div>
     </section>
   )

@@ -146,7 +146,7 @@ export const companyIntro = {
     'Atharva Polymers was established in MIDC Ranjangaon, Pune with a focused mission: to deliver consistently reliable polymer products for industrial applications. Over nearly two decades, that focus has not wavered.',
     'Operating from a single, precision-controlled manufacturing facility, we have built long-term partnerships with industries across India and international markets by prioritising quality and dependability over corporate scale.',
     // ⚠ AWAITING CLIENT — replace paragraph 3 with client-approved company story before launch.
-    '⚠ AWAITING CLIENT COMPANY STORY',
+    // '⚠ AWAITING CLIENT COMPANY STORY',
   ],
   pullQuote:
     '19 years in one discipline creates a depth of manufacturing knowledge that cannot be replicated by companies that do everything.',

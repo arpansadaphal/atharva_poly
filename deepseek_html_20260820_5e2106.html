@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atharva Group — Homepage Section (HTML Prototype)</title>
+
+    <!--
+        ═══════════════════════════════════════════════════════════════════
+        ATHARVA GROUP — HOMEPAGE SECTION
+        Section type: Homepage addition · Not a new page
+        Position: after <CertificationsTrust />, before <ContactCTA />
+        Concept: "The Industrial Register" — typographic company directory
+
+        This HTML prototype implements the full section spec from the
+        implementation guide. It is intended to be converted into the
+        Next.js component `AtharvaGroupSection.tsx` after client approval.
+
+        Company data sourced from: `src/lib/group-data.ts` (spec section 11)
+        ═══════════════════════════════════════════════════════════════════
+    -->
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           CSS CUSTOM PROPERTIES — matches Tailwind slate/blue palette
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --slate-50: #f8fafc;
+            --slate-200: #e2e8f0;
+            --slate-300: #cbd5e1;
+            --slate-400: #94a3b8;
+            --slate-600: #475569;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+            --blue-600: #2563eb;
+
+            --font-sans:
+                'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                'Helvetica Neue', Arial, sans-serif;
+            --font-mono:
+                ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                'Liberation Mono', 'Courier New', monospace;
+
+            /* Layout measurements */
+            --container-max: 1280px;
+            --section-padding-y: 120px;
+            --row-height-desktop: 60px;
+            --row-height-tablet: 56px;
+            --register-padding-x: 20px;
+            --register-padding-x-mobile: 16px;
+
+            /* Animation timings */
+            --anim-duration-row: 0.45s;
+            --anim-stagger-interval: 0.1s;
+            --anim-delay-rows-base: 0.2s;
+            --anim-border-draw: 0.3s;
+            --anim-divider-draw: 0.15s;
+            --anim-hover: 0.15s;
+            --anim-logo: 0.4s;
+            --anim-fade: 0.3s;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════════════════════════════ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: var(--slate-900);
+            line-height: 1.5;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION SHELL
+           ═══════════════════════════════════════════════════════════════ */
+        .atharva-group-section {
+            background: #ffffff;
+            padding: var(--section-padding-y) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .atharva-group-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        @media (min-width: 768px) {
+            .atharva-group-container {
+                padding: 0 32px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .atharva-group-container {
+                padding: 0 48px;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           GRID LAYOUT
+           Desktop: 38% / 62% two-column grid
+           Tablet/Mobile: single column stack
+           ═══════════════════════════════════════════════════════════════ */
+        .group-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .group-grid {
+                grid-template-columns: 38fr 62fr;
+                gap: 80px;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           LEFT COLUMN — HEADER CONTENT
+           ═══════════════════════════════════════════════════════════════ */
+        .group-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        /* Group logo */
+        .group-logo {
+            height: 40px;
+            width: auto;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .group-logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        /* Specification Mark + Eyebrow row */
+        .group-eyebrow-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        /* The "Specification Mark" — vertical blue bar */
+        .group-spec-mark {
+            width: 2px;
+            height: 18px;
+            background: var(--blue-600);
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .group-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--slate-400);
+        }
+
+        /* Headline */
+        .group-headline {
+            font-size: 40px;
+            font-weight: 300;
+            line-height: 1.15;
+            color: var(--slate-900);
+            max-width: 380px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 1024px) {
+            .group-headline {
+                font-size: 48px;
+            }
+        }
+
+        /* Supporting paragraph */
+        .group-paragraph {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.75; /* leading-7 */
+            color: var(--slate-600);
+            max-width: 360px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           RIGHT COLUMN — COMPANY REGISTER
+           ═══════════════════════════════════════════════════════════════ */
+        .group-right {
+            width: 100%;
+        }
+
+        /* Register container — sharp corners, 1px top/bottom borders */
+        .register-container {
+            position: relative;
+            width: 100%;
+            border-top: 1px solid var(--slate-200);
+            border-bottom: 1px solid var(--slate-200);
+            /* Zero border-radius — architectural, not card-like */
+            border-radius: 0;
+        }
+
+        /* Register list */
+        .register-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           INDIVIDUAL REGISTER ROW
+           ═══════════════════════════════════════════════════════════════ */
+        .register-row {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 0 var(--register-padding-x);
+            height: var(--row-height-desktop);
+            cursor: default;
+            transition: background-color var(--anim-hover) ease;
+            /* Row entrance animation — starts hidden */
+            opacity: 0;
+            transform: translateY(12px);
+            transition:
+                opacity var(--anim-duration-row) ease,
+                transform var(--anim-duration-row) ease,
+                background-color var(--anim-hover) ease;
+        }
+
+        /* Divider line between rows (all rows except the first) */
+        .register-row:not(:first-child) {
+            border-top: 1px solid var(--slate-200);
+        }
+
+        /* Row hover background */
+        .register-row:hover {
+            background-color: var(--slate-50);
+        }
+
+        /* Inner flex container to allow wrapping on mobile */
+        .register-row-inner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+            min-width: 0;
+            flex-wrap: nowrap;
+        }
+
+        @media (max-width: 767px) {
+            .register-row-inner {
+                flex-wrap: wrap;
+                gap: 4px 8px;
+            }
+        }
+
+        /* Entry number — monospace, decorative */
+        .row-number {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--slate-300);
+            width: 32px;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        /* Company full name */
+        .row-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--slate-600);
+            flex: 1;
+            min-width: 0;
+            transition: color var(--anim-hover) ease;
+            letter-spacing: 0.01em;
+            word-break: break-word;
+        }
+
+        /* Sector descriptor — right-aligned */
+        .row-sector {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--slate-400);
+            flex-shrink: 0;
+            text-align: right;
+            transition: color var(--anim-hover) ease;
+            white-space: nowrap;
+        }
+
+        /* Arrow indicator — appears on hover for non-primary rows */
+        .row-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            opacity: 0;
+            transition: opacity var(--anim-hover) ease;
+            color: var(--slate-300);
+        }
+        .row-arrow svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Hover — raise contrast on name and sector for non-primary rows */
+        .register-row:not(.is-primary):hover .row-name {
+            color: var(--slate-900);
+        }
+        .register-row:not(.is-primary):hover .row-sector {
+            color: var(--slate-600);
+        }
+        .register-row:not(.is-primary):hover .row-arrow {
+            opacity: 1;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           PRIMARY ROW (ATHARVA POLYMERS) — "This Website" differentiation
+           ═══════════════════════════════════════════════════════════════ */
+        .register-row.is-primary .row-name {
+            color: var(--slate-900);
+        }
+
+        .register-row.is-primary .row-sector {
+            color: var(--slate-600);
+        }
+
+        /* Blue left border — the Specification Mark at row scale */
+        .register-row.is-primary::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--blue-600);
+        }
+
+        /* "THIS WEBSITE" label */
+        .row-badge {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--blue-600);
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        /* Suppress arrow on primary row */
+        .register-row.is-primary .row-arrow {
+            display: none !important;
+        }
+        /* Suppress name/sector hover transition on primary row (already full contrast) */
+        .register-row.is-primary:hover .row-name {
+            color: var(--slate-900);
+        }
+        .register-row.is-primary:hover .row-sector {
+            color: var(--slate-600);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           TAGLINE FOOTER
+           ═══════════════════════════════════════════════════════════════ */
+        .group-tagline {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--slate-400);
+            margin-top: 32px;
+            opacity: 0;
+            transition: opacity var(--anim-fade) ease;
+        }
+
+        .atharva-group-section.is-in-view .group-tagline {
+            opacity: 1;
+            transition-delay: 0.7s; /* after last row */
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           ENTRANCE ANIMATIONS (triggered by Intersection Observer)
+           ═══════════════════════════════════════════════════════════════ */
+
+        /* ── Left column: staggered reveal ─────────────────────────────── */
+        .group-logo,
+        .group-eyebrow-row,
+        .group-headline,
+        .group-paragraph {
+            opacity: 0;
+            transform: translateY(8px);
+            transition:
+                opacity var(--anim-logo) ease,
+                transform var(--anim-logo) ease;
+        }
+
+        .group-eyebrow-row {
+            transition:
+                opacity var(--anim-fade) ease,
+                transform var(--anim-fade) ease;
+        }
+        .group-headline,
+        .group-paragraph {
+            transition:
+                opacity var(--anim-logo) ease,
+                transform var(--anim-logo) ease;
+        }
+
+        .atharva-group-section.is-in-view .group-logo {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0ms;
+        }
+        .atharva-group-section.is-in-view .group-eyebrow-row {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.2s;
+        }
+        .atharva-group-section.is-in-view .group-headline {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.25s;
+        }
+        .atharva-group-section.is-in-view .group-paragraph {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.4s;
+        }
+
+        /* ── Register rows: staggered entrance ─────────────────────────── */
+        .atharva-group-section.is-in-view .register-row {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays — 100ms interval, base delay 200ms */
+        .atharva-group-section.is-in-view .register-row:nth-child(1) {
+            transition-delay: 0.2s, 0.2s, 0s;
+        }
+        .atharva-group-section.is-in-view .register-row:nth-child(2) {
+            transition-delay: 0.3s, 0.3s, 0s;
+        }
+        .atharva-group-section.is-in-view .register-row:nth-child(3) {
+            transition-delay: 0.4s, 0.4s, 0s;
+        }
+        .atharva-group-section.is-in-view .register-row:nth-child(4) {
+            transition-delay: 0.5s, 0.5s, 0s;
+        }
+        .atharva-group-section.is-in-view .register-row:nth-child(5) {
+            transition-delay: 0.6s, 0.6s, 0s;
+        }
+
+        /* ── Register border draw (top and bottom) ────────────────────── */
+        .register-container::before,
+        .register-container::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--slate-200);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--anim-border-draw) ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .register-container::before {
+            top: 0;
+        }
+        .register-container::after {
+            bottom: 0;
+        }
+        .atharva-group-section.is-in-view .register-container::before,
+        .atharva-group-section.is-in-view .register-container::after {
+            transform: scaleX(1);
+            transition-delay: 0.1s; /* draw before rows stagger in */
+        }
+
+        /* ── Row divider draw (each row's top border) ──────────────────── */
+        .register-row .row-divider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--slate-200);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--anim-divider-draw) ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .atharva-group-section.is-in-view .register-row:nth-child(2) .row-divider {
+            transform: scaleX(1);
+            transition-delay: 0.3s;
+        }
+        .atharva-group-section.is-in-view .register-row:nth-child(3) .row-divider {
+            transform: scaleX(1);
+            transition-delay: 0.4s;
+        }
+        .atharva-group-section.is-in-view .register-row:nth-child(4) .row-divider {
+            transform: scaleX(1);
+            transition-delay: 0.5s;
+        }
+        .atharva-group-section.is-in-view .register-row:nth-child(5) .row-divider {
+            transform: scaleX(1);
+            transition-delay: 0.6s;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           RESPONSIVE — TABLET (768px–1023px)
+           ═══════════════════════════════════════════════════════════════ */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .register-row {
+                height: var(--row-height-tablet);
+            }
+            .row-name {
+                font-size: 14px;
+            }
+            .group-headline {
+                font-size: 42px;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           RESPONSIVE — MOBILE (<768px)
+           ═══════════════════════════════════════════════════════════════ */
+        @media (max-width: 767px) {
+            .atharva-group-section {
+                padding: 80px 0;
+            }
+            .atharva-group-container {
+                padding: 0 20px;
+            }
+            .group-grid {
+                gap: 36px;
+            }
+
+            /* Row height becomes auto — allows content wrapping */
+            .register-row {
+                height: auto;
+                min-height: 56px;
+                padding-top: 16px;
+                padding-bottom: 16px;
+                padding-left: var(--register-padding-x-mobile);
+                padding-right: var(--register-padding-x-mobile);
+                flex-wrap: wrap;
+                align-items: flex-start;
+            }
+
+            /* Entry number hidden on mobile */
+            .row-number {
+                display: none;
+            }
+
+            .row-name {
+                font-size: 14px;
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+
+            /* Sector descriptor drops to its own line below company name */
+            .row-sector {
+                font-size: 12px;
+                font-weight: 500;
+                color: var(--slate-400);
+                flex-basis: 100%;
+                text-align: left;
+                margin-top: 4px;
+                margin-left: 0;
+                white-space: normal;
+                order: 10;
+            }
+
+            /* Arrow icon on mobile — smaller touch target, still hidden by default */
+            .row-arrow {
+                width: 18px;
+                height: 18px;
+                flex-shrink: 0;
+                align-self: flex-start;
+                margin-top: 2px;
+            }
+            .row-arrow svg {
+                width: 12px;
+                height: 12px;
+            }
+
+            /* "THIS WEBSITE" badge wraps alongside company name */
+            .row-badge {
+                font-size: 9px;
+                letter-spacing: 0.06em;
+                flex-shrink: 1;
+            }
+
+            .group-headline {
+                font-size: 32px;
+                max-width: 100%;
+            }
+            .group-paragraph {
+                max-width: 100%;
+                font-size: 15px;
+                line-height: 1.7;
+            }
+            .group-logo img {
+                height: 34px;
+            }
+            .group-logo {
+                height: 34px;
+                margin-bottom: 12px;
+            }
+            .group-tagline {
+                margin-top: 24px;
+                font-size: 11px;
+                letter-spacing: 0.1em;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           REDUCED MOTION — fall back to opacity only
+           ═══════════════════════════════════════════════════════════════ */
+        @media (prefers-reduced-motion: reduce) {
+            .register-row,
+            .group-logo,
+            .group-eyebrow-row,
+            .group-headline,
+            .group-paragraph,
+            .group-tagline {
+                transform: none !important;
+                transition: opacity 0.3s ease !important;
+            }
+
+            .register-container::before,
+            .register-container::after,
+            .register-row .row-divider {
+                transform: none !important;
+                transition: opacity 0.3s ease !important;
+                opacity: 0;
+            }
+
+            .atharva-group-section.is-in-view .register-container::before,
+            .atharva-group-section.is-in-view .register-container::after,
+            .atharva-group-section.is-in-view .register-row .row-divider {
+                opacity: 1;
+                transform: none !important;
+            }
+
+            /* Remove stagger delays under reduced motion */
+            .atharva-group-section.is-in-view .register-row,
+            .atharva-group-section.is-in-view .group-logo,
+            .atharva-group-section.is-in-view .group-eyebrow-row,
+            .atharva-group-section.is-in-view .group-headline,
+            .atharva-group-section.is-in-view .group-paragraph,
+            .atharva-group-section.is-in-view .group-tagline {
+                transition-delay: 0s !important;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           FUTURE: LINKED ROW SUPPORT (when websiteUrl is confirmed)
+           ═══════════════════════════════════════════════════════════════
+           Add class="register-row-link" to convert row to anchor style.
+           The row becomes clickable and opens in a new tab.
+           ═══════════════════════════════════════════════════════════════ */
+        .register-row.register-row-link {
+            cursor: pointer;
+        }
+        .register-row.register-row-link .row-arrow {
+            opacity: 0.4;
+            transition: opacity var(--anim-hover) ease;
+        }
+        .register-row.register-row-link:hover .row-arrow {
+            opacity: 1;
+        }
+        .register-row.register-row-link:focus-visible {
+            outline: 2px solid var(--blue-600);
+            outline-offset: -2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+        ═══════════════════════════════════════════════════════════════════
+        SECTION: ATHARVA GROUP
+        Position: after <CertificationsTrust />, before <ContactCTA />
+        Background: white — breaks the dark section streak
+        ═══════════════════════════════════════════════════════════════════
+    -->
+    <section
+        class="atharva-group-section"
+        id="atharva-group"
+        aria-label="The Atharva Group"
+    >
+        <div class="atharva-group-container">
+            <div class="group-grid">
+
+                <!-- ──────────────────────────────────────────────────────
+                     LEFT COLUMN — Header content (38%)
+                     ────────────────────────────────────────────────────── -->
+                <div class="group-left">
+                    <!-- Group logo — replace src with /assets/brand/logo.png -->
+                    <div class="group-logo">
+                        <img
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='40' viewBox='0 0 160 40'%3E%3Crect width='160' height='40' fill='%231e293b' rx='4'/%3E%3Ctext x='80' y='24' font-family='Arial, sans-serif' font-size='12' font-weight='600' fill='%23fbbf24' text-anchor='middle' letter-spacing='2'%3EATHARVA GROUP%3C/text%3E%3C/svg%3E"
+                            alt="Atharva Group of Industries"
+                            width="160"
+                            height="40"
+                        />
+                        <!-- NOTE: Replace above placeholder with actual /assets/brand/logo.png -->
+                    </div>
+
+                    <!-- Specification Mark + Eyebrow -->
+                    <div class="group-eyebrow-row">
+                        <span class="group-spec-mark" aria-hidden="true"></span>
+                        <span class="group-eyebrow">THE ATHARVA GROUP</span>
+                    </div>
+
+                    <!-- Headline -->
+                    <h2 class="group-headline">
+                        Part of a Broader Manufacturing Family.
+                    </h2>
+
+                    <!-- Supporting paragraph -->
+                    <p class="group-paragraph">
+                        Atharva Polymers is one of five manufacturing businesses within the
+                        Atharva Group — a diversified industrial family built on the same
+                        principles of precision, discipline, and long-term supply relationships.
+                    </p>
+                </div>
+
+                <!-- ──────────────────────────────────────────────────────
+                     RIGHT COLUMN — Company Register (62%)
+                     ────────────────────────────────────────────────────── -->
+                <div class="group-right">
+                    <div class="register-container">
+                        <ul class="register-list" role="list">
+
+                            <!-- ── Row 01: Atharva Metal & Engineering ── -->
+                            <li class="register-row" role="listitem">
+                                <!-- Divider line (animate scaleX) -->
+                                <div class="row-divider" aria-hidden="true"></div>
+                                <span class="row-number" aria-hidden="true">01</span>
+                                <div class="register-row-inner">
+                                    <span class="row-name">ATHARVA METAL &amp; ENGINEERING PVT. LTD.</span>
+                                    <span class="row-sector">Sheet Metal Fabrication</span>
+                                </div>
+                                <span class="row-arrow" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><polyline points="5 12 19 12 13 6 19 12 13 18" /></svg>
+                                </span>
+                            </li>
+
+                            <!-- ── Row 02: Atharva Corrugations ── -->
+                            <li class="register-row" role="listitem">
+                                <div class="row-divider" aria-hidden="true"></div>
+                                <span class="row-number" aria-hidden="true">02</span>
+                                <div class="register-row-inner">
+                                    <span class="row-name">ATHARVA CORRUGATIONS PVT. LTD.</span>
+                                    <span class="row-sector">Corrugated Packaging</span>
+                                </div>
+                                <span class="row-arrow" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><polyline points="5 12 19 12 13 6 19 12 13 18" /></svg>
+                                </span>
+                            </li>
+
+                            <!-- ── Row 03: Thermofoam Eng ── -->
+                            <li class="register-row" role="listitem">
+                                <div class="row-divider" aria-hidden="true"></div>
+                                <span class="row-number" aria-hidden="true">03</span>
+                                <div class="register-row-inner">
+                                    <span class="row-name">THERMOFOAM ENG PVT. LTD.</span>
+                                    <span class="row-sector">EPS Thermoforming</span>
+                                </div>
+                                <span class="row-arrow" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><polyline points="5 12 19 12 13 6 19 12 13 18" /></svg>
+                                </span>
+                            </li>
+
+                            <!-- ── Row 04: Atharva Biopharma ── -->
+                            <li class="register-row" role="listitem">
+                                <div class="row-divider" aria-hidden="true"></div>
+                                <span class="row-number" aria-hidden="true">04</span>
+                                <div class="register-row-inner">
+                                    <span class="row-name">ATHARVA BIOPHARMA PVT. LTD.</span>
+                                    <span class="row-sector">Biopharma Manufacturing</span>
+                                </div>
+                                <span class="row-arrow" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><polyline points="5 12 19 12 13 6 19 12 13 18" /></svg>
+                                </span>
+                            </li>
+
+                            <!-- ── Row 05: Atharva Polymers (THIS WEBSITE) ── -->
+                            <li class="register-row is-primary" role="listitem">
+                                <div class="row-divider" aria-hidden="true"></div>
+                                <span class="row-number" aria-hidden="true">05</span>
+                                <div class="register-row-inner">
+                                    <span class="row-name">ATHARVA POLYMERS PVT. LTD.</span>
+                                    <span class="row-badge">THIS WEBSITE</span>
+                                    <span class="row-sector">Precision Polymer Manufacturing</span>
+                                </div>
+                                <!-- No arrow icon on primary row -->
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <!-- Tagline footer — optional, below register -->
+                    <div class="group-tagline">
+                        Stability · Growth · Trust · Excellence
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         JAVASCRIPT — Intersection Observer for entrance animations
+         ═══════════════════════════════════════════════════════════════ -->
+    <script>
+        (function () {
+            'use strict';
+
+            // ── Select the section element ─────────────────────────────
+            const section = document.querySelector('.atharva-group-section');
+            if (!section) return;
+
+            // ── Intersection Observer setup ────────────────────────────
+            // Matches spec: { once: true, margin: '-80px 0px' }
+            // 'once' behaviour is handled by unobserving after first intersection.
+            const observerOptions = {
+                threshold: 0.1, // Trigger when ~10% of section is visible
+                rootMargin: '-80px 0px' // Matches the spec's margin
+            };
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        // Add the 'is-in-view' class to trigger all CSS animations
+                        section.classList.add('is-in-view');
+                        // Unobserve — animations run once only
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // ── Start observing the section ────────────────────────────
+            observer.observe(section);
+
+            // ── Fallback: if IntersectionObserver is not supported ─────
+            // (e.g., very old browsers), show content immediately.
+            if (typeof IntersectionObserver === 'undefined') {
+                section.classList.add('is-in-view');
+            }
+
+            // ── Fallback: if section is already in view on page load ───
+            // (e.g., user lands mid-page), handle edge case.
+            const rect = section.getBoundingClientRect();
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            if (rect.top < viewportHeight - 80 && rect.bottom > 0) {
+                // Section is already visible — trigger immediately
+                section.classList.add('is-in-view');
+                observer.unobserve(section);
+            }
+
+            /*
+             * ── FUTURE ENHANCEMENT: linked row support ────────────────
+             *
+             * When client confirms external URLs for group companies,
+             * convert the relevant <li class="register-row"> elements
+             * to clickable anchors. Example:
+             *
+             * <li class="register-row register-row-link">
+             *   <a
+             *     href="https://company-website.com"
+             *     target="_blank"
+             *     rel="noopener noreferrer"
+             *     aria-label="Visit ATHARVA METAL & ENGINEERING PVT. LTD. website — opens in a new tab"
+             *     style="position:absolute; inset:0; z-index:2; text-decoration:none; color:inherit; display:block;"
+             *   ></a>
+             *   <!-- rest of row content unchanged -->
+             * </li>
+             *
+             * The arrow icon will then navigate to the URL when the
+             * row is clicked. The hover styles already handle the
+             * visual states.
+             */
+        })();
+    </script>
+</body>
+</html>

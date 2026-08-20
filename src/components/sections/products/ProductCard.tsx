@@ -101,21 +101,22 @@ export default function ProductCard({ product, variant = 'default', className }:
       />
 
       {/* Image/Placeholder */}
-      <div className={`${isCompact ? 'aspect-[16/9]' : 'aspect-[16/10]'} bg-slate-900 flex items-center justify-center relative overflow-hidden`}>
-        {product.images?.card ? (
-          <img 
-            src={product.images.card} 
-            alt={product.name} 
-            className="w-full h-full object-cover" 
-            loading="lazy"
-          />
-        ) : (
-          <div className="flex flex-col items-center text-slate-600">
-            <Box className="w-8 h-8" />
-            <span className="text-[12px] mt-2">{product.name}</span>
-          </div>
-        )}
-      </div>
+  {/* Image/Placeholder */}
+<div className={`${isCompact ? 'aspect-[16/9]' : 'aspect-[16/10]'} bg-slate-100 flex items-center justify-center relative overflow-hidden`}>
+  {product.images?.card ? (
+    <img
+      src={product.images.card}
+      alt={product.name}
+      className="w-full h-full object-contain p-4"  // ← object-contain instead of object-cover
+      loading="lazy"
+    />
+  ) : (
+    <div className="flex flex-col items-center text-slate-600">
+      <Box className="w-8 h-8" />
+      <span className="text-[12px] mt-2">{product.name}</span>
+    </div>
+  )}
+</div>
 
       {/* Card body */}
       <div className={`${isCompact ? 'p-4' : 'p-5 md:p-6'}`}>

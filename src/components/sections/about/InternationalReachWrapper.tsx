@@ -1,12 +1,10 @@
-'use client'
+'use client';
 
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 
-const InternationalReach = dynamic(
-  () => import('./InternationalReach').then((mod) => mod.InternationalReach),
-  { ssr: false }
-)
+const InternationalReach = dynamic(() => import('./InternationalReach'), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-slate-900" />, // optional
+});
 
-export default function InternationalReachWrapper() {
-  return <InternationalReach />
-}
+export default InternationalReach;

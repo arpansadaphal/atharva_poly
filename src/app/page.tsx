@@ -10,6 +10,8 @@ import ContactCTA from '@/components/sections/ContactCTA'
 import CertificationsTrust from '@/components/sections/CertificationsTrust'
 import SolutionsCategories from '@/components/sections/SolutionsCategories'
 import BrandMarquee from '@/components/sections/BrandMarquee'
+import AtharvaGroupSection from '@/components/sections/AtharvaGroupSection'
+import InternationalReach from '@/components/sections/about/InternationalReach'
 
 export const metadata: Metadata = {
   title: 'Polymer Manufacturer in Pune | Atharva Polymers',
@@ -41,10 +43,12 @@ export default function HomePage() {
       {/* <SolutionsCategories /> */}
       <ProductCategories/>
       <IndustriesServed/>
-      <BrandMarquee/>
-     
+      <AtharvaGroupSection/>
       
-      <ManufacturingQuality/>
+     <InternationalReach/>
+     <BrandMarquee/>
+      
+      {/* <ManufacturingQuality/> */}
       <CertificationsTrust/>
        <ContactCTA/>
     </main>

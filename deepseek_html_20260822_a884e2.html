@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Industry Card Hover Effect</title>
+  <style>
+    :root {
+      --base-card-width: 240px;      /* width of card when idle */
+      --expanded-card-width: 360px; /* width of card when hovered */
+      --image-strip-width: 70px;     /* visible image width when idle */
+      --image-expanded-width: 220px; /* image width when hovered */
+      --card-height: 64px;
+      --transition-duration: 0.3s;
+      --transition-ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --bg-color: #ffffff;
+      --border-color: #e2e8f0;
+      --text-color: #1e293b;
+      --shadow-hover: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .industry-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: max-content;
+      background: #fff;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    /* Card wrapper */
+    .industry-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: var(--card-height);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg-color);
+      transition: width var(--transition-duration) var(--transition-ease),
+                  transform var(--transition-duration) var(--transition-ease),
+                  box-shadow var(--transition-duration) var(--transition-ease);
+      width: var(--base-card-width);
+      will-change: width, transform;
+    }
+
+    /* When hovering, the card expands to the right or left.
+       We set the width directly via JS, but keep base width here.
+       The transform is handled by JS as well. */
+    .industry-card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Image container */
+    .card-image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: var(--image-strip-width);
+      overflow: hidden;
+      transition: width var(--transition-duration) var(--transition-ease),
+                  transform var(--transition-duration) var(--transition-ease);
+      will-change: width, transform;
+      z-index: 1;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left center; /* keep the left part visible */
+    }
+
+    /* Text label */
+    .card-label {
+      position: relative;
+      z-index: 2;
+      padding-left: calc(var(--image-strip-width) + 16px);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-color);
+      white-space: nowrap;
+      transition: color var(--transition-duration) ease;
+    }
+
+    /* When image expands over the label, we add a gradient overlay for readability */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to right, rgba(15,23,42,0.7), transparent 70%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-duration) ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="industry-list">
+    <div class="industry-card" data-label="Automotive">
+      <div class="card-image">
+        <img src="https://picsum.photos/seed/auto/400/300" alt="Automotive" />
+      </div>
+      <div class="card-overlay"></div>
+      <span class="card-label">Automotive</span>
+    </div>
+
+    <div class="industry-card" data-label="Packaging">
+      <div class="card-image">
+        <img src="https://picsum.photos/seed/pack/400/300" alt="Packaging" />
+      </div>
+      <div class="card-overlay"></div>
+      <span class="card-label">Packaging</span>
+    </div>
+
+    <div class="industry-card" data-label="Electronics">
+      <div class="card-image">
+        <img src="https://picsum.photos/seed/elec/400/300" alt="Electronics" />
+      </div>
+      <div class="card-overlay"></div>
+      <span class="card-label">Electronics</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const CARDS = document.querySelectorAll('.industry-card');
+      const CARD_BASE_WIDTH = 240;
+      const CARD_EXPANDED_WIDTH = 360;
+      const IMG_BASE_WIDTH = 70;
+      const IMG_EXPANDED_WIDTH = 220;
+
+      CARDS.forEach(card => {
+        const imageContainer = card.querySelector('.card-image');
+        const overlay = card.querySelector('.card-overlay');
+
+        // State
+        let hovered = false;
+        let entryDirection = 'right'; // 'right' = expand right, 'left' = expand left
+
+        // Mouse enter: determine direction based on entry X relative to card midpoint
+        card.addEventListener('mouseenter', (e) => {
+          const rect = card.getBoundingClientRect();
+          const entryX = e.clientX - rect.left;
+          const midpoint = rect.width / 2;
+
+          entryDirection = (entryX <= midpoint) ? 'right' : 'left';
+          hovered = true;
+
+          // Update card width and transform
+          if (entryDirection === 'right') {
+            card.style.width = CARD_EXPANDED_WIDTH + 'px';
+            card.style.transform = 'translateX(0)';
+            // Image expands to the right: fixed left, width increases
+            imageContainer.style.width = IMG_EXPANDED_WIDTH + 'px';
+            imageContainer.style.transform = 'translateX(0)';
+          } else {
+            // Expand to the left: card shifts left by (expanded - base)
+            card.style.width = CARD_EXPANDED_WIDTH + 'px';
+            card.style.transform = `translateX(${-(CARD_EXPANDED_WIDTH - CARD_BASE_WIDTH)}px)`;
+            // Image expands to the left: fixed right edge, so we translate left
+            imageContainer.style.width = IMG_EXPANDED_WIDTH + 'px';
+            imageContainer.style.transform = `translateX(${IMG_EXPANDED_WIDTH - IMG_BASE_WIDTH}px)`;
+          }
+
+          // Show overlay for readability
+          overlay.style.opacity = '1';
+        });
+
+        // Mouse leave: reset to base
+        card.addEventListener('mouseleave', () => {
+          hovered = false;
+          entryDirection = 'right'; // default for next time
+
+          card.style.width = CARD_BASE_WIDTH + 'px';
+          card.style.transform = 'translateX(0)';
+          imageContainer.style.width = IMG_BASE_WIDTH + 'px';
+          imageContainer.style.transform = 'translateX(0)';
+          overlay.style.opacity = '0';
+        });
+
+        // Click for demo (optional navigation)
+        card.addEventListener('click', () => {
+          alert('Industry: ' + card.getAttribute('data-label'));
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

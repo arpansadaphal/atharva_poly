@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory & Product Gallery | Atharva Polymers, Pune</title>
+    <meta name="description" content="Photography from the Atharva Polymers manufacturing facility — MIDC Ranjangaon, Pune. Production floor, quality systems, machinery, and infrastructure.">
+    <link rel="canonical" href="https://www.atharvapolymers.com/gallery">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Factory & Product Gallery | Atharva Polymers">
+    <meta property="og:description" content="Photography from the Atharva Polymers manufacturing facility — MIDC Ranjangaon, Pune.">
+    <meta property="og:url" content="https://www.atharvapolymers.com/gallery">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ImageGallery",
+        "name": "Atharva Polymers — Factory & Product Gallery",
+        "description": "Manufacturing facility photography — MIDC Ranjangaon, Pune",
+        "url": "https://www.atharvapolymers.com/gallery",
+        "image": [
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/production-01.webp", "description": "Production floor — MIDC Ranjangaon, active injection moulding operation", "name": "Production Floor"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/production-02.webp", "description": "Production floor — elevated wide-angle view, machinery in operation", "name": "Production Floor"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/production-03.webp", "description": "Production floor — machine operator at injection moulding press", "name": "Production Floor"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/machinery-01.webp", "description": "Injection moulding press — 100T–200T range, detail view", "name": "Machinery"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/machinery-02.webp", "description": "Heavy tonnage press — 600T–1000T clamping force", "name": "Machinery"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/quality-01.webp", "description": "Quality inspection station — dimensional measurement", "name": "Quality & Inspection"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/quality-02.webp", "description": "In-process quality check — first article inspection", "name": "Quality & Inspection"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/packaging-01.webp", "description": "Packaging area — finished goods preparation", "name": "Packaging & Dispatch"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/packaging-02.webp", "description": "Labelled cartons ready for dispatch", "name": "Packaging & Dispatch"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/facility-01.webp", "description": "MIDC Ranjangaon facility — exterior view", "name": "Facility & Infrastructure"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/facility-02.webp", "description": "Raw material storage area", "name": "Facility & Infrastructure"},
+            {"@type": "ImageObject", "contentUrl": "/assets/gallery/facility-03.webp", "description": "Finished goods warehouse", "name": "Facility & Infrastructure"}
+        ]
+    }
+    </script>
+
+    <style>
+        /* ============================================
+           DESIGN TOKENS — LOCKED FROM MASTER PLAN
+           ============================================ */
+        :root {
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-500: #64748b;
+            --slate-400: #94a3b8;
+            --slate-300: #cbd5e1;
+            --slate-200: #e2e8f0;
+            --slate-100: #f1f5f9;
+            --slate-50: #f8fafc;
+            --white: #ffffff;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+
+            --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+            --section-padding: clamp(4rem, 8vw, 7rem);
+            --max-width: 1280px;
+
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 0.75rem;
+
+            --grid-gap: 12px;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--slate-900);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        body.lightbox-open {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        button {
+            font-family: inherit;
+            font-size: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+        }
+
+        /* ============================================
+           NOISE OVERLAY (subtle texture)
+           ============================================ */
+        .noise-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.6'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+            z-index: 1;
+        }
+
+        /* ============================================
+           UTILITY
+           ============================================ */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 3rem;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* ============================================
+           NAVBAR (minimal — gallery is secondary)
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 40;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.3s ease;
+        }
+
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--white);
+            letter-spacing: -0.01em;
+        }
+
+        .navbar-logo svg {
+            width: 28px;
+            height: 28px;
+            color: var(--blue-600);
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .navbar-links a {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--slate-400);
+            transition: color 0.2s ease;
+        }
+
+        .navbar-links a:hover {
+            color: var(--white);
+        }
+
+        .navbar-links a.active {
+            color: var(--white);
+        }
+
+        @media (max-width: 640px) {
+            .navbar-links a:not(.active) {
+                display: none;
+            }
+        }
+
+        /* ============================================
+           SECTION G1 — PAGE HERO
+           ============================================ */
+        .hero {
+            position: relative;
+            background: var(--slate-900);
+            min-height: 280px;
+            padding: 100px 0 3rem;
+            overflow: hidden;
+        }
+
+        @media (min-width: 1024px) {
+            .hero {
+                min-height: 360px;
+                padding: 120px 0 4rem;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+        }
+
+        .hero-spec-mark {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.6s var(--ease-standard) 0.1s forwards;
+        }
+
+        .spec-mark-icon {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--slate-400);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--blue-600);
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--white);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.6s var(--ease-standard) 0.25s forwards;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        .hero-description {
+            font-size: 1.0625rem;
+            color: var(--slate-400);
+            max-width: 520px;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeUp 0.6s var(--ease-standard) 0.4s forwards;
+        }
+
+        /* ============================================
+           SECTION G2 — FILTER + GRID
+           ============================================ */
+        .gallery-section {
+            background: var(--white);
+            padding: var(--section-padding) 0;
+        }
+
+        /* --- Filter Tabs --- */
+        .filter-tabs-wrapper {
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.5s var(--ease-standard) 0.1s forwards;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 4px;
+        }
+
+        .filter-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-tab {
+            flex-shrink: 0;
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--slate-600);
+            background: var(--slate-100);
+            border: 1px solid transparent;
+            transition: all 0.25s var(--ease-standard);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-tab:hover {
+            background: var(--slate-200);
+            color: var(--slate-800);
+        }
+
+        .filter-tab.active {
+            background: var(--slate-900);
+            color: var(--white);
+            border-color: var(--slate-900);
+        }
+
+        .filter-tab .tab-count {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.08);
+            border-radius: 9999px;
+            padding: 0.125rem 0.5rem;
+            min-width: 1.5rem;
+            text-align: center;
+        }
+
+        .filter-tab.active .tab-count {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- Image count --- */
+        .image-count {
+            font-size: 0.8125rem;
+            color: var(--slate-400);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        /* --- Gallery Grid --- */
+        .gallery-grid-wrapper {
+            transition: opacity 0.15s var(--ease-standard);
+        }
+
+        .gallery-grid-wrapper.fade-out {
+            opacity: 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-auto-rows: 260px;
+            gap: var(--grid-gap);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        @media (min-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 220px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-auto-rows: 280px;
+            }
+        }
+
+        .gallery-grid li {
+            opacity: 0;
+            animation: fadeInItem 0.2s var(--ease-standard) forwards;
+        }
+
+        @keyframes fadeInItem {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Spanning rules (desktop only) --- */
+        @media (min-width: 1024px) {
+            .gallery-grid li.span-feature {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+            .gallery-grid li.span-tall {
+                grid-column: span 1;
+                grid-row: span 2;
+            }
+        }
+
+        /* --- Image Cell --- */
+        .gallery-cell {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--slate-100);
+            border: none;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .gallery-cell:focus-visible {
+            outline: 3px solid var(--blue-600);
+            outline-offset: 3px;
+        }
+
+        .gallery-cell-inner {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.5s var(--ease-standard);
+            will-change: transform;
+        }
+
+        .gallery-cell:hover .gallery-cell-inner {
+            transform: scale(1.04);
+        }
+
+        /* Placeholder image background */
+        .gallery-cell-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s var(--ease-standard);
+        }
+
+        /* Dark hover overlay */
+        .gallery-cell-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.3s ease;
+            z-index: 2;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 0.75rem;
+        }
+
+        .gallery-cell:hover .gallery-cell-overlay {
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        /* Category label — bottom left */
+        .cell-category-label {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            color: var(--white);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0 0.5rem 0 0;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .gallery-cell:hover .cell-category-label {
+            opacity: 1;
+        }
+
+        /* Expand icon — bottom right */
+        .cell-expand-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            opacity: 0;
+            transition: opacity 0.2s ease, background 0.2s ease;
+        }
+
+        .gallery-cell:hover .cell-expand-icon {
+            opacity: 1;
+        }
+
+        .cell-expand-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Placeholder text inside the cell */
+        .cell-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .cell-placeholder-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.6;
+        }
+
+        .cell-placeholder-label {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .cell-placeholder-sub {
+            font-size: 0.6875rem;
+            opacity: 0.5;
+            margin-top: 0.25rem;
+        }
+
+        /* --- Empty State --- */
+        .empty-state {
+            background: var(--slate-50);
+            border-radius: var(--radius-xl);
+            padding: 4rem 1.5rem;
+            text-align: center;
+            grid-column: 1 / -1;
+            color: var(--slate-400);
+        }
+
+        .empty-state svg {
+            width: 36px;
+            height: 36px;
+            color: var(--slate-300);
+            margin: 0 auto 0.75rem;
+        }
+
+        .empty-state p {
+            font-size: 0.875rem;
+            color: var(--slate-400);
+        }
+
+        /* ============================================
+           SECTION G3 — CTA
+           ============================================ */
+        .cta-section {
+            position: relative;
+            background: var(--slate-900);
+            padding: var(--section-padding) 0;
+            overflow: hidden;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--white);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .cta-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .cta-content p {
+            color: var(--slate-400);
+            font-size: 1.0625rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            border-radius: 9999px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: all 0.25s var(--ease-standard);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--blue-600);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-700);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+        }
+
+        /* ============================================
+           LIGHTBOX MODAL
+           ============================================ */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s var(--ease-standard);
+        }
+
+        .lightbox-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-overlay.closing {
+            opacity: 0;
+        }
+
+        .lightbox-container {
+            position: relative;
+            width: 100%;
+            max-width: 1152px;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: scale(0.96);
+            transition: transform 0.2s var(--ease-standard);
+        }
+
+        .lightbox-overlay.open .lightbox-container {
+            transform: scale(1);
+        }
+
+        .lightbox-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            transition: opacity 0.15s ease;
+        }
+
+        .lightbox-image-wrapper.fade-image {
+            opacity: 0;
+        }
+
+        .lightbox-image-placeholder {
+            width: 100%;
+            max-height: 85vh;
+            aspect-ratio: 4 / 3;
+            border-radius: var(--radius-lg);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .lightbox-caption {
+            font-size: 0.875rem;
+            color: var(--slate-400);
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0 1rem;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        /* Lightbox controls */
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-close svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 48px;
+            height: 48px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .lightbox-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-nav-btn.prev {
+            left: 1rem;
+        }
+
+        .lightbox-nav-btn.next {
+            right: 1rem;
+        }
+
+        .lightbox-nav-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10;
+            font-size: 0.8125rem;
+            color: var(--slate-300);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.375rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .lightbox-category-badge {
+            position: absolute;
+            top: 1rem;
+            left: 4.5rem;
+            z-index: 10;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--white);
+            background: var(--blue-600);
+            padding: 0.375rem 0.625rem;
+            border-radius: 9999px;
+        }
+
+        /* Mobile lightbox controls */
+        @media (max-width: 640px) {
+            .lightbox-nav-btn {
+                position: static;
+                transform: none;
+                width: 44px;
+                height: 44px;
+                flex-shrink: 0;
+            }
+            .lightbox-nav-btn.prev,
+            .lightbox-nav-btn.next {
+                position: static;
+            }
+            .lightbox-mobile-controls {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                padding: 0.75rem 1rem;
+                border-radius: var(--radius-lg);
+                margin-top: 1rem;
+            }
+            .lightbox-counter-mobile {
+                font-size: 0.8125rem;
+                color: var(--slate-300);
+                font-weight: 500;
+                min-width: 60px;
+                text-align: center;
+            }
+            .lightbox-category-badge {
+                left: 4rem;
+                top: 1rem;
+            }
+            .lightbox-close {
+                width: 36px;
+                height: 36px;
+                top: 0.75rem;
+                right: 0.75rem;
+            }
+            .lightbox-close svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* Desktop: hide mobile controls */
+        @media (min-width: 641px) {
+            .lightbox-mobile-controls {
+                display: none;
+            }
+            .lightbox-counter-mobile {
+                display: none;
+            }
+        }
+
+        /* Mobile: hide desktop nav buttons */
+        @media (max-width: 640px) {
+            .lightbox-nav-btn.prev,
+            .lightbox-nav-btn.next {
+                display: none;
+            }
+        }
+
+        /* ============================================
+           ANIMATION KEYFRAMES
+           ============================================ */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE FINE-TUNING
+           ============================================ */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            .hero-description {
+                font-size: 0.9375rem;
+            }
+            .cta-content h2 {
+                font-size: 1.5rem;
+            }
+            .gallery-grid {
+                grid-auto-rows: 240px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================
+    NAVBAR
+    ============================================ -->
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="container navbar-inner">
+            <a href="/" class="navbar-logo" aria-label="Atharva Polymers home">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12h20M12 2v20" />
+                </svg>
+                <span>Atharva Polymers</span>
+            </a>
+            <div class="navbar-links">
+                <a href="/manufacturing">Manufacturing</a>
+                <a href="/gallery" class="active">Gallery</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================
+    SECTION G1 — PAGE HERO (DARK)
+    ============================================ -->
+    <section class="hero" aria-label="Gallery hero">
+        <div class="noise-overlay" aria-hidden="true"></div>
+        <div class="container hero-content">
+            <div class="hero-spec-mark">
+                <div class="spec-mark-icon" aria-hidden="true">AP</div>
+                <span class="hero-eyebrow">Factory &amp; Product Gallery</span>
+            </div>
+            <h1>Inside the Facility</h1>
+            <p class="hero-description">
+                Photography from our MIDC Ranjangaon manufacturing facility —
+                production floor, quality systems, machinery, and infrastructure.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================
+    SECTION G2 — FILTER + GRID (WHITE)
+    ============================================ -->
+    <section class="gallery-section" aria-label="Gallery images">
+        <div class="container">
+            <!-- Filter Tabs -->
+            <div class="filter-tabs-wrapper">
+                <div class="filter-tabs" role="tablist" aria-label="Filter gallery by category" id="filterTabs">
+                    <!-- Tabs rendered by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Image count -->
+            <p class="image-count" id="imageCount" aria-live="polite">Showing 12 images</p>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid-wrapper" id="galleryGridWrapper">
+                <ul class="gallery-grid" id="galleryGrid" role="list">
+                    <!-- Gallery items rendered by JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    SECTION G3 — CTA (DARK)
+    ============================================ -->
+    <section class="cta-section" aria-label="Contact CTA">
+        <div class="noise-overlay" aria-hidden="true"></div>
+        <div class="container cta-content">
+            <h2>Have a Project in Mind?</h2>
+            <p>
+                From 100T to 1000T injection moulding, our Ranjangaon facility is
+                equipped to handle your manufacturing requirements.
+            </p>
+            <a href="/contact" class="btn btn-primary">
+                Discuss Your Requirements
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================
+    LIGHTBOX MODAL
+    ============================================ -->
+    <div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true" aria-label="Image lightbox">
+        <div class="lightbox-container" id="lightboxContainer">
+            <!-- Close button -->
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close gallery">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Counter (desktop) -->
+            <span class="lightbox-counter" id="lightboxCounter" aria-live="polite">1 / 12</span>
+
+            <!-- Category badge -->
+            <span class="lightbox-category-badge" id="lightboxCategory">Production</span>
+
+            <!-- Prev button (desktop) -->
+            <button class="lightbox-nav-btn prev" id="lightboxPrev" aria-label="Previous image">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+
+            <!-- Next button (desktop) -->
+            <button class="lightbox-nav-btn next" id="lightboxNext" aria-label="Next image">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 6l6 6-6 6" />
+                </svg>
+            </button>
+
+            <!-- Image -->
+            <div class="lightbox-image-wrapper" id="lightboxImageWrapper">
+                <div class="lightbox-image-placeholder" id="lightboxImage" role="img" aria-label="Gallery image"></div>
+            </div>
+
+            <!-- Caption -->
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+
+            <!-- Mobile controls -->
+            <div class="lightbox-mobile-controls">
+                <button class="lightbox-nav-btn" id="lightboxPrevMobile" aria-label="Previous image">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                </button>
+                <span class="lightbox-counter-mobile" id="lightboxCounterMobile" aria-live="polite">1 / 12</span>
+                <button class="lightbox-nav-btn" id="lightboxNextMobile" aria-label="Next image">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 6l6 6-6 6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+    JAVASCRIPT
+    ============================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================
+            // GALLERY DATA
+            // ⚠ PLACEHOLDERS — replace with real photography paths
+            // ============================================
+            const galleryImages = [
+                {
+                    src: '/assets/gallery/production-01.webp',
+                    alt: 'Production floor — MIDC Ranjangaon, active injection moulding operation',
+                    category: 'production',
+                    caption: 'Active injection moulding operation — MIDC Ranjangaon'
+                },
+                {
+                    src: '/assets/gallery/production-02.webp',
+                    alt: 'Production floor — elevated wide-angle view, machinery in operation',
+                    category: 'production',
+                    caption: 'Elevated wide-angle view of the production floor'
+                },
+                {
+                    src: '/assets/gallery/production-03.webp',
+                    alt: 'Production floor — machine operator at injection moulding press',
+                    category: 'production',
+                    caption: 'Machine operator at an injection moulding press'
+                },
+                {
+                    src: '/assets/gallery/machinery-01.webp',
+                    alt: 'Injection moulding press — 100T–200T range, detail view',
+                    category: 'machinery',
+                    caption: 'Injection moulding press — 100T–200T range'
+                },
+                {
+                    src: '/assets/gallery/machinery-02.webp',
+                    alt: 'Heavy tonnage press — 600T–1000T clamping force',
+                    category: 'machinery',
+                    caption: 'Heavy tonnage press — 600T–1000T clamping force'
+                },
+                {
+                    src: '/assets/gallery/quality-01.webp',
+                    alt: 'Quality inspection station — dimensional measurement',
+                    category: 'quality',
+                    caption: 'Dimensional measurement at the quality inspection station'
+                },
+                {
+                    src: '/assets/gallery/quality-02.webp',
+                    alt: 'In-process quality check — first article inspection',
+                    category: 'quality',
+                    caption: 'First article inspection — in-process quality check'
+                },
+                {
+                    src: '/assets/gallery/packaging-01.webp',
+                    alt: 'Packaging area — finished goods preparation',
+                    category: 'packaging',
+                    caption: 'Finished goods preparation in the packaging area'
+                },
+                {
+                    src: '/assets/gallery/packaging-02.webp',
+                    alt: 'Labelled cartons ready for dispatch',
+                    category: 'packaging',
+                    caption: 'Labelled cartons ready for dispatch'
+                },
+                {
+                    src: '/assets/gallery/facility-01.webp',
+                    alt: 'MIDC Ranjangaon facility — exterior view',
+                    category: 'facility',
+                    caption: 'Atharva Polymers facility — MIDC Ranjangaon, Pune'
+                },
+                {
+                    src: '/assets/gallery/facility-02.webp',
+                    alt: 'Raw material storage area',
+                    category: 'facility',
+                    caption: 'Raw material storage area'
+                },
+                {
+                    src: '/assets/gallery/facility-03.webp',
+                    alt: 'Finished goods warehouse',
+                    category: 'facility',
+                    caption: 'Finished goods warehouse'
+                }
+            ];
+
+            const categoryLabels = {
+                all: 'All',
+                production: 'Production Floor',
+                quality: 'Quality & Inspection',
+                machinery: 'Machinery',
+                packaging: 'Packaging & Dispatch',
+                facility: 'Facility & Infrastructure',
+                team: 'Team'
+            };
+
+            // Category placeholder colors (for visual demo)
+            const categoryColors = {
+                production: {
+                    bg: 'linear-gradient(135deg, #1e293b 0%, #3b4a5c 30%, #5a6e85 60%, #2c3e50 100%)',
+                    icon: '⚙️',
+                    pattern: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 4px, transparent 4px, transparent 8px)'
+                },
+                quality: {
+                    bg: 'linear-gradient(135deg, #0f172a 0%, #1e3a5c 40%, #2d5a7e 70%, #1a2f45 100%)',
+                    icon: '🔬',
+                    pattern: 'repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 6px)'
+                },
+                machinery: {
+                    bg: 'linear-gradient(135deg, #1a1a2e 0%, #2d2d44 35%, #444466 65%, #1e1e30 100%)',
+                    icon: '🏭',
+                    pattern: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 3px, transparent 3px, transparent 10px)'
+                },
+                packaging: {
+                    bg: 'linear-gradient(135deg, #2d1f0e 0%, #4a3520 30%, #6b5030 60%, #3a2818 100%)',
+                    icon: '📦',
+                    pattern: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 3px, transparent 3px, transparent 12px)'
+                },
+                facility: {
+                    bg: 'linear-gradient(135deg, #0f1923 0%, #1a3349 30%, #28485e 60%, #152535 100%)',
+                    icon: '🏗️',
+                    pattern: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 8px)'
+                },
+                team: {
+                    bg: 'linear-gradient(135deg, #2d1520 0%, #4a2035 35%, #6b304e 65%, #351820 100%)',
+                    icon: '👥',
+                    pattern: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 4px, transparent 4px, transparent 10px)'
+                }
+            };
+
+            // ============================================
+            // STATE
+            // ============================================
+            let activeCategory = 'all';
+            let filteredImages = [...galleryImages];
+            let lightboxIndex = 0;
+            let lightboxIsOpen = false;
+            let lastFocusedElement = null;
+            let imageOpacityTimeout = null;
+
+            // ============================================
+            // DOM REFS
+            // ============================================
+            const filterTabsEl = document.getElementById('filterTabs');
+            const imageCountEl = document.getElementById('imageCount');
+            const galleryGridEl = document.getElementById('galleryGrid');
+            const galleryGridWrapper = document.getElementById('galleryGridWrapper');
+            const lightboxOverlay = document.getElementById('lightboxOverlay');
+            const lightboxContainer = document.getElementById('lightboxContainer');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxImageWrapper = document.getElementById('lightboxImageWrapper');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const lightboxCounterMobile = document.getElementById('lightboxCounterMobile');
+            const lightboxCategory = document.getElementById('lightboxCategory');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            const lightboxPrevMobile = document.getElementById('lightboxPrevMobile');
+            const lightboxNextMobile = document.getElementById('lightboxNextMobile');
+
+            // ============================================
+            // HELPER FUNCTIONS
+            // ============================================
+            function getImagesByCategory(category) {
+                if (category === 'all') return [...galleryImages];
+                return galleryImages.filter(img => img.category === category);
+            }
+
+            function getAvailableCategories() {
+                const cats = new Set(galleryImages.map(img => img.category));
+                return ['all', ...Array.from(cats)];
+            }
+
+            function getPlaceholderStyle(category, index) {
+                const colors = categoryColors[category] || categoryColors.production;
+                // Vary the gradient slightly per image
+                const angle = 135 + (index * 7) % 90;
+                const baseGradient = colors.bg.replace('135deg', angle + 'deg');
+                return {
+                    background: baseGradient,
+                    backgroundImage: `${colors.pattern}, ${baseGradient}`,
+                    backgroundSize: 'auto, cover',
+                    backgroundPosition: 'center, center'
+                };
+            }
+
+            function getImageNumberLabel(index, total) {
+                const num = index + 1;
+                return String(num).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+            }
+
+            // ============================================
+            // RENDER FILTER TABS
+            // ============================================
+            function renderFilterTabs() {
+                const categories = getAvailableCategories();
+                const tabs = categories.map(catId => {
+                    const count = catId === 'all' ?
+                        galleryImages.length :
+                        galleryImages.filter(img => img.category === catId).length;
+                    const label = categoryLabels[catId] || catId;
+                    const isActive = catId === activeCategory;
+                    return `
+                        <button class="filter-tab ${isActive ? 'active' : ''}" 
+                                role="tab" 
+                                aria-selected="${isActive}"
+                                data-category="${catId}"
+                                aria-label="Filter by ${label} (${count} images)">
+                            ${label}
+                            <span class="tab-count">${count}</span>
+                        </button>
+                    `;
+                }).join('');
+                filterTabsEl.innerHTML = tabs;
+
+                // Attach event listeners
+                filterTabsEl.querySelectorAll('.filter-tab').forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        const cat = this.dataset.category;
+                        if (cat !== activeCategory) {
+                            setActiveCategory(cat);
+                        }
+                    });
+                });
+            }
+
+            function setActiveCategory(category) {
+                activeCategory = category;
+                filteredImages = getImagesByCategory(category);
+
+                // Update tab states
+                filterTabsEl.querySelectorAll('.filter-tab').forEach(tab => {
+                    const isActive = tab.dataset.category === category;
+                    tab.classList.toggle('active', isActive);
+                    tab.setAttribute('aria-selected', isActive);
+                });
+
+                // Update count
+                updateImageCount();
+
+                // Fade out grid
+                galleryGridWrapper.classList.add('fade-out');
+
+                setTimeout(() => {
+                    renderGalleryGrid();
+                    // Remove fade-out class after re-render
+                    galleryGridWrapper.classList.remove('fade-out');
+                }, 150);
+            }
+
+            function updateImageCount() {
+                const count = filteredImages.length;
+                const noun = count === 1 ? 'image' : 'images';
+                imageCountEl.textContent = `Showing ${count} ${noun}`;
+            }
+
+            // ============================================
+            // RENDER GALLERY GRID
+            // ============================================
+            function renderGalleryGrid() {
+                const isDesktop = window.innerWidth >= 1024;
+                const items = filteredImages.map((img, index) => {
+                    let spanClass = '';
+                    if (isDesktop) {
+                        // Spanning rules: index 0 = feature, index 3 = tall
+                        if (index === 0) spanClass = 'span-feature';
+                        else if (index === 3) spanClass = 'span-tall';
+                    }
+                    const style = getPlaceholderStyle(img.category, index);
+                    const colors = categoryColors[img.category] || categoryColors.production;
+                    const label = categoryLabels[img.category] || img.category;
+
+                    return `
+                        <li class="${spanClass}" role="listitem" style="animation-delay: ${index * 0.03}s">
+                            <button class="gallery-cell" 
+                                    data-index="${index}"
+                                    aria-label="View full-size: ${img.alt}"
+                                    tabindex="0">
+                                <div class="gallery-cell-inner">
+                                    <div class="gallery-cell-bg" style="background-image: ${style.backgroundImage}; background-size: ${style.backgroundSize}; background-position: ${style.backgroundPosition};">
+                                        <div class="cell-placeholder">
+                                            <span class="cell-placeholder-icon">${colors.icon}</span>
+                                            <span class="cell-placeholder-label">${label}</span>
+                                            <span class="cell-placeholder-sub">${getImageNumberLabel(index, filteredImages.length)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-cell-overlay">
+                                    <span class="cell-category-label">${label}</span>
+                                    <span class="cell-expand-icon" aria-hidden="true">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </button>
+                        </li>
+                    `;
+                }).join('');
+
+                if (filteredImages.length === 0) {
+                    galleryGridEl.innerHTML = `
+                        <li class="empty-state" role="listitem">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <path d="M21 15l-5-5L5 21" />
+                            </svg>
+                            <p>No images in this category yet.</p>
+                        </li>
+                    `;
+                } else {
+                    galleryGridEl.innerHTML = items;
+
+                    // Attach click handlers to each cell
+                    galleryGridEl.querySelectorAll('.gallery-cell').forEach(cell => {
+                        cell.addEventListener('click', function() {
+                            const idx = parseInt(this.dataset.index, 10);
+                            openLightbox(idx);
+                        });
+                        cell.addEventListener('keydown', function(e) {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                const idx = parseInt(this.dataset.index, 10);
+                                openLightbox(idx);
+                            }
+                        });
+                    });
+                }
+            }
+
+            // ============================================
+            // LIGHTBOX FUNCTIONALITY
+            // ============================================
+            function openLightbox(index) {
+                lightboxIndex = index;
+                lightboxIsOpen = true;
+                lastFocusedElement = document.activeElement;
+
+                // Lock body scroll
+                document.body.classList.add('lightbox-open');
+
+                // Show overlay
+                lightboxOverlay.classList.add('open');
+                lightboxOverlay.classList.remove('closing');
+
+                // Render initial image
+                updateLightboxImage(true);
+
+                // Focus close button
+                setTimeout(() => {
+                    lightboxClose.focus();
+                }, 100);
+            }
+
+            function closeLightbox() {
+                if (!lightboxIsOpen) return;
+                lightboxIsOpen = false;
+                lightboxOverlay.classList.add('closing');
+                lightboxOverlay.classList.remove('open');
+
+                // Unlock body scroll
+                document.body.classList.remove('lightbox-open');
+
+                // Clear any pending opacity timeout
+                if (imageOpacityTimeout) {
+                    clearTimeout(imageOpacityTimeout);
+                    imageOpacityTimeout = null;
+                }
+
+                // Restore focus to triggering element
+                if (lastFocusedElement && lastFocusedElement.focus) {
+                    lastFocusedElement.focus();
+                }
+                lastFocusedElement = null;
+            }
+
+            function updateLightboxImage(immediate) {
+                const img = filteredImages[lightboxIndex];
+                if (!img) return;
+
+                const colors = categoryColors[img.category] || categoryColors.production;
+                const label = categoryLabels[img.category] || img.category;
+                const total = filteredImages.length;
+
+                // Update category badge
+                lightboxCategory.textContent = label;
+
+                // Update counters
+                const counterText = `${lightboxIndex + 1} / ${total}`;
+                lightboxCounter.textContent = counterText;
+                lightboxCounterMobile.textContent = counterText;
+
+                // Update caption
+                lightboxCaption.textContent = img.caption || img.alt || '';
+
+                // Update image placeholder with fade transition
+                if (immediate) {
+                    const style = getPlaceholderStyle(img.category, lightboxIndex);
+                    lightboxImage.style.backgroundImage = style.backgroundImage;
+                    lightboxImage.style.backgroundSize = style.backgroundSize;
+                    lightboxImage.style.backgroundPosition = style.backgroundPosition;
+                    lightboxImage.setAttribute('aria-label', img.alt);
+                    lightboxImage.textContent = label;
+                } else {
+                    // Fade out
+                    lightboxImageWrapper.classList.add('fade-image');
+
+                    if (imageOpacityTimeout) clearTimeout(imageOpacityTimeout);
+
+                    imageOpacityTimeout = setTimeout(() => {
+                        // Swap image
+                        const style = getPlaceholderStyle(img.category, lightboxIndex);
+                        lightboxImage.style.backgroundImage = style.backgroundImage;
+                        lightboxImage.style.backgroundSize = style.backgroundSize;
+                        lightboxImage.style.backgroundPosition = style.backgroundPosition;
+                        lightboxImage.setAttribute('aria-label', img.alt);
+                        lightboxImage.textContent = label;
+
+                        // Fade in
+                        lightboxImageWrapper.classList.remove('fade-image');
+                        imageOpacityTimeout = null;
+                    }, 100);
+                }
+
+                // Update aria-labels for prev/next buttons
+                const prevIdx = (lightboxIndex - 1 + total) % total;
+                const nextIdx = (lightboxIndex + 1) % total;
+                const prevImg = filteredImages[prevIdx];
+                const nextImg = filteredImages[nextIdx];
+                if (prevImg) {
+                    lightboxPrev.setAttribute('aria-label', `Previous image: ${prevImg.alt}`);
+                    lightboxPrevMobile.setAttribute('aria-label', `Previous image: ${prevImg.alt}`);
+                }
+                if (nextImg) {
+                    lightboxNext.setAttribute('aria-label', `Next image: ${nextImg.alt}`);
+                    lightboxNextMobile.setAttribute('aria-label', `Next image: ${nextImg.alt}`);
+                }
+            }
+
+            function navigateLightbox(direction) {
+                const total = filteredImages.length;
+                if (total === 0) return;
+                lightboxIndex = (lightboxIndex + direction + total) % total;
+                updateLightboxImage(false);
+            }
+
+            // ============================================
+            // LIGHTBOX EVENT LISTENERS
+            // ============================================
+            lightboxClose.addEventListener('click', closeLightbox);
+
+            lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
+            lightboxNext.addEventListener('click', () => navigateLightbox(1));
+            lightboxPrevMobile.addEventListener('click', () => navigateLightbox(-1));
+            lightboxNextMobile.addEventListener('click', () => navigateLightbox(1));
+
+            // Click outside image to close
+            lightboxOverlay.addEventListener('click', function(e) {
+                if (e.target === lightboxOverlay) {
+                    closeLightbox();
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (!lightboxIsOpen) return;
+
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    navigateLightbox(-1);
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    navigateLightbox(1);
+                } else if (e.key === 'Tab') {
+                    // Focus trap
+                    const focusable = [lightboxClose, lightboxPrev, lightboxNext];
+                    const first = focusable[0];
+                    const last = focusable[focusable.length - 1];
+
+                    if (e.shiftKey) {
+                        if (document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        }
+                    } else {
+                        if (document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
+                }
+            });
+
+            // Touch/swipe for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let touchStartY = 0;
+            let touchEndY = 0;
+
+            lightboxOverlay.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            }, { passive: true });
+
+            lightboxOverlay.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                const deltaX = touchEndX - touchStartX;
+                const deltaY = touchEndY - touchStartY;
+                const threshold = 50;
+
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold) {
+                    if (deltaX > 0) {
+                        // Swipe right → previous
+                        navigateLightbox(-1);
+                    } else {
+                        // Swipe left → next
+                        navigateLightbox(1);
+                    }
+                }
+            }
+
+            // ============================================
+            // RESPONSIVE HANDLING
+            // ============================================
+            function handleResize() {
+                // Re-render grid to apply/remove spanning rules
+                renderGalleryGrid();
+                // Re-render filter tabs (they don't change, but just in case)
+                // Note: We don't need to re-render tabs on resize
+            }
+
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(handleResize, 250);
+            });
+
+            // ============================================
+            // INITIAL RENDER
+            // ============================================
+            function init() {
+                renderFilterTabs();
+                updateImageCount();
+                renderGalleryGrid();
+            }
+
+            // Start
+            init();
+
+            // Expose for debugging (optional)
+            window.galleryApp = {
+                galleryImages,
+                filteredImages,
+                activeCategory,
+                setActiveCategory,
+                openLightbox,
+                closeLightbox,
+                navigateLightbox
+            };
+
+        })();
+    </script>
+
+</body>
+</html>

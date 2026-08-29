@@ -38,3 +38,4 @@ export interface GalleryImage {
   category: 'production' | 'quality' | 'machinery' | 'packaging' | 'facility' | 'team'
   caption?: string
 }
+

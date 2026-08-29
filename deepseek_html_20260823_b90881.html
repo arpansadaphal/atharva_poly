@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atharva Group — Compound Panel Track</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <style>
+    /* ========== RESET & BASE ========== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .atharva-section {
+      position: relative;
+      background: #0f172a;
+      overflow: hidden;
+      padding-bottom: 6rem;
+    }
+
+    .noise-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.5;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 6rem 3rem 4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .group-logo {
+      height: 36px;
+      width: auto;
+      margin-bottom: 1.5rem;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+
+    .spec-mark {
+      width: 8px;
+      height: 8px;
+      background: #2563eb;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .headline {
+      font-size: 2.5rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    .supporting {
+      font-size: 1rem;
+      color: #94a3b8;
+      line-height: 1.75;
+      max-width: 700px;
+    }
+
+    /* ========== DESKTOP PANEL TRACK ========== */
+    .panel-track {
+      display: flex;
+      width: 100%;
+      height: 440px;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .panel {
+      position: relative;
+      height: 100%;
+      flex-shrink: 0;
+      overflow: hidden;
+      cursor: pointer;
+      background: #0f172a;
+      border: none;
+      padding: 0;
+      text-align: left;
+      outline: none;
+      will-change: width;
+      color: #fff;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .panel:focus-visible {
+      box-shadow: inset 0 0 0 2px #2563eb;
+      z-index: 3;
+    }
+
+    .panel:not(:last-child) {
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .panel.primary {
+      border-top: 2px solid #2563eb;
+    }
+
+    /* ===== IMAGE LAYER (KEY CHANGE) ===== */
+    .panel-image {
+      position: absolute;
+      inset: 0;
+      background-size: auto 100%;      /* height fills panel, width auto */
+      background-position: left top;    /* logo at top‑left stays visible */
+      background-repeat: no-repeat;
+      will-change: transform;           /* no transform used, but kept for future */
+      z-index: 0;
+    }
+
+    .panel-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(15, 23, 42, 0.95) 0%,
+        rgba(15, 23, 42, 0.5) 60%,
+        rgba(15, 23, 42, 0.1) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .ghost-number {
+      position: absolute;
+      bottom: -20px;
+      left: 10px;
+      font-weight: 200;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.04);
+      font-size: clamp(140px, 18vw, 280px);
+      pointer-events: none;
+      user-select: none;
+      z-index: 2;
+      opacity: 0.04;
+      transform: scale(1);
+      transform-origin: bottom left;
+      will-change: transform, opacity;
+    }
+
+    .collapsed-number {
+      position: absolute;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #64748b;
+      z-index: 3;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .panel.primary .collapsed-number {
+      color: #2563eb;
+    }
+
+    .panel-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.5rem;
+      z-index: 4;
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      transition: opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .panel-content.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .content-entry-number {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-company-name {
+      font-size: 1.75rem;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      max-width: 460px;
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .content-sector {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #cbd5e1;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      color: #60a5fa;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      width: max-content;
+    }
+
+    .visit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #60a5fa;
+      text-decoration: none;
+      transition: color 0.2s;
+      width: max-content;
+    }
+
+    .visit-link:hover {
+      color: #93c5fd;
+    }
+
+    /* ========== MOBILE ACCORDION ========== */
+    .mobile-accordion {
+      display: none;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .accordion-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      background: transparent;
+      border: none;
+      color: #cbd5e1;
+      cursor: pointer;
+      text-align: left;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    .accordion-header:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .accordion-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .accordion-number {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: #64748b;
+      width: 2rem;
+      flex-shrink: 0;
+    }
+
+    .accordion-chevron {
+      width: 16px;
+      height: 16px;
+      color: #64748b;
+      transition: transform 0.3s;
+    }
+
+    .accordion-row.open .accordion-chevron {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .accordion-row.open .accordion-content {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .accordion-inner {
+      padding: 0 0 1.5rem 3.25rem;
+      color: #cbd5e1;
+      font-size: 0.875rem;
+    }
+
+    .accordion-image {
+      width: 100%;
+      height: 140px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 1023px) {
+      .panel-track {
+        display: none;
+      }
+      .mobile-accordion {
+        display: block;
+      }
+      .headline {
+        font-size: 2rem;
+      }
+      .header {
+        padding: 4rem 1.5rem 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .mobile-accordion {
+        display: none;
+      }
+      .panel-content {
+        padding: 3.5rem;
+      }
+      .content-company-name {
+        font-size: 2.125rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .panel,
+      .panel-image,
+      .ghost-number,
+      .panel-content {
+        transition-duration: 0.001ms !important;
+        animation-duration: 0.001ms !important;
+      }
+      .accordion-content {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="atharva-section" aria-label="The Atharva Group — manufacturing entities">
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <div class="header" id="section-header">
+      <svg class="group-logo" viewBox="0 0 200 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Atharva Group Logo">
+        <rect x="4" y="4" width="28" height="28" rx="4" stroke="white" stroke-width="2" fill="none"/>
+        <path d="M12 20 L18 12 L24 20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="44" y="24" font-family="system-ui" font-size="16" font-weight="600" fill="white">ATHARVA GROUP</text>
+      </svg>
+
+      <div class="eyebrow">
+        <span class="spec-mark" aria-hidden="true"></span>
+        <span>THE ATHARVA GROUP</span>
+      </div>
+
+      <h1 class="headline">Five Industries. One Group.</h1>
+      <p class="supporting">
+        Atharva Polymers is one of five manufacturing businesses within the Atharva Group —
+        a diversified industrial family built on precision, discipline, and long‑term
+        supply relationships across sectors.
+      </p>
+    </div>
+
+    <div class="panel-track" id="panel-track" role="list" aria-label="Manufacturing entities"></div>
+
+    <div class="mobile-accordion" id="mobile-accordion" role="list" aria-label="Manufacturing entities accordion"></div>
+  </section>
+
+  <script>
+    (function () {
+      const companies = [
+        {
+          id: 'metal',
+          shortName: 'Metal',
+          fullName: 'Atharva Metal & Engineering Pvt. Ltd.',
+          sectorDescriptor: 'Sheet Metal Fabrication',
+          isPrimary: false,
+          websiteUrl: 'https://example.com/metal',
+          image: 'https://picsum.photos/id/1015/2400/800'   // 3:1 aspect ratio
+        },
+        {
+          id: 'corrugations',
+          shortName: 'Corrugations',
+          fullName: 'Atharva Corrugations Pvt. Ltd.',
+          sectorDescriptor: 'Corrugated Packaging',
+          isPrimary: false,
+          websiteUrl: 'https://example.com/corrugations',
+          image: 'https://picsum.photos/id/1043/2400/800'
+        },
+        {
+          id: 'thermofoam',
+          shortName: 'ThermoFoam',
+          fullName: 'ThermoFoam Eng Pvt. Ltd.',
+          sectorDescriptor: 'EPS Thermoforming',
+          isPrimary: false,
+          websiteUrl: 'https://example.com/thermofoam',
+          image: 'https://picsum.photos/id/1060/2400/800'
+        },
+        {
+          id: 'biopharma',
+          shortName: 'Biopharma',
+          fullName: 'Atharva Biopharma Pvt. Ltd.',
+          sectorDescriptor: 'Biopharma Manufacturing',
+          isPrimary: false,
+          websiteUrl: 'https://example.com/biopharma',
+          image: 'https://picsum.photos/id/1080/2400/800'
+        },
+        {
+          id: 'polymers',
+          shortName: 'Polymers',
+          fullName: 'Atharva Polymers Pvt. Ltd.',
+          sectorDescriptor: 'Precision Polymer Manufacturing',
+          isPrimary: true,
+          websiteUrl: null,
+          image: 'https://picsum.photos/id/1074/2400/800'
+        }
+      ];
+
+      const PANEL_COUNT = companies.length;
+      const ACTIVE_PERCENT = 55;
+      const INACTIVE_PERCENT = (100 - ACTIVE_PERCENT) / (PANEL_COUNT - 1);
+      const DEFAULT_PERCENT = 100 / PANEL_COUNT;
+
+      const panelTrack = document.getElementById('panel-track');
+      const mobileAccordion = document.getElementById('mobile-accordion');
+      const panelRefs = [];
+      const ghostRefs = [];
+
+      let activeIndex = null;
+      let reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function buildDesktopPanels() {
+        panelTrack.innerHTML = '';
+        panelRefs.length = 0;
+        ghostRefs.length = 0;
+
+        companies.forEach((company, index) => {
+          const panel = document.createElement('button');
+          panel.className = 'panel';
+          if (company.isPrimary) panel.classList.add('primary');
+          panel.setAttribute('role', 'listitem');
+          panel.setAttribute('aria-expanded', 'false');
+          panel.setAttribute('aria-label', `${company.fullName} — ${company.sectorDescriptor}`);
+          panel.style.width = DEFAULT_PERCENT + '%';
+          panel.dataset.index = index;
+
+          const image = document.createElement('div');
+          image.className = 'panel-image';
+          image.style.backgroundImage = `url('${company.image}')`;
+          image.setAttribute('aria-hidden', 'true');
+          panel.appendChild(image);
+
+          const overlay = document.createElement('div');
+          overlay.className = 'panel-overlay';
+          panel.appendChild(overlay);
+
+          const ghost = document.createElement('div');
+          ghost.className = 'ghost-number';
+          ghost.setAttribute('data-ghost-number', '');
+          ghost.setAttribute('aria-hidden', 'true');
+          ghost.textContent = String(index + 1).padStart(2, '0');
+          panel.appendChild(ghost);
+
+          const collapsedNum = document.createElement('div');
+          collapsedNum.className = 'collapsed-number';
+          collapsedNum.setAttribute('aria-hidden', 'true');
+          collapsedNum.textContent = String(index + 1).padStart(2, '0');
+          panel.appendChild(collapsedNum);
+
+          const content = document.createElement('div');
+          content.className = 'panel-content';
+          content.innerHTML = `
+            <div class="content-entry-number">${String(index + 1).padStart(2, '0')}</div>
+            <div class="content-company-name">${company.fullName}</div>
+            <div class="content-sector">${company.sectorDescriptor}</div>
+            ${company.isPrimary
+              ? `<span class="badge">This website</span>`
+              : company.websiteUrl
+                ? `<a class="visit-link" href="${company.websiteUrl}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${company.shortName} website — opens in a new tab">Visit ${company.shortName} <span aria-hidden="true">→</span></a>`
+                : ''
+            }
+          `;
+          panel.appendChild(content);
+
+          panelRefs[index] = panel;
+          ghostRefs[index] = ghost;
+
+          panel.addEventListener('mouseenter', () => expandPanel(index));
+          panel.addEventListener('focus', () => expandPanel(index));
+          panel.addEventListener('blur', () => {
+            setTimeout(collapseAll, 100);
+          });
+
+          panelTrack.appendChild(panel);
+        });
+
+        panelTrack.addEventListener('mouseleave', collapseAll);
+      }
+
+      function buildMobileAccordion() {
+        mobileAccordion.innerHTML = '';
+        companies.forEach((company, index) => {
+          const row = document.createElement('div');
+          row.className = 'accordion-row';
+          row.setAttribute('role', 'listitem');
+
+          const header = document.createElement('button');
+          header.className = 'accordion-header';
+          header.setAttribute('aria-expanded', 'false');
+          header.innerHTML = `
+            <span class="accordion-left">
+              <span class="accordion-number">${String(index + 1).padStart(2, '0')}</span>
+              <span>${company.shortName}</span>
+            </span>
+            <svg class="accordion-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd" />
+            </svg>
+          `;
+
+          const content = document.createElement('div');
+          content.className = 'accordion-content';
+          content.innerHTML = `
+            <div class="accordion-inner">
+              <div class="accordion-image" style="background-image: url('${company.image}');"></div>
+              <div style="font-weight:600; color:#e2e8f0; margin-bottom:0.25rem;">${company.fullName}</div>
+              <div style="margin-bottom:1rem;">${company.sectorDescriptor}</div>
+              ${company.isPrimary
+                ? `<span class="badge">This website</span>`
+                : company.websiteUrl
+                  ? `<a class="visit-link" href="${company.websiteUrl}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${company.shortName} website — opens in a new tab">Visit ${company.shortName} <span aria-hidden="true">→</span></a>`
+                  : ''
+              }
+            </div>
+          `;
+
+          header.addEventListener('click', () => {
+            const isOpen = row.classList.contains('open');
+            document.querySelectorAll('.accordion-row').forEach(r => {
+              r.classList.remove('open');
+              r.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+            });
+            if (!isOpen) {
+              row.classList.add('open');
+              header.setAttribute('aria-expanded', 'true');
+            }
+          });
+
+          row.appendChild(header);
+          row.appendChild(content);
+          mobileAccordion.appendChild(row);
+        });
+      }
+
+      function expandPanel(index) {
+        if (reducedMotion) {
+          panelRefs.forEach((panel, i) => {
+            panel.style.width = i === index ? ACTIVE_PERCENT + '%' : INACTIVE_PERCENT + '%';
+            ghostRefs[i].style.opacity = i === index ? 0.07 : 0.04;
+            ghostRefs[i].style.transform = i === index ? 'scale(1.08)' : 'scale(1)';
+          });
+          updateContentVisibility(index);
+          activeIndex = index;
+          return;
+        }
+
+        if (activeIndex === index) return;
+        activeIndex = index;
+
+        panelRefs.forEach((panel, i) => {
+          gsap.to(panel, {
+            width: i === index ? ACTIVE_PERCENT + '%' : INACTIVE_PERCENT + '%',
+            duration: 0.5,
+            ease: 'power3.out',
+            overwrite: true
+          });
+
+          gsap.to(ghostRefs[i], {
+            opacity: i === index ? 0.07 : 0.04,
+            scale: i === index ? 1.08 : 1,
+            transformOrigin: 'bottom left',
+            duration: i === index ? 1.2 : 0.4,
+            ease: i === index ? 'power1.out' : 'power2.out',
+            overwrite: true
+          });
+
+          const collapsedNum = panel.querySelector('.collapsed-number');
+          if (collapsedNum) {
+            gsap.to(collapsedNum, {
+              opacity: i === index ? 0 : 1,
+              duration: 0.2,
+              overwrite: true
+            });
+          }
+
+          panel.setAttribute('aria-expanded', i === index ? 'true' : 'false');
+        });
+
+        updateContentVisibility(index);
+      }
+
+      function collapseAll() {
+        if (activeIndex === null) return;
+        activeIndex = null;
+
+        if (reducedMotion) {
+          panelRefs.forEach((panel) => {
+            panel.style.width = DEFAULT_PERCENT + '%';
+            panel.setAttribute('aria-expanded', 'false');
+          });
+          updateContentVisibility(null);
+          return;
+        }
+
+        panelRefs.forEach((panel, i) => {
+          gsap.to(panel, {
+            width: DEFAULT_PERCENT + '%',
+            duration: 0.4,
+            ease: 'power3.inOut',
+            overwrite: true
+          });
+
+          gsap.to(ghostRefs[i], {
+            opacity: 0.04,
+            scale: 1,
+            duration: 0.3,
+            overwrite: true
+          });
+
+          const collapsedNum = panel.querySelector('.collapsed-number');
+          if (collapsedNum) {
+            gsap.to(collapsedNum, {
+              opacity: 1,
+              duration: 0.2,
+              overwrite: true
+            });
+          }
+
+          panel.setAttribute('aria-expanded', 'false');
+        });
+
+        updateContentVisibility(null);
+      }
+
+      function updateContentVisibility(index) {
+        panelRefs.forEach((panel, i) => {
+          const content = panel.querySelector('.panel-content');
+          if (content) {
+            if (i === index) {
+              setTimeout(() => content.classList.add('active'), 180);
+            } else {
+              content.classList.remove('active');
+            }
+          }
+        });
+      }
+
+      function setupEntranceAnimations() {
+        const trackObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && panelRefs.length) {
+              if (reducedMotion) {
+                panelRefs.forEach(panel => {
+                  panel.style.opacity = '1';
+                  panel.style.transform = 'translateY(0)';
+                });
+              } else {
+                gsap.fromTo(panelRefs,
+                  { opacity: 0, y: 30 },
+                  {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.08,
+                    ease: 'power3.out',
+                    overwrite: true
+                  }
+                );
+              }
+              trackObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2 });
+
+        if (panelTrack) trackObserver.observe(panelTrack);
+
+        const headerObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const header = entry.target;
+              const children = header.children;
+              if (reducedMotion) {
+                Array.from(children).forEach(el => {
+                  el.style.opacity = '1';
+                  el.style.transform = 'translateY(0)';
+                });
+              } else {
+                gsap.fromTo(children,
+                  { opacity: 0, y: 15 },
+                  {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    stagger: 0.1,
+                    delay: 0.1,
+                    ease: 'power2.out',
+                    overwrite: true
+                  }
+                );
+              }
+              headerObserver.unobserve(header);
+            }
+          });
+        }, { threshold: 0.3 });
+
+        const header = document.getElementById('section-header');
+        if (header) headerObserver.observe(header);
+      }
+
+      function init() {
+        buildDesktopPanels();
+        buildMobileAccordion();
+        setupEntranceAnimations();
+
+        panelTrack.addEventListener('mouseenter', () => {
+          panelRefs.forEach(p => p && (p.style.willChange = 'width'));
+        });
+        panelTrack.addEventListener('mouseleave', () => {
+          setTimeout(() => {
+            panelRefs.forEach(p => p && (p.style.willChange = 'auto'));
+          }, 500);
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

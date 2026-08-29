@@ -14,14 +14,14 @@ function CompactProductCard({ product }: { product: Product }) {
       href={`/products/${product.slug}`}
       className="service-card-hover bg-white border border-slate-200 rounded-xl overflow-hidden relative group cursor-pointer block"
     >
-      {/* Product image or placeholder */}
-      <div className="aspect-[16/10] bg-slate-100 flex items-center justify-center overflow-hidden">
+      {/* Product image or placeholder — now shows full image with contain */}
+      <div className="aspect-[16/10] bg-slate-100 flex items-center justify-center overflow-hidden p-4">
         {product.images?.card ? (
-          <Image
+          <img
             src={product.images.card}
             alt={product.name}
-            fill
-            className="object-cover"
+            className="w-full h-full object-contain"
+            loading="lazy"
           />
         ) : (
           <span className="text-slate-400 text-sm">Product Image</span>

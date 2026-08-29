@@ -1,98 +1,268 @@
-'use client'
+// 'use client';
 
-import Globe from 'react-globe.gl'
-import { useRef } from 'react'
-import { useInView } from 'framer-motion'
-import { motion } from 'framer-motion'
-import { fadeUp, ease } from '@/lib/animations'
+// import { useEffect, useState } from 'react';
+// import { useReducedMotion } from 'framer-motion';
+// import { canUseWebGL } from '@/lib/webgl-support';
+// import { exportRoutes } from '@/lib/international-reach-data';
+// import GlobeStage from './international-reach/GlobeStage';
+// import WorldRouteSchematic from './international-reach/WorldRouteSchematic';
+// import ExportReachTextAlternative from './international-reach/ExportReachTextAlternative';
 
-const E = ease
+// const InternationalReach = () => {
+//   const prefersReducedMotion = useReducedMotion();
+//   const [mounted, setMounted] = useState(false);
+//   const [showGlobe, setShowGlobe] = useState(false);
 
-// Cast Globe to any to bypass prop type checks (props are valid but not typed correctly in this version)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const AnyGlobe = Globe as any
+//   useEffect(() => {
+//     setMounted(true);
+//     // Check all conditions only on the client side
+//     const isDesktop = window.innerWidth >= 1024;
+//     const hasWebGL = canUseWebGL();
+//     const shouldShowGlobe = isDesktop && hasWebGL && !prefersReducedMotion;
+//     setShowGlobe(shouldShowGlobe);
+//   }, [prefersReducedMotion]);
 
-export function InternationalReach() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const globeRef = useRef<any>(null)
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const inView = useInView(sectionRef, { once: true, margin: '-100px 0px' })
+//   // Don't render anything until mounted to prevent hydration mismatch
+//   if (!mounted) {
+//     return (
+//       <section aria-label="Export Markets" className="relative overflow-hidden bg-slate-900 section-padding">
+//         <div className="noise-overlay" aria-hidden="true" />
+//         <div className="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-12">
+//           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 items-center">
+//             <div className="lg:col-span-2 space-y-6">
+//               {/* Content column - render statically on server and client */}
+//               <div className="flex items-center gap-3">
+//                 <span className="w-8 h-0.5 bg-blue-500 inline-block" aria-hidden="true"></span>
+//                 <span className="text-blue-400 text-[0.7rem] font-semibold tracking-[0.18em] uppercase">
+//                   Export Markets
+//                 </span>
+//               </div>
+//               <h2 className="text-white text-3xl lg:text-4xl font-bold leading-tight tracking-tight">
+//                 Manufacturing in India.
+//                 <br />
+//                 Delivering Beyond It.
+//               </h2>
+//               <p className="text-slate-400 text-[0.9375rem] leading-relaxed max-w-[48ch]">
+//                 From MIDC Ranjangaon, Atharva Polymers currently supplies industrial clients across four international
+//                 markets, including the United States and Mexico. Two additional export relationships are active under
+//                 existing client confidentiality agreements.
+//               </p>
+//               <div className="flex items-end gap-4">
+//                 <div>
+//                   <span className="text-5xl font-bold text-white font-mono leading-none">{exportRoutes.length}+</span>
+//                   <div className="text-[0.625rem] tracking-[0.12em] uppercase text-slate-500 mt-2 font-medium">
+//                     Export Markets Served
+//                   </div>
+//                 </div>
+//                 <span className="text-slate-500 text-xs font-mono pb-1">
+//                   +2 additional markets — confidential
+//                 </span>
+//               </div>
+//             </div>
+//             <div className="lg:col-span-3 relative min-h-[400px] flex items-center justify-center">
+//               {/* Placeholder - will be replaced after mount */}
+//               <div className="w-full max-w-[600px] aspect-square bg-slate-800/20 rounded-lg"></div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+//     );
+//   }
 
-  // Define marker data: [longitude, latitude, name, color, size?]
-  const markerData = [
-    [73.8567, 18.5204, 'Pune, India', '#3b82f6', 0.08], // Pune
-    [-95.7129, 37.0902, 'USA', '#3b82f6', 0.06], // USA center
-    [-102.5528, 23.6345, 'Mexico', '#3b82f6', 0.06] // Mexico center
-  ]
+//   return (
+//     <section aria-label="Export Markets" className="relative overflow-hidden bg-slate-900 section-padding">
+//       <div className="noise-overlay" aria-hidden="true" />
+//       <div className="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-12">
+//         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 items-center">
+//           {/* Content column */}
+//           <div className="lg:col-span-2 space-y-6">
+//             <div className="flex items-center gap-3">
+//               <span className="w-8 h-0.5 bg-blue-500 inline-block" aria-hidden="true"></span>
+//               <span className="text-blue-400 text-[0.7rem] font-semibold tracking-[0.18em] uppercase">
+//                 Export Markets
+//               </span>
+//             </div>
+//             <h2 className="text-white text-3xl lg:text-4xl font-bold leading-tight tracking-tight">
+//               Manufacturing in India.
+//               <br />
+//               Delivering Beyond It.
+//             </h2>
+//             <p className="text-slate-400 text-[0.9375rem] leading-relaxed max-w-[48ch]">
+//               From MIDC Ranjangaon, Atharva Polymers currently supplies industrial clients across four international
+//               markets, including the United States and Mexico. Two additional export relationships are active under
+//               existing client confidentiality agreements.
+//             </p>
+//             <div className="flex items-end gap-4">
+//               <div>
+//                 <span className="text-5xl font-bold text-white font-mono leading-none">{exportRoutes.length}+</span>
+//                 <div className="text-[0.625rem] tracking-[0.12em] uppercase text-slate-500 mt-2 font-medium">
+//                   Export Markets Served
+//                 </div>
+//               </div>
+//               <span className="text-slate-500 text-xs font-mono pb-1">
+//                 +2 additional markets — confidential
+//               </span>
+//             </div>
+//             <div className="flex flex-wrap items-center gap-4 pt-2">
+//               <a
+//                 href="/contact?inquiry=quote"
+//                 className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium text-sm px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
+//               >
+//                 Discuss Your Export Requirement
+//               </a>
+//               <a
+//                 href={`https://wa.me/?text=${encodeURIComponent('Hello, I would like to discuss an export requirement.')}`}
+//                 className="inline-flex items-center gap-2 text-slate-400 font-normal text-sm px-6 py-3 rounded-md border border-slate-700 hover:border-slate-500 hover:text-white transition-colors"
+//               >
+//                 Chat on WhatsApp
+//               </a>
+//             </div>
+//             <ExportReachTextAlternative />
+//           </div>
+
+//           {/* Visual stage */}
+//           <div className="lg:col-span-3 relative min-h-[400px]">
+//             {showGlobe ? (
+//               <div className="w-full h-full flex items-center justify-center">
+//                 <GlobeStage />
+//               </div>
+//             ) : (
+//               <WorldRouteSchematic />
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default InternationalReach;
+
+
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useReducedMotion } from 'framer-motion';
+import { canUseWebGL } from '@/lib/webgl-support';
+import { exportRoutes } from '@/lib/international-reach-data';
+import GlobeStage from './international-reach/GlobeStage';
+import WorldRouteSchematic from './international-reach/WorldRouteSchematic';
+import ExportReachTextAlternative from './international-reach/ExportReachTextAlternative';
+
+const InternationalReach = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  const [showGlobe, setShowGlobe] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const isDesktop = window.innerWidth >= 1024;
+    const hasWebGL = canUseWebGL();
+    const shouldShowGlobe = isDesktop && hasWebGL && !prefersReducedMotion;
+    setShowGlobe(shouldShowGlobe);
+  }, [prefersReducedMotion]);
+
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <section aria-label="Export Markets" className="relative overflow-hidden bg-slate-900 section-padding">
+        <div className="noise-overlay" aria-hidden="true" />
+        <div className="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 items-center">
+            <div className="lg:col-span-2 space-y-6">
+              <div className="flex items-center gap-3">
+                <span className="w-8 h-0.5 bg-blue-500 inline-block" aria-hidden="true"></span>
+                <span className="text-blue-400 text-[0.7rem] font-semibold tracking-[0.18em] uppercase">
+                  Export Markets
+                </span>
+              </div>
+              <h2 className="text-white text-3xl lg:text-4xl font-bold leading-tight tracking-tight">
+                Manufacturing in India.
+                <br />
+                Delivering Beyond It.
+              </h2>
+            </div>
+            <div className="lg:col-span-3 relative min-h-[400px]">
+              <div className="w-full aspect-square max-w-[620px] mx-auto bg-slate-800/10 rounded-full animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section aria-label="International Reach" className="relative bg-slate-900 overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 pointer-events-none" />
-      </div>
-      <div className="relative max-w-[1280px] mx-auto py-[120px] px-6 lg:px-12">
-        <div className="flex items-center gap-3 mb-4">
-          <div aria-hidden="true" className="w-0.5 bg-blue-600 flex-shrink-0" style={{ height: 16 }} />
-          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.1em]">
-            Global Presence
-          </span>
+    <section aria-label="Export Markets" className="relative overflow-hidden bg-slate-900 section-padding">
+      <div className="noise-overlay" aria-hidden="true" />
+      <div className="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 items-center">
+          {/* Content column */}
+          <div className="lg:col-span-2 space-y-6">
+            <div className="flex items-center gap-3">
+              <span className="w-8 h-0.5 bg-blue-500 inline-block" aria-hidden="true"></span>
+              <span className="text-blue-400 text-[0.7rem] font-semibold tracking-[0.18em] uppercase">
+                Export Markets
+              </span>
+            </div>
+            
+            <h2 className="text-white text-3xl lg:text-4xl font-bold leading-tight tracking-tight">
+              Manufacturing in India.
+              <br />
+              Delivering Beyond It.
+            </h2>
+            
+            <p className="text-slate-400 text-[0.9375rem] leading-relaxed max-w-[48ch]">
+              From MIDC Ranjangaon, Atharva Polymers currently supplies industrial clients across four international
+              markets, including the United States and Mexico. Two additional export relationships are active under
+              existing client confidentiality agreements.
+            </p>
+            
+            <div className="flex items-end gap-4">
+              <div>
+                <span className="text-5xl font-bold text-white font-mono leading-none">
+                  {exportRoutes.length}+
+                </span>
+                <div className="text-[0.625rem] tracking-[0.12em] uppercase text-slate-500 mt-2 font-medium">
+                  Export Markets Served
+                </div>
+              </div>
+              <span className="text-slate-500 text-xs font-mono pb-1">
+                +2 additional markets — confidential
+              </span>
+            </div>
+            
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <a
+                href="/contact?inquiry=quote"
+                className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium text-sm px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Discuss Your Export Requirement
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a
+                href={`https://wa.me/?text=${encodeURIComponent('Hello, I would like to discuss an export requirement.')}`}
+                className="inline-flex items-center gap-2 text-slate-400 font-normal text-sm px-6 py-3 rounded-md border border-slate-700 hover:border-slate-500 hover:text-white transition-colors"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                </svg>
+                Chat on WhatsApp
+              </a>
+            </div>
+            
+            <ExportReachTextAlternative />
+          </div>
+
+          {/* Visual stage */}
+          <div className="lg:col-span-3 relative">
+            {showGlobe ? <GlobeStage /> : <WorldRouteSchematic />}
+          </div>
         </div>
-
-        <motion.h2
-          className="font-normal text-slate-900 leading-[1.15] mb-8"
-          style={{ fontSize: 'clamp(32px, 4vw, 48px)' }}
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          transition={{ duration: 0.6, delay: 0.4, ease: E }}
-        >
-          Worldwide Operations
-        </motion.h2>
-
-        <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
-          <AnyGlobe
-            ref={globeRef}
-            globeImageUrl='//unpkg.com/three-globe/example/img/earth-dark.jpg'
-            bumpImageUrl='//unpkg.com/three-globe/example/img/earth-topology.png'
-            showAtmosphere
-            atmosphereColor='#3b82f6'
-            atmosphereAltitude={0.25}
-            markersData={markerData}
-            markerLabel={{ 
-              name: 'name', 
-              color: () => '#fff', 
-              textAnchor: 'middle', 
-              alignmentBaseline: 'center',
-              fontSize: 12,
-              fontWeight: 600,
-              backgroundColor: () => '#3b82f6',
-              backgroundPadding: 3,
-              borderRadius: 3,
-              pixelOffset: [0, -20]
-            }}
-            markerColor={() => '#3b82f6'}
-            markerRadius={0.06}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            onMarkerClick={({object: { markerData: [, , name] }}: any) => {
-              alert(`Selected: ${name}`)
-            }}
-            rotationSpeed={0.2}
-            pointerEvents={true}
-          />
-        </div>
-
-        <p className="mt-6 text-slate-500 text-sm max-w-[480px]">
-          Atharva Polymers serves key markets in the United States and Mexico, with our 
-          headquarters and manufacturing facility located in Pune, India. Our global reach 
-          enables us to deliver high-quality polymer solutions to international clients 
-          while maintaining competitive pricing and reliable lead times.
-        </p>
-
-        <p className="mt-4 text-slate-500 text-sm max-w-[480px]">
-          Additional international markets are currently under NDA and will be disclosed 
-          upon mutual agreement.
-        </p>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default InternationalReach;

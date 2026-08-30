@@ -8,29 +8,108 @@ import { NoiseOverlay } from '@/components/ui/NoiseOverlay';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { groupCompanies, GroupCompany } from '@/lib/group-data';
 
-// Easing array for Framer Motion
 const ease = [0.22, 1, 0.36, 1];
 
-// Panel sizing constants
 const PANEL_COUNT = groupCompanies.length;
 const ACTIVE_PERCENT = 55;
 const INACTIVE_PERCENT = (100 - ACTIVE_PERCENT) / (PANEL_COUNT - 1);
 const DEFAULT_PERCENT = 100 / PANEL_COUNT;
-const TRACK_HEIGHT = 440; // px
+const TRACK_HEIGHT = 440;
 
 export default function AtharvaGroupSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const [panelsVisible, setPanelsVisible] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const headerInView = useInView(sectionRef, { once: true, margin: '-80px 0px' });
   const trackInView = useInView(trackRef, { once: true, margin: '-80px 0px' });
 
-  // Expand a panel to active state
+  // Mark as mounted
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // ✅ FIX: Initialize panels — set width and make them VISIBLE by default
+  useEffect(() => {
+    if (!isMounted) return;
+
+    panelRefs.current.forEach((panel, i) => {
+      if (!panel) return;
+      
+      // Set initial width
+      panel.style.width = `${DEFAULT_PERCENT}%`;
+      
+      // Make panel visible immediately (no hidden state)
+      panel.style.opacity = '1';
+      panel.style.transform = 'translateY(0)';
+      
+      // Set will-change for performance
+      panel.style.willChange = 'width';
+    });
+  }, [isMounted]);
+
+  // ✅ FIX: Entrance animation — only animate if not yet visible
+  useEffect(() => {
+    if (!isMounted || !trackInView || !panelRefs.current.length) return;
+
+    // If reduced motion, just ensure panels are visible
+    if (prefersReducedMotion) {
+      panelRefs.current.forEach((panel) => {
+        if (panel) {
+          panel.style.opacity = '1';
+          panel.style.transform = 'translateY(0)';
+        }
+      });
+      setPanelsVisible(true);
+      return;
+    }
+
+    // Set initial hidden state ONLY if not already visible
+    if (!panelsVisible) {
+      panelRefs.current.forEach((panel) => {
+        if (panel) {
+          gsap.set(panel, { opacity: 0, y: 30 });
+        }
+      });
+
+      // Animate in with a small delay
+      gsap.to(panelRefs.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: 'power3.out',
+        overwrite: true,
+        delay: 0.05,
+        onComplete: () => setPanelsVisible(true),
+      });
+    }
+  }, [trackInView, prefersReducedMotion, isMounted, panelsVisible]);
+
+  // ✅ FALLBACK: If for any reason panels aren't visible after 2s, force show them
+  useEffect(() => {
+    if (!isMounted) return;
+
+    const fallbackTimer = setTimeout(() => {
+      if (!panelsVisible && panelRefs.current.length) {
+        panelRefs.current.forEach((panel) => {
+          if (panel) {
+            gsap.set(panel, { opacity: 1, y: 0 });
+          }
+        });
+        setPanelsVisible(true);
+      }
+    }, 2000);
+
+    return () => clearTimeout(fallbackTimer);
+  }, [isMounted, panelsVisible]);
+
   const expandPanel = useCallback(
     (index: number) => {
-      if (!panelRefs.current.length) return;
+      if (!panelRefs.current.length || !isMounted) return;
 
       if (prefersReducedMotion) {
         panelRefs.current.forEach((panel, i) => {
@@ -47,7 +126,6 @@ export default function AtharvaGroupSection() {
       panelRefs.current.forEach((panel, i) => {
         if (!panel) return;
 
-        // Panel width
         gsap.to(panel, {
           width: i === index ? `${ACTIVE_PERCENT}%` : `${INACTIVE_PERCENT}%`,
           duration: 0.5,
@@ -55,16 +133,14 @@ export default function AtharvaGroupSection() {
           overwrite: true,
         });
 
-        // Update aria-expanded
         panel.setAttribute('aria-expanded', i === index ? 'true' : 'false');
       });
     },
-    [activeIndex, prefersReducedMotion]
+    [activeIndex, prefersReducedMotion, isMounted]
   );
 
-  // Collapse all panels to default state
   const collapseAll = useCallback(() => {
-    if (activeIndex === null) return;
+    if (activeIndex === null || !isMounted) return;
     setActiveIndex(null);
 
     if (prefersReducedMotion) {
@@ -88,37 +164,8 @@ export default function AtharvaGroupSection() {
 
       panel.setAttribute('aria-expanded', 'false');
     });
-  }, [activeIndex, prefersReducedMotion]);
+  }, [activeIndex, prefersReducedMotion, isMounted]);
 
-  // Entrance animation for panel track
-  useEffect(() => {
-    if (!trackInView || !panelRefs.current.length) return;
-
-    if (prefersReducedMotion) {
-      panelRefs.current.forEach((panel) => {
-        if (panel) {
-          panel.style.opacity = '1';
-          panel.style.transform = 'translateY(0)';
-        }
-      });
-      return;
-    }
-
-    gsap.fromTo(
-      panelRefs.current,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: 'power3.out',
-        overwrite: true,
-      }
-    );
-  }, [trackInView, prefersReducedMotion]);
-
-  // Will-change management for performance
   const handleTrackMouseEnter = () => {
     panelRefs.current.forEach((panel) => {
       if (panel) panel.style.willChange = 'width';
@@ -145,7 +192,7 @@ export default function AtharvaGroupSection() {
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-24 pb-16 relative z-10">
         <motion.div
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 15 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
+          animate={isMounted && headerInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1, ease }}
         >
           <Image
@@ -160,7 +207,7 @@ export default function AtharvaGroupSection() {
 
         <motion.div
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 15 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
+          animate={isMounted && headerInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2, ease }}
         >
           <SectionHeader
@@ -173,7 +220,7 @@ export default function AtharvaGroupSection() {
         <motion.p
           className="text-[16px] text-slate-400 leading-7 max-w-[700px] mt-5"
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 15 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
+          animate={isMounted && headerInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.3, ease }}
         >
           Atharva Polymers is one of five manufacturing businesses within the Atharva Group —
@@ -217,9 +264,6 @@ export default function AtharvaGroupSection() {
   );
 }
 
-// ----------------------------------------------------------------------
-// Desktop Panel Button (no numbering, softer overlay)
-// ----------------------------------------------------------------------
 function PanelButton({
   company,
   index,
@@ -268,7 +312,7 @@ function PanelButton({
         aria-hidden="true"
       />
 
-      {/* Logo overlay – top-left */}
+      {/* Logo overlay */}
       <div
         className="absolute top-4 left-4 z-[5] flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold uppercase tracking-wider"
         aria-hidden="true"
@@ -276,11 +320,10 @@ function PanelButton({
         {company.shortName.substring(0, 2)}
       </div>
 
-      {/* Softer gradient overlay – much lighter than before */}
+      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/30 to-transparent pointer-events-none" />
 
-      {/* Active content (no number) */}
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {isActive && (
           <motion.div
             key={company.id}
@@ -321,9 +364,6 @@ function PanelButton({
   );
 }
 
-// ----------------------------------------------------------------------
-// Mobile Accordion (no numbers)
-// ----------------------------------------------------------------------
 function MobileAccordion({ companies }: { companies: GroupCompany[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -338,7 +378,6 @@ function MobileAccordion({ companies }: { companies: GroupCompany[] }) {
               onClick={() => setOpenIndex(isOpen ? null : index)}
               aria-expanded={isOpen}
             >
-              {/* Only the short name – no number */}
               <span className="text-[15px] font-semibold">{company.shortName}</span>
 
               <svg
@@ -396,6 +435,406 @@ function MobileAccordion({ companies }: { companies: GroupCompany[] }) {
     </div>
   );
 }
+
+
+// 'use client';
+
+// import { useRef, useState, useEffect, useCallback } from 'react';
+// import { motion, AnimatePresence, useInView, useReducedMotion } from 'framer-motion';
+// import Image from 'next/image';
+// import { gsap } from 'gsap';
+// import { NoiseOverlay } from '@/components/ui/NoiseOverlay';
+// import { SectionHeader } from '@/components/ui/SectionHeader';
+// import { groupCompanies, GroupCompany } from '@/lib/group-data';
+
+// // Easing array for Framer Motion
+// const ease = [0.22, 1, 0.36, 1];
+
+// // Panel sizing constants
+// const PANEL_COUNT = groupCompanies.length;
+// const ACTIVE_PERCENT = 55;
+// const INACTIVE_PERCENT = (100 - ACTIVE_PERCENT) / (PANEL_COUNT - 1);
+// const DEFAULT_PERCENT = 100 / PANEL_COUNT;
+// const TRACK_HEIGHT = 440; // px
+
+// export default function AtharvaGroupSection() {
+//   const sectionRef = useRef<HTMLElement>(null);
+//   const trackRef = useRef<HTMLDivElement>(null);
+//   const panelRefs = useRef<(HTMLButtonElement | null)[]>([]);
+//   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+//   const prefersReducedMotion = useReducedMotion();
+//   const headerInView = useInView(sectionRef, { once: true, margin: '-80px 0px' });
+//   const trackInView = useInView(trackRef, { once: true, margin: '-80px 0px' });
+
+//   // Expand a panel to active state
+//   const expandPanel = useCallback(
+//     (index: number) => {
+//       if (!panelRefs.current.length) return;
+
+//       if (prefersReducedMotion) {
+//         panelRefs.current.forEach((panel, i) => {
+//           if (!panel) return;
+//           panel.style.width = i === index ? `${ACTIVE_PERCENT}%` : `${INACTIVE_PERCENT}%`;
+//         });
+//         setActiveIndex(index);
+//         return;
+//       }
+
+//       if (activeIndex === index) return;
+//       setActiveIndex(index);
+
+//       panelRefs.current.forEach((panel, i) => {
+//         if (!panel) return;
+
+//         // Panel width
+//         gsap.to(panel, {
+//           width: i === index ? `${ACTIVE_PERCENT}%` : `${INACTIVE_PERCENT}%`,
+//           duration: 0.5,
+//           ease: 'power3.out',
+//           overwrite: true,
+//         });
+
+//         // Update aria-expanded
+//         panel.setAttribute('aria-expanded', i === index ? 'true' : 'false');
+//       });
+//     },
+//     [activeIndex, prefersReducedMotion]
+//   );
+
+//   // Collapse all panels to default state
+//   const collapseAll = useCallback(() => {
+//     if (activeIndex === null) return;
+//     setActiveIndex(null);
+
+//     if (prefersReducedMotion) {
+//       panelRefs.current.forEach((panel) => {
+//         if (!panel) return;
+//         panel.style.width = `${DEFAULT_PERCENT}%`;
+//         panel.setAttribute('aria-expanded', 'false');
+//       });
+//       return;
+//     }
+
+//     panelRefs.current.forEach((panel) => {
+//       if (!panel) return;
+
+//       gsap.to(panel, {
+//         width: `${DEFAULT_PERCENT}%`,
+//         duration: 0.4,
+//         ease: 'power3.inOut',
+//         overwrite: true,
+//       });
+
+//       panel.setAttribute('aria-expanded', 'false');
+//     });
+//   }, [activeIndex, prefersReducedMotion]);
+
+//   // Entrance animation for panel track
+//   useEffect(() => {
+//     if (!trackInView || !panelRefs.current.length) return;
+
+//     if (prefersReducedMotion) {
+//       panelRefs.current.forEach((panel) => {
+//         if (panel) {
+//           panel.style.opacity = '1';
+//           panel.style.transform = 'translateY(0)';
+//         }
+//       });
+//       return;
+//     }
+
+//     gsap.fromTo(
+//       panelRefs.current,
+//       { opacity: 0, y: 30 },
+//       {
+//         opacity: 1,
+//         y: 0,
+//         duration: 0.6,
+//         stagger: 0.08,
+//         ease: 'power3.out',
+//         overwrite: true,
+//       }
+//     );
+//   }, [trackInView, prefersReducedMotion]);
+
+//   // Will-change management for performance
+//   const handleTrackMouseEnter = () => {
+//     panelRefs.current.forEach((panel) => {
+//       if (panel) panel.style.willChange = 'width';
+//     });
+//   };
+
+//   const handleTrackMouseLeave = () => {
+//     setTimeout(() => {
+//       panelRefs.current.forEach((panel) => {
+//         if (panel) panel.style.willChange = 'auto';
+//       });
+//     }, 500);
+//   };
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       aria-label="The Atharva Group — manufacturing entities"
+//       className="relative bg-slate-900 overflow-hidden pb-24"
+//     >
+//       <NoiseOverlay />
+
+//       {/* Header area */}
+//       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-24 pb-16 relative z-10">
+//         <motion.div
+//           initial={prefersReducedMotion ? {} : { opacity: 0, y: 15 }}
+//           animate={headerInView ? { opacity: 1, y: 0 } : {}}
+//           transition={{ duration: 0.5, delay: 0.1, ease }}
+//         >
+//           <Image
+//             src="/assets/logos/logo1.png"
+//             alt="Atharva Group Logo"
+//             width={120}
+//             height={36}
+//             className="h-[36px] w-auto mb-6"
+//             priority={false}
+//           />
+//         </motion.div>
+
+//         <motion.div
+//           initial={prefersReducedMotion ? {} : { opacity: 0, y: 15 }}
+//           animate={headerInView ? { opacity: 1, y: 0 } : {}}
+//           transition={{ duration: 0.5, delay: 0.2, ease }}
+//         >
+//           <SectionHeader
+//             eyebrow="THE ATHARVA GROUP"
+//             headline="Five Industries. One Group."
+//             theme="dark"
+//           />
+//         </motion.div>
+
+//         <motion.p
+//           className="text-[16px] text-slate-400 leading-7 max-w-[700px] mt-5"
+//           initial={prefersReducedMotion ? {} : { opacity: 0, y: 15 }}
+//           animate={headerInView ? { opacity: 1, y: 0 } : {}}
+//           transition={{ duration: 0.5, delay: 0.3, ease }}
+//         >
+//           Atharva Polymers is one of five manufacturing businesses within the Atharva Group —
+//           a diversified industrial family built on precision, discipline, and long‑term
+//           supply relationships across sectors.
+//         </motion.p>
+//       </div>
+
+//       {/* Desktop horizontal panel track */}
+//       <div
+//         ref={trackRef}
+//         className="hidden lg:flex w-full overflow-hidden"
+//         style={{ height: `${TRACK_HEIGHT}px` }}
+//         onMouseEnter={handleTrackMouseEnter}
+//         onMouseLeave={() => {
+//           handleTrackMouseLeave();
+//           collapseAll();
+//         }}
+//         role="list"
+//         aria-label="Manufacturing entities"
+//       >
+//         {groupCompanies.map((company, index) => (
+//           <PanelButton
+//             key={company.id}
+//             company={company}
+//             index={index}
+//             isActive={activeIndex === index}
+//             onHover={() => expandPanel(index)}
+//             onFocus={() => expandPanel(index)}
+//             onBlur={() => setTimeout(collapseAll, 100)}
+//             panelRef={(el) => {
+//               panelRefs.current[index] = el;
+//             }}
+//           />
+//         ))}
+//       </div>
+
+//       {/* Mobile accordion */}
+//       <MobileAccordion companies={groupCompanies} />
+//     </section>
+//   );
+// }
+
+// // ----------------------------------------------------------------------
+// // Desktop Panel Button (no numbering, softer overlay)
+// // ----------------------------------------------------------------------
+// function PanelButton({
+//   company,
+//   index,
+//   isActive,
+//   onHover,
+//   onFocus,
+//   onBlur,
+//   panelRef,
+// }: {
+//   company: GroupCompany;
+//   index: number;
+//   isActive: boolean;
+//   onHover: () => void;
+//   onFocus: () => void;
+//   onBlur: () => void;
+//   panelRef: (el: HTMLButtonElement | null) => void;
+// }) {
+//   const isPrimary = company.isPrimary;
+
+//   return (
+//     <button
+//       ref={panelRef}
+//       className={`
+//         relative h-full flex-shrink-0 overflow-hidden cursor-pointer
+//         bg-slate-900 text-white text-left outline-none
+//         focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset
+//         ${index < groupCompanies.length - 1 ? 'border-r border-white/[0.06]' : ''}
+//         ${isPrimary ? 'border-t-2 border-blue-600' : ''}
+//       `}
+//       style={{ width: `${DEFAULT_PERCENT}%` }}
+//       onMouseEnter={onHover}
+//       onFocus={onFocus}
+//       onBlur={onBlur}
+//       aria-expanded={isActive}
+//       aria-label={`${company.fullName} — ${company.sectorDescriptor}`}
+//       role="listitem"
+//     >
+//       {/* Image layer */}
+//       <div
+//         className="absolute inset-0 bg-no-repeat"
+//         style={{
+//           backgroundImage: `url('${company.image}')`,
+//           backgroundSize: 'auto 100%',
+//           backgroundPosition: 'left top',
+//         }}
+//         aria-hidden="true"
+//       />
+
+//       {/* Logo overlay – top-left */}
+//       <div
+//         className="absolute top-4 left-4 z-[5] flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold uppercase tracking-wider"
+//         aria-hidden="true"
+//       >
+//         {company.shortName.substring(0, 2)}
+//       </div>
+
+//       {/* Softer gradient overlay – much lighter than before */}
+//       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/30 to-transparent pointer-events-none" />
+
+//       {/* Active content (no number) */}
+//       <AnimatePresence>
+//         {isActive && (
+//           <motion.div
+//             key={company.id}
+//             className="absolute inset-0 flex flex-col justify-end p-10 lg:p-14"
+//             initial={{ opacity: 0, y: 16 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             exit={{ opacity: 0, y: 8 }}
+//             transition={{ duration: 0.28, delay: 0.18, ease }}
+//           >
+//             <div className="relative z-10">
+//               <h3 className="text-[28px] lg:text-[34px] font-semibold text-white leading-[1.1] max-w-[460px]">
+//                 {company.fullName}
+//               </h3>
+//               <p className="text-[14px] font-medium text-slate-400 mt-2">
+//                 {company.sectorDescriptor}
+//               </p>
+
+//               {isPrimary ? (
+//                 <span className="mt-6 inline-flex items-center bg-blue-600/20 border border-blue-600/30 text-blue-400 text-[11px] font-semibold px-3 py-1 rounded-full uppercase tracking-[0.08em]">
+//                   This website
+//                 </span>
+//               ) : company.websiteUrl ? (
+//                 <a
+//                   href={company.websiteUrl}
+//                   target="_blank"
+//                   rel="noopener noreferrer"
+//                   className="mt-6 inline-flex items-center gap-1.5 text-[14px] font-medium text-blue-400 hover:text-blue-300 transition-colors"
+//                   aria-label={`Visit ${company.shortName} website — opens in a new tab`}
+//                 >
+//                   Visit {company.shortName} <span aria-hidden="true">→</span>
+//                 </a>
+//               ) : null}
+//             </div>
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </button>
+//   );
+// }
+
+// // ----------------------------------------------------------------------
+// // Mobile Accordion (no numbers)
+// // ----------------------------------------------------------------------
+// function MobileAccordion({ companies }: { companies: GroupCompany[] }) {
+//   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+//   return (
+//     <div className="lg:hidden max-w-[1280px] mx-auto px-6 relative z-10" role="list">
+//       {companies.map((company, index) => {
+//         const isOpen = openIndex === index;
+//         return (
+//           <div key={company.id} className="border-b border-white/[0.08]" role="listitem">
+//             <button
+//               className="w-full flex items-center justify-between py-5 bg-transparent text-slate-300 cursor-pointer text-left hover:bg-white/[0.02] transition-colors"
+//               onClick={() => setOpenIndex(isOpen ? null : index)}
+//               aria-expanded={isOpen}
+//             >
+//               {/* Only the short name – no number */}
+//               <span className="text-[15px] font-semibold">{company.shortName}</span>
+
+//               <svg
+//                 className={`w-4 h-4 text-slate-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+//                 viewBox="0 0 20 20"
+//                 fill="currentColor"
+//                 aria-hidden="true"
+//               >
+//                 <path
+//                   fillRule="evenodd"
+//                   d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"
+//                   clipRule="evenodd"
+//                 />
+//               </svg>
+//             </button>
+
+//             <AnimatePresence initial={false}>
+//               {isOpen && (
+//                 <motion.div
+//                   initial={{ height: 0, opacity: 0 }}
+//                   animate={{ height: 'auto', opacity: 1 }}
+//                   exit={{ height: 0, opacity: 0 }}
+//                   transition={{ duration: 0.3, ease }}
+//                   className="overflow-hidden"
+//                 >
+//                   <div className="px-[52px] pb-6">
+//                     <div
+//                       className="w-full h-[140px] bg-cover bg-center rounded mb-4"
+//                       style={{ backgroundImage: `url('${company.image}')` }}
+//                     />
+//                     <div className="font-semibold text-white mb-1">{company.fullName}</div>
+//                     <div className="text-slate-400 mb-4">{company.sectorDescriptor}</div>
+//                     {company.isPrimary ? (
+//                       <span className="inline-flex items-center bg-blue-600/20 border border-blue-600/30 text-blue-400 text-[11px] font-semibold px-3 py-1 rounded-full uppercase tracking-[0.08em]">
+//                         This website
+//                       </span>
+//                     ) : company.websiteUrl ? (
+//                       <a
+//                         href={company.websiteUrl}
+//                         target="_blank"
+//                         rel="noopener noreferrer"
+//                         className="inline-flex items-center gap-1.5 text-[14px] font-medium text-blue-400 hover:text-blue-300"
+//                         aria-label={`Visit ${company.shortName} website — opens in a new tab`}
+//                       >
+//                         Visit {company.shortName} <span aria-hidden="true">→</span>
+//                       </a>
+//                     ) : null}
+//                   </div>
+//                 </motion.div>
+//               )}
+//             </AnimatePresence>
+//           </div>
+//         );
+//       })}
+//     </div>
+//   );
+// }
 
 // 'use client';
 
@@ -892,3 +1331,5 @@ function MobileAccordion({ companies }: { companies: GroupCompany[] }) {
 //     </div>
 //   );
 // }
+
+

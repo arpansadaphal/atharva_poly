@@ -436,6 +436,7 @@ function MobileAccordion({ companies }: { companies: GroupCompany[] }) {
   );
 }
 
+
 // 'use client';
 
 // import { useRef, useState, useEffect, useCallback } from 'react';

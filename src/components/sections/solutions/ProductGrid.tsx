@@ -3,10 +3,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import FilterTabs from '@/components/ui/FilterTabs'
-import ProductCard from '@/components/ProductCard'
+import ProductCard from '@/components/sections/products/ProductCard'
 import { Package } from 'lucide-react'
 import Link from 'next/link'
-import type { ProductDetail } from '@/types/products'
+import type { ProductDetail } from '@/types/solutions'
 
 interface ProductGridProps {
   products: ProductDetail[]

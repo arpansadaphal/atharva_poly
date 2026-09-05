@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { FileDown } from 'lucide-react'
 import BreadcrumbNav from '@/components/ui/BreadcrumbNav'
-import type { ProductDetail } from '@/types/products'
+import type { ProductDetail } from '@/types/solutions'
 
 interface ProductDetailHeaderProps {
   product: ProductDetail

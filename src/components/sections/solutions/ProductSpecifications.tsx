@@ -5,7 +5,7 @@ import { FileDown } from 'lucide-react'
 import SpecificationTable from '@/components/ui/SpecificationTable'
 import CertificationsTrust from '@/components/sections/CertificationsTrust'
 import Link from 'next/link'
-import type { ProductDetail } from '@/types/products'
+import type { ProductDetail } from '@/types/solutions'
 
 interface ProductSpecificationsProps {
   product: ProductDetail

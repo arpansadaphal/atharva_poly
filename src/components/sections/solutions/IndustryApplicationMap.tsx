@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { Car, Package, ShoppingBag, Factory } from 'lucide-react'
 import Link from 'next/link'
-import type { ProductDetail } from '@/types/products'
+import type { ProductDetail } from '@/types/solutions'
 
 interface IndustryApplicationMapProps {
   products: ProductDetail[]

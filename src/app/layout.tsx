@@ -124,6 +124,86 @@
 // }
 
 
+// import type { Metadata } from 'next'
+// import { Inter } from 'next/font/google'
+// import './globals.css'
+// import { Navbar } from '@/components/sections/Navbar'
+// import { Footer } from '@/components/sections/Footer'
+// import { WhatsAppButton } from '@/components/sections/WhatsAppButton'
+
+// const inter = Inter({
+//   subsets: ['latin'],
+//   weight: ['200', '300', '400', '500', '600'],
+//   variable: '--font-inter',
+//   display: 'swap',
+// })
+
+// export const metadata: Metadata = {
+//   metadataBase: new URL(
+//     process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.atharvapolymers.com'
+//   ),
+//   title: {
+//     default: 'Polymer Manufacturer in Pune | Atharva Polymers',
+//     template: '%s | Atharva Polymers',
+//   },
+//   description:
+//     'Atharva Polymers manufactures polymer products for industrial applications from our MIDC Ranjangaon, Pune facility. 19+ years experience, export-ready. Request a quote today.',
+//   keywords: [
+//     'polymer manufacturer pune',
+//     'polymer manufacturing india',
+//     'industrial polymer supplier',
+//     'polymer manufacturer ranjangaon midc',
+//     'polymer export india',
+//   ],
+//   authors: [{ name: 'Atharva Polymers Pvt Ltd' }],
+//   creator: 'Atharva Polymers Pvt Ltd',
+//   openGraph: {
+//     type: 'website',
+//     siteName: 'Atharva Polymers',
+//     locale: 'en_IN',
+//     images: [
+//       {
+//         url: '/og-image.jpg',
+//         width: 1200,
+//         height: 630,
+//         alt: 'Atharva Polymers — Precision Polymer Manufacturing, Pune',
+//       },
+//     ],
+//   },
+//   twitter: {
+//     card: 'summary_large_image',
+//     images: ['/og-image.jpg'],
+//   },
+//   robots: {
+//     index: true,
+//     follow: true,
+//   },
+// }
+
+// export default function RootLayout({
+//   children,
+// }: {
+//   children: React.ReactNode
+// }) {
+//   return (
+//     <html lang="en" data-scroll-behavior="smooth" className={inter.variable}>
+//       <body className="font-sans antialiased">
+//         {/* Global navigation — fixed, transparent over hero, solid on scroll */}
+//         <Navbar />
+
+//         {/* Page content wrapped in main landmark */}
+//         <main>{children}</main>
+
+//         {/* Global footer */}
+//         <Footer />
+
+//         {/* Floating WhatsApp button — mandatory client requirement, visible on all pages */}
+//         <WhatsAppButton />
+//       </body>
+//     </html>
+//   )
+// }
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -138,10 +218,24 @@ const inter = Inter({
   display: 'swap',
 })
 
+// ---------- Environment-aware metadataBase ----------
+// Uses SITE_URL (server-side env) as the single source of truth.
+// Works on AWS, Netlify, Vercel, or any Node.js host.
+function getSiteUrl(): string {
+  // 1. Explicitly set in .env.production (recommended for production)
+  if (process.env.SITE_URL) {
+    return process.env.SITE_URL
+  }
+  // 2. Auto-detect Vercel preview deployments (optional, safe to keep)
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`
+  }
+  // 3. Fallback (your production domain)
+  return 'https://www.atharvapolymers.com'
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.atharvapolymers.com'
-  ),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: 'Polymer Manufacturer in Pune | Atharva Polymers',
     template: '%s | Atharva Polymers',
@@ -188,16 +282,14 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth" className={inter.variable}>
       <body className="font-sans antialiased">
-        {/* Global navigation — fixed, transparent over hero, solid on scroll */}
         <Navbar />
 
-        {/* Page content wrapped in main landmark */}
-        <main>{children}</main>
+        {/* MAIN landmark – properly identified for crawlers */}
+        <main id="main" role="main">
+          {children}
+        </main>
 
-        {/* Global footer */}
         <Footer />
-
-        {/* Floating WhatsApp button — mandatory client requirement, visible on all pages */}
         <WhatsAppButton />
       </body>
     </html>

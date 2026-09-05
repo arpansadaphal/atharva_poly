@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { FileDown } from 'lucide-react'
 import BreadcrumbNav from '@/components/ui/BreadcrumbNav'
-import type { ProductDetail } from '@/types/solutions'
+import type { ProductDetail } from '@/types/products'
 
 interface ProductDetailHeaderProps {
   product: ProductDetail
@@ -18,8 +18,8 @@ export default function ProductDetailHeader({ product }: ProductDetailHeaderProp
 
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: 'Solutions', href: '/solutions' },
-    { label: catCap, href: `/solutions?category=${product.category}` },
+    { label: 'Products', href: '/products' },
+    { label: catCap, href: `/products?category=${product.category}` },
     { label: product.name },
   ]
 
@@ -73,7 +73,7 @@ export default function ProductDetailHeader({ product }: ProductDetailHeaderProp
           >
             Request a Quotation
           </Link>
-          {/* {hasDatasheet && datasheetDownload && (
+          {hasDatasheet && datasheetDownload && (
             <a
               href={datasheetDownload.href}
               target="_blank"
@@ -81,16 +81,6 @@ export default function ProductDetailHeader({ product }: ProductDetailHeaderProp
               className="inline-flex items-center justify-center h-12 px-6 border border-slate-500 text-white font-medium rounded-lg hover:border-white hover:text-white transition-colors text-[15px] gap-2"
             >
               <FileDown className="w-4 h-4" /> Download Data Sheet
-            </a>
-          )} */}
-            {hasDatasheet && datasheetDownload && (
-            <a
-              href={`/contact?product=${product.slug}&inquiry=quote`}
-              target="_blank"
-              rel="noopener"
-              className="inline-flex items-center justify-center h-12 px-6 border border-slate-500 text-white font-medium rounded-lg hover:border-white hover:text-white transition-colors text-[15px] gap-2"
-            >
-              <FileDown className="w-4 h-4" /> Request Data Sheet
             </a>
           )}
         </motion.div>

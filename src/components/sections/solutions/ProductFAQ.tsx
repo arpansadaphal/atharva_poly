@@ -1,7 +1,7 @@
 'use client'
 
 import FAQAccordion from '@/components/ui/FAQAccordion'
-import type { ProductDetail } from '@/types/solutions'
+import type { ProductDetail } from '@/types/products'
 
 interface ProductFAQProps {
   product: ProductDetail

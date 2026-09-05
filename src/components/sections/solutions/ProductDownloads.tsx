@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import DownloadItem from '@/components/ui/DownloadItem'
-import type { ProductDetail } from '@/types/solutions'
+import type { ProductDetail } from '@/types/products'
 
 interface ProductDownloadsProps {
   product: ProductDetail

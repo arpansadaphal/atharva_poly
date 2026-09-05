@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import KeyPropertiesPanel from '@/components/ui/KeyPropertiesPanel'
-import type { ProductDetail } from '@/types/solutions'
+import type { ProductDetail } from '@/types/products'
 
 interface ProductOverviewProps {
   product: ProductDetail

@@ -1,9 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import ProductCard from '@/components/sections/products/ProductCard'
-import { getRelatedProducts } from '@/lib/solutions-data'
-import type { ProductDetail } from '@/types/solutions'
+import ProductCard from '@/components/ProductCard'
+import { getRelatedProducts } from '@/lib/products-data'
+import type { ProductDetail } from '@/types/products'
 
 interface RelatedProductsProps {
   product: ProductDetail

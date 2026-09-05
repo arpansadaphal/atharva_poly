@@ -5,7 +5,7 @@ import { FileDown } from 'lucide-react'
 import SpecificationTable from '@/components/ui/SpecificationTable'
 import CertificationsTrust from '@/components/sections/CertificationsTrust'
 import Link from 'next/link'
-import type { ProductDetail } from '@/types/solutions'
+import type { ProductDetail } from '@/types/products'
 
 interface ProductSpecificationsProps {
   product: ProductDetail
@@ -35,7 +35,7 @@ export default function ProductSpecifications({ product }: ProductSpecifications
           <SpecificationTable sections={product.technicalSpecs} />
         </motion.div>
 
-        {/* {hasDatasheet && datasheetDownload && (
+        {hasDatasheet && datasheetDownload && (
           <a
             href={datasheetDownload.href}
             target="_blank"
@@ -44,7 +44,7 @@ export default function ProductSpecifications({ product }: ProductSpecifications
           >
             <FileDown className="w-4 h-4" /> Download the full technical data sheet — {datasheetDownload.fileSizeLabel}
           </a>
-        )} */}
+        )}
 
         {/* Manufacturing note */}
         <p className="text-[15px] text-slate-600 max-w-[640px] mt-8 pt-8 border-t border-slate-200">

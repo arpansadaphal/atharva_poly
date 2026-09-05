@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {NoiseOverlay} from '@/components/ui/NoiseOverlay'
 import { buildWhatsAppURL } from '@/lib/whatsapp'
-import type { ProductDetail } from '@/types/solutions'
+import type { ProductDetail } from '@/types/products'
 
 interface ProductInquiryCTAProps {
   product: ProductDetail

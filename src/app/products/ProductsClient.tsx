@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, Suspense, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import PageHero from '@/components/sections/products/PageHero'
 import FilterTabs from '@/components/ui/FilterTabs'
@@ -11,7 +10,6 @@ import { Button } from '@/components/ui/Button'
 import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
 import { products, getProductsByIndustry } from '@/lib/products-data'
 import { Refrigerator, Car, Armchair, Factory, ChevronLeft, ChevronRight } from 'lucide-react'
-import Link from 'next/link'
 
 const filterTabs = [
   { label: 'All', value: 'all' },
@@ -30,21 +28,10 @@ const industryQuickLinks = [
 
 const ITEMS_PER_PAGE = 6
 
-function ProductsPageContent() {
-  const searchParams = useSearchParams()
-  const [activeIndustry, setActiveIndustry] = useState('all')
+export default function ProductsClient({ initialIndustry }: { initialIndustry: string }) {
+  const [activeIndustry, setActiveIndustry] = useState(initialIndustry)
   const [currentPage, setCurrentPage] = useState(1)
-  const [mobileFullCatalog, setMobileFullCatalog] = useState(false)
-  const [isInitialized, setIsInitialized] = useState(false)
-
-  // Set state from URL params only after mount (client-side)
-  useEffect(() => {
-    const industryParam = searchParams.get('industry') || 'all'
-    setActiveIndustry(industryParam)
-    setMobileFullCatalog(industryParam !== 'all')
-    setCurrentPage(1)
-    setIsInitialized(true)
-  }, [searchParams])
+  const [mobileFullCatalog, setMobileFullCatalog] = useState(initialIndustry !== 'all')
 
   const filtered = getProductsByIndustry(activeIndustry)
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE)
@@ -57,7 +44,6 @@ function ProductsPageContent() {
     setMobileFullCatalog(true)
   }
 
-  // One unique product per category for the mobile preview
   const pickedSlugs = new Set<string>()
   const mobileCategoryProducts = industryQuickLinks
     .map(({ key }) => {
@@ -135,15 +121,6 @@ function ProductsPageContent() {
       )}
     </>
   )
-
-  // Don't render content until initialized to prevent hydration mismatch
-  if (!isInitialized) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-      </div>
-    )
-  }
 
   return (
     <>
@@ -261,17 +238,5 @@ function ProductsPageContent() {
         </div>
       </section>
     </>
-  )
-}
-
-export default function ProductsPage() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-      </div>
-    }>
-      <ProductsPageContent />
-    </Suspense>
   )
 }
